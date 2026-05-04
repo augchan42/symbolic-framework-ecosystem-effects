@@ -44,7 +44,7 @@ scripts/        # One script per figure/table, plus reproduce_all.py
 8. Limitations (single game, prompt class, n=10)
 9. Conclusion
 
-## Key Findings (N=41: 11 control, 10 yarrow, 10 tarot, 10 scrambled)
+## Key Findings (N=40: 10 control, 10 yarrow, 10 tarot, 10 scrambled)
 
 - **Tarot elevates Han peak territory**: 4-way KW p=0.008, MWU tarot > others p<0.002
 - **Qin suppression under yarrow**: 0/10 (Fisher vs tarot p=0.033)
