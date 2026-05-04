@@ -10,6 +10,7 @@
 \usepackage{hyperref}
 \usepackage{natbib}
 \usepackage{xcolor}
+\usepackage{multirow}
 
 \title{Who Wins When One Agent Reflects?\\
 \large Pass-Through Effects of Prompt Interventions in Multi-Agent Games}
@@ -28,81 +29,277 @@ We inject symbolic reasoning frameworks into one agent in a 7-player simultaneou
 \section{Introduction}
 \label{sec:intro}
 
-% TODO: Lead with the punchline. Cite paper 1. Preview structure.
+Modifying one agent's prompt can change which other agent wins. This paper documents that phenomenon.
+
+We gave a single agent in a 7-player strategy game access to symbolic reasoning frameworks---I~Ching hexagrams cast by yarrow stalk, Tarot card spreads, or scrambled (incoherent) versions of the same text. The agent receiving the framework did not benefit: its survival rate dropped under every framework condition relative to control. But the winner of the game shifted systematically depending on which framework was injected.
+
+This is not the result we expected. The experimental program began as a test of whether traditional Chinese divination sequences, which exhibit statistically unusual structural properties \citep{Chan2026kingwen}, could improve strategic decision-making in LLM agents. They cannot---neither in neural training \citep{Chan2026kingwen} nor in agentic decision-making (this paper). What they \emph{can} do is redirect the multi-agent system around the recipient, producing condition-specific winner distributions that differ significantly from both control and each other.
+
+We call this pattern class \textbf{pass-through effects}: interventions applied to agent $A$ that do not improve $A$'s outcomes but systematically alter the outcomes of agents $B$, $C$, \ldots who never receive the intervention. The intervention passes through its target and lands elsewhere in the system.
+
+Three results establish the pattern:
+
+\begin{enumerate}
+\item \textbf{No local benefit} (\S\ref{sec:local}). The framework recipient (Han) survives at 30--40\% across all framework conditions vs.\ 64\% under control. The intervention hurts its target.
+\item \textbf{Ecosystem redirection} (\S\ref{sec:ecosystem}). Each framework condition produces a distinct winner distribution. Yarrow suppresses Qin ($0/10$); tarot elevates Qin ($5/10$); scrambled text elevates Qi ($6/10$). These are redistributions among non-recipients.
+\item \textbf{Perturbativeness gradient} (\S\ref{sec:gradient}). Non-recipient agents produce monotonically longer reasoning text as the framework becomes more perturbative (control $<$ yarrow $<$ tarot $<$ scrambled), suggesting a dose-response mechanism.
+\end{enumerate}
+
+Section~\ref{sec:synthesis} synthesizes these into a formal characterization of pass-through effects. Section~\ref{sec:discussion} considers implications for multi-agent alignment and evaluation methodology.
 
 % ==============================================================
 \section{Experimental Setup}
 \label{sec:setup}
 
 \subsection{Environment and Agents}
-% 7-state Warring States diplomacy game, Diplomacy-style mechanics,
-% 20-round games, LLM agents (Claude Opus 4.6)
+
+The game environment is a 7-player simultaneous-move strategy game modeled on the Warring States period of Chinese history (475--221 BCE). It uses Diplomacy-style mechanics \citep{Mukobi2023welfare}: simultaneous hidden order submission, deterministic resolution, and supply-center-based victory conditions.
+
+\paragraph{Map.} A custom board with 46 territories (27 supply centers + 19 corridors), including 9 neutral supply centers. Mountain passes and river crossings serve as buffer corridors between states. Victory requires 15 of 27 supply centers or the most supply centers after 20 rounds.
+
+\paragraph{Agents.} All seven players are instances of Claude Opus 4.6 with historical persona prompts corresponding to their state's philosophical school (Table~\ref{tab:states}). Each agent receives per-round intelligence (board state, prior diplomacy outcomes, credibility alerts) and issues simultaneous orders: \texttt{hold}, \texttt{move(target)}, or \texttt{support(state, action, target)}.
+
+\paragraph{Diplomacy.} A structured diplomacy phase runs every round (2 passes). Conditional proposals and credibility tracking are implemented---broken peace promises generate alerts visible to all agents.
+
+\begin{table}[t]
+\centering
+\caption{Seven states and their LLM persona characteristics. All agents use Claude Opus 4.6 with identical architectures; differentiation is through persona prompts only.}
+\label{tab:states}
+\begin{tabular}{llll}
+\toprule
+State & School & Advantage & Disadvantage \\
+\midrule
+Qin & Legalism & Attack, reform & Alliance trust \\
+Han$^*$ & King Wen (experimental) & Adaptability & Smallest, weakest \\
+Wei & Administration & Early game, talent & Exposed geography \\
+Zhao & Militarism & Cavalry, defense & Stability \\
+Qi & Eclecticism & Intelligence, income & Recovery after losses \\
+Chu & Daoism & Depth, territory & Reform efficiency \\
+Yan & Confucianism & Defense, surprise & Economy, passivity \\
+\bottomrule
+\multicolumn{4}{l}{\footnotesize $^*$Han is the intervention recipient in all framework conditions.}
+\end{tabular}
+\end{table}
+
+\paragraph{Game structure.} Games are organized in campaigns of 5--10 sequential games. Agents accumulate strategic memories across games within a campaign via a reflection and memory-bank system (see \S\ref{sec:intervention}).
 
 \subsection{Intervention Design}
-% Dual-timescale: decision-time (per-round MANDATE) + learning-time (between-game reflection)
-% Length-matched control
+\label{sec:intervention}
+
+The intervention operates at two timescales:
+
+\paragraph{Decision-time (per-round).} Before each order submission, Han receives oracle text (a hexagram reading, Tarot spread, or scrambled text depending on condition) together with a \textsc{MANDATE} instruction to interpret the oracle in relation to the current strategic situation before issuing orders. The control condition receives a length-matched generic reflection prompt (``Consider your strategic position carefully'') without oracle content.
+
+\paragraph{Learning-time (between-game).} After each game, Han reflects on the game through the lens of its assigned framework. These reflections are stored in a SQLite memory bank and retrieved in subsequent games within the same campaign.
+
+\paragraph{Evidence for decision-time primacy.} First-in-campaign games (where the memory bank is empty) exhibit the same condition-specific ecosystem effects as later games. This suggests the per-round oracle injection is the primary driver, not accumulated memory. We cannot fully ablate these timescales with the current design (\S\ref{sec:limitations}).
 
 \subsection{Conditions and Controls}
-% 4 conditions: control, yarrow, tarot, scrambled
-% Table with description of each
+
+Four conditions, each applied exclusively to Han:
+
+\begin{table}[h]
+\centering
+\caption{Experimental conditions. All conditions modify only Han's prompt; the other six agents are identical across conditions.}
+\label{tab:conditions}
+\begin{tabular}{lp{7cm}l}
+\toprule
+Condition & Han's Per-Round Prompt & $n$ \\
+\midrule
+Control & Length-matched generic reflection prompt & 11 \\
+Yarrow & Yarrow-stalk I~Ching cast (random seed); hexagram text + \textsc{MANDATE} to interpret & 10 \\
+Tarot & 3-card Tarot spread (situation / hidden influence / posture) + \textsc{MANDATE} & 10 \\
+Scrambled & Word-scrambled yarrow text; same structure, incoherent content + \textsc{MANDATE} & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The scrambled condition is the critical ablation. It preserves the structural intervention---oracle-formatted prompt, \textsc{MANDATE} to interpret---while removing coherent semantic content. If framework effects derive from the \emph{content} of the oracle (its ``wisdom''), scrambled should resemble control. If they derive from the \emph{structure} of having to interpret something before acting, scrambled should resemble yarrow. Neither prediction holds: scrambled produces the largest perturbation of all conditions.
 
 \subsection{Metrics}
-% Local: Han survival, peak SCs
-% System: winner distribution, elimination order
+\label{sec:metrics}
+
+We distinguish local metrics (measuring the recipient's outcomes) from system metrics (measuring the ecosystem):
+
+\paragraph{Local metrics.}
+\begin{itemize}
+\item \textbf{Survival}: whether Han holds $\geq 1$ supply center at game end.
+\item \textbf{Peak supply centers}: Han's maximum supply-center count during the game (Han starts at 2).
+\end{itemize}
+
+\paragraph{System metrics.}
+\begin{itemize}
+\item \textbf{Winner distribution}: which state holds the most supply centers at game end, by condition.
+\item \textbf{Non-Han reasoning length}: mean characters per order in non-Han agents' strategic reasoning (a behavioral measure of ecosystem perturbation).
+\end{itemize}
+
+All statistical tests are non-parametric (Kruskal-Wallis for multi-group comparisons, Mann-Whitney $U$ for pairwise comparisons, Fisher's exact test for count data). No corrections for multiple comparisons are applied; we report exact $p$-values and note where results would not survive Bonferroni correction (\S\ref{sec:limitations}).
 
 % ==============================================================
 \section{Results I: No Local Benefit}
 \label{sec:local}
 
-% Han survival, peak SCs, tarot elevates peak (KW p=0.008)
-% But survival worse under all frameworks
+The framework intervention does not help its recipient.
+
+\paragraph{Survival.} Han survives (holds $\geq 1$ SC at game end) in 64\% of control games ($7/11$) but only 30\% under yarrow ($3/10$), 30\% under tarot ($3/10$), and 40\% under scrambled ($4/10$). All framework conditions reduce Han's survival relative to control, though individual pairwise comparisons do not reach significance at this sample size.
+
+\paragraph{Peak supply centers.} Tarot is the sole condition that elevates Han's peak SC count above control (Table~\ref{tab:local}). The 4-way Kruskal-Wallis test is significant ($H = 11.83$, $p = 0.008$); Mann-Whitney confirms tarot $>$ all others ($U = 247$, $p < 0.001$). However, this peak-territory elevation does not translate into survival---tarot Han achieves higher peaks but is eliminated at the same rate as yarrow.
+
+\begin{table}[t]
+\centering
+\caption{Han local outcomes by condition. Peak SCs = maximum supply centers held during the game (Han starts at 2). Survival = holding $\geq 1$ SC at game end.}
+\label{tab:local}
+\begin{tabular}{lcccc}
+\toprule
+& Control & Yarrow & Tarot & Scrambled \\
+& $(n=11)$ & $(n=10)$ & $(n=10)$ & $(n=10)$ \\
+\midrule
+Survival & 7/11 (64\%) & 3/10 (30\%) & 3/10 (30\%) & 4/10 (40\%) \\
+Peak SCs (mean) & 2.36 & 2.30 & 3.00 & 2.10 \\
+Peak SCs (range) & 2--4 & 2--3 & 2--4 & 2--3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The dissociation between peak territory and survival under tarot is notable. Tarot Han expands more aggressively than other conditions---the framework appears to encourage territorial ambition---but this expansion provokes coalitional responses that ultimately eliminate Han. The net effect is null or negative: higher peaks, same elimination rate, identical final outcome.
+
+Under scrambled and yarrow, Han does not even achieve elevated peaks. The frameworks provide no local benefit on any metric.
 
 % ==============================================================
 \section{Results II: Ecosystem Redirection}
 \label{sec:ecosystem}
 
-% Winner distributions, Qin suppression, Qi dominance
-% "Redistribution, not degradation"
+While the intervention fails to benefit its recipient, it systematically redirects which non-recipient state wins.
+
+\paragraph{Winner distributions.} Each condition produces a distinct winner profile (Table~\ref{tab:winners}):
+
+\begin{table}[t]
+\centering
+\caption{Winner distributions by condition. Han never wins in any condition. Bold indicates the condition's modal winner or a statistically significant departure from pooled rates.}
+\label{tab:winners}
+\begin{tabular}{lcccccc}
+\toprule
+& Qin & Yan & Qi & Chu & Zhao & Wei \\
+\midrule
+Control ($n=11$) & 3 & 4 & 2 & 1 & 1 & 0 \\
+Yarrow ($n=10$) & \textbf{0} & 4 & 3 & 3 & 0 & 0 \\
+Tarot ($n=10$) & \textbf{5} & 3 & 1 & 0 & 1 & 0 \\
+Scrambled ($n=10$) & 1 & 1 & \textbf{6} & 0 & 1 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Qin suppression under yarrow.} The strongest expansionist state (Qin, Legalist school) wins 0 of 10 yarrow games. This is significantly below the tarot rate of 5/10 (Fisher's exact $p = 0.033$) and below the tarot-vs-pooled-others rate (Fisher $p = 0.026$). Wins redistribute primarily to Chu and Qi---cooperative and intelligence-oriented states.
+
+\paragraph{Qi dominance under scrambled.} The intelligence-school state (Qi, Eclectic school) wins 6 of 10 scrambled games, significantly above the non-scrambled pooled rate of 6/31 (Fisher's exact $p = 0.040$). This is the highest single-state dominance in any condition.
+
+\paragraph{Redistribution, not degradation.} These are not cases of the system breaking down. Game length, total supply-center turnover, and diplomatic activity are comparable across conditions. What changes is which non-recipient state captures the surplus left by Han's weakness. The intervention creates a vacuum (Han underperforms) and the framework's character determines which neighbor fills it.
 
 % ==============================================================
 \section{Results III: Perturbativeness Gradient}
 \label{sec:gradient}
 
-% Non-Han reasoning length monotonic increase
-% Dose-response: more perturbative framework → more reasoning disruption
+The six non-recipient agents produce monotonically longer per-order reasoning as the intervention becomes more perturbative.
+
+\paragraph{Measurement.} We extract the strategic reasoning text that each non-Han agent generates before issuing orders. We compute the mean character count per order for each game (one observation per game, averaging across the six non-Han states and all rounds), yielding one independent observation per game.
+
+\paragraph{Results.} The gradient is monotonic and significant (Table~\ref{tab:gradient}; Kruskal-Wallis $H$, 4-way $p < 0.001$). Every adjacent pair in the ordering control $<$ yarrow $<$ tarot $<$ scrambled is directionally consistent.
+
+\begin{table}[t]
+\centering
+\caption{Non-Han reasoning length by condition (mean characters per order, computed per-game for independence). The monotonic increase tracks the perturbativeness of the framework injected into Han.}
+\label{tab:gradient}
+\begin{tabular}{lccc}
+\toprule
+Condition & Mean chars/order & Median & $n$ \\
+\midrule
+Control & 98 & 104 & 11 \\
+Yarrow & 126 & 124 & 10 \\
+Tarot & 152 & 159 & 10 \\
+Scrambled & 197 & 213 & 10 \\
+\bottomrule
+\multicolumn{4}{l}{\footnotesize KW 4-way: $p < 0.001$. Pairwise MWU: scrambled vs.\ control $p < 0.001$,} \\
+\multicolumn{4}{l}{\footnotesize scrambled vs.\ yarrow $p = 0.001$, scrambled vs.\ tarot $p = 0.014$.}
+\end{tabular}
+\end{table}
+
+\paragraph{Interpretation.} Non-Han agents never see the oracle text. They interact with Han only through Han's orders and diplomatic messages. Yet the perturbativeness of Han's framework---how much it disrupts Han's reasoning---propagates through Han's observable behavior into the reasoning processes of other agents. Incoherent (scrambled) text produces the largest effect: agents facing a Han that behaves unpredictably elaborate their own reasoning by $\sim$100\% relative to control.
+
+This gradient provides a candidate mechanism for the ecosystem redirection in \S\ref{sec:ecosystem}. More perturbative frameworks cause greater elaboration in non-recipients, and this elaboration is not uniform---it differentially advantages states whose strategic profiles benefit from deliberation (Qi's intelligence school) over states whose profiles benefit from rapid exploitation (Qin's expansionism).
 
 % ==============================================================
 \section{Synthesis: Pass-Through Effects}
 \label{sec:synthesis}
 
-% Define the pattern class
-% Connect sections 3-5
-% Diagram: Intervention → Agent A → (no improvement) → System redistribution → Agents B, C...
+We define \textbf{pass-through effects} as follows:
+
+\begin{quote}
+An intervention applied to agent $A$ exhibits a \emph{pass-through effect} when:
+\begin{enumerate}
+\item it does not improve $A$'s outcomes (null or negative local effect), and
+\item it systematically alters the outcomes of agents $B, C, \ldots$ who do not receive the intervention (non-null system effect on non-recipients).
+\end{enumerate}
+\end{quote}
+
+This is not the same as a ``negative externality.'' A negative externality implies harm to others caused by benefit to self. Pass-through effects involve no benefit to self---the intervention passes \emph{through} its nominal target and lands on the system.
+
+\paragraph{Structure of the effect.} Sections \ref{sec:local}--\ref{sec:gradient} establish the three components:
+
+\begin{enumerate}
+\item \textbf{Local null/negative} (\S\ref{sec:local}): the intervention does not help $A$.
+\item \textbf{System redistribution} (\S\ref{sec:ecosystem}): the intervention redirects outcomes among $B, C, \ldots$ in a condition-specific pattern.
+\item \textbf{Dose-response mechanism} (\S\ref{sec:gradient}): the magnitude of system perturbation scales with intervention intensity, mediated by behavioral changes in non-recipients.
+\end{enumerate}
+
+The causal pathway is: Intervention $\to$ $A$'s behavior changes $\to$ $A$'s observable outputs (orders, diplomacy) become less predictable $\to$ non-recipients elaborate their reasoning in response $\to$ this elaboration differentially benefits certain strategic profiles $\to$ winner distribution shifts.
+
+\paragraph{The scrambled condition as keystone.} The scrambled condition is the strongest evidence for the pass-through interpretation. If the oracle's semantic content were the mechanism, scrambled (incoherent text) should show no effect. Instead, it shows the \emph{largest} effect on non-recipient reasoning and the most concentrated winner distribution (Qi 6/10). This rules out ``the oracle gives good advice that helps some states'' and supports ``the oracle makes Han behave differently, and that behavioral difference propagates.''
+
+\paragraph{Why not just ``side effects''?} The term \emph{side effect} implies the intervention has a primary (intended) effect and secondary (unintended) effects. Pass-through effects have no primary effect---the intervention fails at its nominal purpose entirely. The system-level outcome \emph{is} the only effect. Calling it a side effect would be like calling a drug's only observable action a side effect because the intended action never manifested.
 
 % ==============================================================
 \section{Discussion}
 \label{sec:discussion}
 
-% Alignment implications: optimizing agents ≠ optimizing systems
-% Evaluation implications: local metrics insufficient
-% Generalizability: where else might pass-through effects appear?
+\paragraph{Alignment implications.} If optimizing one agent's prompt can redirect system-level outcomes without benefiting that agent, then prompt-level interventions in multi-agent systems cannot be evaluated by local metrics alone. An intervention that ``does nothing'' to its target may be doing substantial work elsewhere in the system. This complicates alignment evaluation: a prompt injection that fails to manipulate its target might still achieve its goal by redirecting the ecosystem.
+
+\paragraph{Evaluation methodology.} Standard practice in prompt engineering evaluates interventions by their effect on the modified agent. Our results suggest this is insufficient in multi-agent settings. A complete evaluation requires measuring both local outcomes (did the agent improve?) and system outcomes (did the equilibrium shift?). The divergence between these---null local effect, significant system effect---is precisely what makes pass-through effects invisible to agent-level evaluation.
+
+\paragraph{Why does semantic content not matter?} The scrambled condition's dominance in the perturbativeness gradient suggests that what matters is not what the oracle \emph{says} but what it makes the agent \emph{do}. Incoherent text forces more confabulation, produces more unpredictable behavior, and thereby perturbs the system more strongly. This is consistent with a mechanism based on behavioral predictability rather than information content: non-recipients respond to the strangeness of Han's behavior, not to any wisdom in the oracle.
+
+\paragraph{Generalizability.} Pass-through effects may appear wherever:
+\begin{itemize}
+\item Agents observe each other's behavior (not just outcomes).
+\item The system has multiple equilibria that different behavioral profiles favor.
+\item An intervention changes behavioral character without improving capability.
+\end{itemize}
+Candidate domains include multi-agent reinforcement learning, competitive LLM evaluation, and any setting where one agent's ``thinking style'' is observable to others through its outputs.
+
+\paragraph{Connection to paper 1.} The King Wen sequence's anti-habituation properties \citep{Chan2026kingwen} failed to improve neural network training. Here, the same sequence (via yarrow-stalk casting) fails to improve strategic decision-making but produces measurable ecosystem effects. The sequence appears to be a reliable perturbator---it changes behavior without improving it---which is precisely the profile that generates pass-through effects.
 
 % ==============================================================
 \section{Limitations}
 \label{sec:limitations}
 
-% Single game environment
-% Specific prompt class (symbolic/reflective)
-% n=10 per cell (power analysis in supplementary)
-% Cannot fully ablate decision-time vs memory effects
-% Single model (Claude Opus 4.6)
+\paragraph{Single game environment.} All results are from one 7-player strategy game. The specific winner redistributions (Qin suppression, Qi dominance) are properties of this game's topology and state profiles. The pass-through \emph{pattern}---local null, system redistribution---may generalize, but the specific redistributions will not.
+
+\paragraph{Prompt class.} The interventions tested are all symbolic/reflective frameworks. Whether purely linguistic interventions (style changes, reasoning instructions) produce analogous pass-through effects is unknown.
+
+\paragraph{Sample size.} With $n = 10$--$11$ per condition, individual Fisher tests have limited power. A supplementary power analysis indicates $n = 15$--$20$ per cell would be needed for 80\% power on the observed effect sizes. Our primary results (KW $p = 0.008$ for peak SCs; KW $p < 0.001$ for reasoning gradient) are robust, but condition-specific Fisher tests ($p = 0.033$, $p = 0.040$) would not survive Bonferroni correction across all possible pairwise comparisons.
+
+\paragraph{Decision-time vs.\ memory effects.} The dual-timescale design means we cannot fully separate per-round oracle effects from accumulated memory effects. First-in-campaign evidence is suggestive but not definitive: first games still have the oracle injection, so they cannot isolate memory in the other direction.
+
+\paragraph{Single model.} All agents use Claude Opus 4.6. The reasoning-length gradient may be model-specific---different architectures may respond differently to unpredictable counterparts. Replication with other model families would strengthen the finding.
+
+\paragraph{Confabulation vs.\ genuine reasoning.} Longer reasoning under more perturbative conditions may reflect genuine strategic elaboration or mere confabulation (longer text without more strategic content). We do not distinguish these in the current analysis.
 
 % ==============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-% Modifying one agent need not improve that agent.
-% It can instead redirect the system.
+Modifying one agent's reasoning process need not improve that agent. It can instead redirect the multi-agent system around it, altering which other agents win without benefiting the recipient. We call this pattern class pass-through effects and provide evidence for it across three levels: null local outcomes, significant system redistribution, and a dose-response mechanism in non-recipient behavior.
+
+The practical implication is direct: in multi-agent systems, evaluating an intervention by its effect on the target agent is insufficient. The intervention's real impact may be entirely on agents that never received it.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
