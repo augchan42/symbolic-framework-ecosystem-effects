@@ -4,84 +4,112 @@
 
 Tarot and scrambled conditions were run as proper 10-game campaigns with full memory accumulation across games. Control and yarrow were run in smaller batches across multiple campaigns (memory resets between campaigns), creating a confound in the learning-time intervention.
 
-| Condition | Current State | Campaigns Used | Memory Continuity |
-|-----------|--------------|----------------|-------------------|
-| Control | 11 games across 4 campaigns (6+1+2+2) | v2_experiment_01, _02_yan_control, _03_control, v2_smoke_01 | Broken |
-| Yarrow | 10 games across 3 campaigns (8+1+1) | v2_experiment_01_yarrow, _02_yan_yarrow, _02_yarrow | Broken |
-| Tarot | 10 games in 1 campaign | v2_experiment_03_tarot | Clean |
-| Scrambled | 10 games in 1 campaign | v2_experiment_04_scrambled | Clean |
+| Condition | Current State | Campaign | Games Done | Memory Continuity |
+|-----------|--------------|----------|------------|-------------------|
+| Control | 6 games in primary campaign | `v2_experiment_01` | 6 of 10 | Clean (all 6 sequential) |
+| Yarrow | 8 games in primary campaign | `v2_experiment_01_yarrow` | 8 of 10 | Clean (all 8 sequential) |
+| Tarot | Complete | `v2_experiment_03_tarot` | 10 of 10 | Clean |
+| Scrambled | Complete | `v2_experiment_04_scrambled` | 10 of 10 | Clean |
+
+Games from other campaigns (v2_experiment_02_yan_control, v2_experiment_03_control, v2_smoke_01, etc.) are discarded from the analysis — they had independent memory banks.
 
 ## Goal
 
-Re-run control (10 games) and yarrow (10 games) as single 10-game campaigns with unbroken memory accumulation. Final design: N=40 (10 per cell × 4 conditions).
+Resume the existing control and yarrow campaigns to reach 10 games each. Final design: N=40 (10 per cell × 4 conditions).
 
-The v2_smoke_01 control game is discarded — it was a smoke test, not part of the experimental design.
+**Games remaining: 6 total** (4 control + 2 yarrow), ~18-30 hours of compute.
 
-## Prerequisites
+## Prerequisites (on VPS)
 
 ```bash
 cd ~/projects/warringstates-engine
 pip install -e ".[dev,analysis]"
+
+# Rebuild memory DB to ensure all existing reflections are ingested
+python3 -m src.orchestrator rebuild-memory --campaign v2_experiment_01
+python3 -m src.orchestrator rebuild-memory --campaign v2_experiment_01_yarrow
 ```
 
-Ensure the memory DB path is correct (games/vps/experiment_*.db or a fresh DB for the new campaigns).
-
-## Steps Per Campaign
-
-### 1. Initialize Campaign
+### Verify memory state before resuming
 
 ```bash
-# Control (10 games)
-python3 -m src.orchestrator init \
-  --condition control \
-  --model opus \
-  --campaign v3_experiment_control
+# Should show 6 games with ~21 insights each
+sqlite3 games/experiment.db \
+  "SELECT game_id, COUNT(*) FROM memory_bank WHERE campaign_id='v2_experiment_01' GROUP BY game_id;"
 
-# Yarrow (10 games)
-python3 -m src.orchestrator init \
-  --condition random_oracle \
-  --model opus \
-  --campaign v3_experiment_yarrow
+# Should show 8 games with ~12-24 insights each
+sqlite3 games/experiment.db \
+  "SELECT game_id, COUNT(*) FROM memory_bank WHERE campaign_id='v2_experiment_01_yarrow' GROUP BY game_id;"
+
+# Should show 0 pending
+python3 -m src.orchestrator pending-reflections v2_experiment_01
+python3 -m src.orchestrator pending-reflections v2_experiment_01_yarrow
 ```
 
-### 2. Run Each Game (repeat 10× per campaign)
+## Execution Order
 
-For each game in the campaign, the loop is:
+Run yarrow first (only 2 games), then control (4 games).
 
-```
-┌─────────────────────────────────────────────┐
-│  ROUND LOOP (until terminal or round 20)    │
-│                                             │
-│  1. Generate prompts                        │
-│     python3 -m src.orchestrator prompts <game_dir>           │
-│                                             │
-│  2. Diplomacy pass 1                        │
-│     python3 -m src.orchestrator diplomacy <game_dir> --pass 1│
-│     → Launch subagents for each alive state │
-│     → Save responses to diplomacy/pass_1/   │
-│                                             │
-│  3. Diplomacy pass 2                        │
-│     python3 -m src.orchestrator diplomacy <game_dir> --pass 2│
-│     → Launch subagents                      │
-│     → Save responses to diplomacy/pass_2/   │
-│                                             │
-│  4. Regenerate prompts with diplomacy inbox │
-│     python3 -m src.orchestrator prompts <game_dir> --with-diplomacy│
-│                                             │
-│  5. Launch order agents (one per alive state)│
-│     → Save to round_NN/orders/<state>.json  │
-│                                             │
-│  6. Submit and resolve                      │
-│     python3 -m src.orchestrator submit <game_dir>            │
-│                                             │
-│  7. Check status                            │
-│     python3 -m src.orchestrator status <game_dir>            │
-│     → If terminal: exit loop                │
-│     → Else: next round                      │
-└─────────────────────────────────────────────┘
+### Yarrow: Games 9 and 10
+
+```bash
+# Game 9
+python3 -m src.orchestrator init --condition random_oracle --model opus --campaign v2_experiment_01_yarrow
+# → run game loop (see below)
+# → reflect + store-reflections
+
+# Game 10
+python3 -m src.orchestrator init --condition random_oracle --model opus --campaign v2_experiment_01_yarrow
+# → run game loop
+# → reflect + store-reflections
 ```
 
-### 3. Post-Game Reflection (after each game completes)
+### Control: Games 7, 8, 9, 10
+
+```bash
+# Game 7
+python3 -m src.orchestrator init --condition control --model opus --campaign v2_experiment_01
+# → run game loop
+# → reflect + store-reflections
+
+# Game 8
+python3 -m src.orchestrator init --condition control --model opus --campaign v2_experiment_01
+# → run game loop
+# → reflect + store-reflections
+
+# Game 9
+python3 -m src.orchestrator init --condition control --model opus --campaign v2_experiment_01
+# → run game loop
+# → reflect + store-reflections
+
+# Game 10
+python3 -m src.orchestrator init --condition control --model opus --campaign v2_experiment_01
+# → run game loop
+# → reflect + store-reflections
+```
+
+## Per-Game Loop
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ROUND LOOP (until terminal or round 20)                    │
+│                                                             │
+│  1. python3 -m src.orchestrator prompts <game_dir>          │
+│  2. python3 -m src.orchestrator diplomacy <game_dir> --pass 1│
+│     → Launch subagents, save to diplomacy/pass_1/           │
+│  3. python3 -m src.orchestrator diplomacy <game_dir> --pass 2│
+│     → Launch subagents, save to diplomacy/pass_2/           │
+│  4. python3 -m src.orchestrator prompts <game_dir> --with-diplomacy│
+│  5. Launch order agents (one per alive state)               │
+│     → Save to round_NN/orders/<state>.json                  │
+│  6. python3 -m src.orchestrator submit <game_dir>           │
+│  7. python3 -m src.orchestrator status <game_dir>           │
+│     → If terminal: exit loop                                │
+│     → Else: next round                                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Post-Game Reflection (after EVERY game)
 
 ```bash
 # Phase 1: Generate reflection prompts
@@ -94,72 +122,62 @@ python3 -m src.orchestrator reflect <game_dir>
 python3 -m src.orchestrator store-reflections <game_dir>
 ```
 
-**Critical**: Reflections MUST be stored before initializing the next game in the campaign. The memory bank is what carries learning across games.
+**Critical**: Reflections MUST be stored before initializing the next game. The memory bank carries learning across games within the campaign.
 
-### 4. Initialize Next Game in Same Campaign
-
-```bash
-python3 -m src.orchestrator init \
-  --condition <same_condition> \
-  --model opus \
-  --campaign <same_campaign_id>
-```
-
-Then repeat from step 2.
-
-### 5. After All 10 Games Complete
+## Validation After All 6 Games
 
 ```bash
-# Verify campaign completeness
-python3 -m src.orchestrator pending-reflections <campaign_id>
-# Should show 0 pending
+# Each campaign should have exactly 10 games
+python3 -m src.orchestrator pending-reflections v2_experiment_01
+python3 -m src.orchestrator pending-reflections v2_experiment_01_yarrow
 
-# Verify memory bank has entries for all 10 games
-sqlite3 games/vps/<db_file>.db \
-  "SELECT game_id, COUNT(*) FROM memory_bank WHERE campaign_id='<campaign_id>' GROUP BY game_id;"
+# Verify 10 entries per campaign
+sqlite3 games/experiment.db \
+  "SELECT campaign_id, COUNT(DISTINCT game_id) FROM memory_bank GROUP BY campaign_id;"
+
+# Expected:
+#   v2_experiment_01        | 10
+#   v2_experiment_01_yarrow | 10
 ```
 
-## Validation After Re-Run
-
-1. **Campaign integrity**: Each campaign has exactly 10 games with sequential memory accumulation
-2. **Model consistency**: All games use `claude-opus-4-6`
-3. **Reflection completeness**: Every game has stored reflections (check `reflection/responses/` in each game dir)
-4. **No cross-contamination**: New campaigns use fresh campaign IDs; old campaigns remain archived
+Check model consistency in new game_meta.json files:
+```bash
+for game in games/control_opus_2026050* games/random_oracle_opus_2026050*; do
+  echo "$(basename $game): $(jq -r .model $game/game_meta.json)"
+done
+# All should show: claude-opus-4-6
+```
 
 ## Updating the Paper Repo
 
-After re-running, regenerate the summary data:
+After all 6 games complete, regenerate everything:
 
 ```bash
 cd ~/projects/symbolic-framework-ecosystem-effects
 
-# Rebuild game_outcomes.csv from new game_meta.json files
-python3 scripts/extract_game_outcomes.py  # (may need to create/update)
+# Rebuild game_outcomes.csv (include only the 10 games per condition from primary campaigns)
+python3 scripts/extract_game_outcomes.py
 
-# Rebuild reasoning_lengths.csv from new order files
+# Rebuild reasoning_lengths.csv from order files
 python3 scripts/extract_reasoning_lengths.py
 
 # Regenerate all figures and tables
 python3 scripts/reproduce_all.py
-```
 
-Then recompile the paper:
-```bash
+# Recompile paper
 cd paper && pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
 ```
 
-## What to Archive
-
-Keep old campaign data in place — do NOT delete. The old games are valid individual observations; the issue was only campaign structure (memory continuity). Tag the old data:
-
-```bash
-# In warringstates-engine
-git tag v2-pre-rerun-archive
-```
+**Important**: The extraction scripts must filter to only include games from the four primary campaigns:
+- `v2_experiment_01` (control, games 1-10)
+- `v2_experiment_01_yarrow` (yarrow, games 1-10)
+- `v2_experiment_03_tarot` (tarot, games 1-10)
+- `v2_experiment_04_scrambled` (scrambled, games 1-10)
 
 ## Notes
 
-- Each game takes ~3-5 hours wall-clock (20 rounds × 7 agents × diplomacy + orders)
-- Full re-run (20 games): ~60-100 hours of compute
-- Games can be paused mid-campaign (memory bank persists in SQLite)
+- Each game takes ~3-5 hours wall-clock (up to 20 rounds × 7 agents × diplomacy + orders)
+- 6 games total: ~18-30 hours of compute
+- Games can be paused mid-round (state persists on disk)
 - The `--oracle-state han` flag defaults correctly but verify in game_meta.json
+- Old scattered campaign games remain on disk but are excluded from analysis
