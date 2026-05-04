@@ -16,8 +16,14 @@ def main():
     # Non-Han only (the perturbativeness gradient is about OTHER agents' reasoning)
     non_han = df[df.state != "han"]
 
-    # Per-game means (one observation per game for independence)
-    per_game = non_han.groupby(["game_id", "condition"]).mean_reasoning_chars.mean().reset_index()
+    # Per-game weighted mean (weight by n_orders so each individual order counts equally)
+    def weighted_mean(group):
+        total_chars = (group.mean_reasoning_chars * group.n_orders).sum()
+        total_orders = group.n_orders.sum()
+        return total_chars / total_orders if total_orders > 0 else 0.0
+
+    per_game = non_han.groupby(["game_id", "condition"]).apply(weighted_mean).reset_index()
+    per_game.columns = ["game_id", "condition", "mean_reasoning_chars"]
 
     print("="*60)
     print("Non-Han Reasoning Length by Condition (per-game means)")
