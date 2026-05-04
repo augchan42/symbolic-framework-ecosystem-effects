@@ -1,0 +1,110 @@
+% Who Wins When One Agent Reflects?
+% Pass-Through Effects of Prompt Interventions in Multi-Agent Games
+% Augustin Chan, 2026
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{xcolor}
+
+\title{Who Wins When One Agent Reflects?\\
+\large Pass-Through Effects of Prompt Interventions in Multi-Agent Games}
+\author{Augustin Chan\\
+\texttt{aug@iterative.day}}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We inject symbolic reasoning frameworks into one agent in a 7-player simultaneous-move strategy game and measure ecosystem-level outcomes across 41 games (4 conditions, $n \geq 10$ per cell). The intervention does not benefit its recipient---survival drops from 64\% (control) to 30--40\% (all framework conditions)---but systematically redirects which \emph{other} state wins. Under yarrow-stalk I~Ching divination, the strongest expansionist state (Qin) wins 0 of 10 games (Fisher $p = 0.033$ vs.\ tarot). Under Tarot, Qin wins 5 of 10. Under scrambled (incoherent) text, the intelligence-school state (Qi) wins 6 of 10 (Fisher $p = 0.040$ vs.\ others). A perturbativeness gradient in non-recipient reasoning length (control~98 $<$ yarrow~126 $<$ tarot~152 $<$ scrambled~197 chars/order; Kruskal-Wallis $p < 0.001$) provides a candidate mechanism: more perturbative frameworks induce longer reasoning in \emph{other} agents. We name this pattern class \textbf{pass-through effects}---interventions that do not improve their target but redirect system-level outcomes to third parties.
+\end{abstract}
+
+% ==============================================================
+\section{Introduction}
+\label{sec:intro}
+
+% TODO: Lead with the punchline. Cite paper 1. Preview structure.
+
+% ==============================================================
+\section{Experimental Setup}
+\label{sec:setup}
+
+\subsection{Environment and Agents}
+% 7-state Warring States diplomacy game, Diplomacy-style mechanics,
+% 20-round games, LLM agents (Claude Opus 4.6)
+
+\subsection{Intervention Design}
+% Dual-timescale: decision-time (per-round MANDATE) + learning-time (between-game reflection)
+% Length-matched control
+
+\subsection{Conditions and Controls}
+% 4 conditions: control, yarrow, tarot, scrambled
+% Table with description of each
+
+\subsection{Metrics}
+% Local: Han survival, peak SCs
+% System: winner distribution, elimination order
+
+% ==============================================================
+\section{Results I: No Local Benefit}
+\label{sec:local}
+
+% Han survival, peak SCs, tarot elevates peak (KW p=0.008)
+% But survival worse under all frameworks
+
+% ==============================================================
+\section{Results II: Ecosystem Redirection}
+\label{sec:ecosystem}
+
+% Winner distributions, Qin suppression, Qi dominance
+% "Redistribution, not degradation"
+
+% ==============================================================
+\section{Results III: Perturbativeness Gradient}
+\label{sec:gradient}
+
+% Non-Han reasoning length monotonic increase
+% Dose-response: more perturbative framework → more reasoning disruption
+
+% ==============================================================
+\section{Synthesis: Pass-Through Effects}
+\label{sec:synthesis}
+
+% Define the pattern class
+% Connect sections 3-5
+% Diagram: Intervention → Agent A → (no improvement) → System redistribution → Agents B, C...
+
+% ==============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+% Alignment implications: optimizing agents ≠ optimizing systems
+% Evaluation implications: local metrics insufficient
+% Generalizability: where else might pass-through effects appear?
+
+% ==============================================================
+\section{Limitations}
+\label{sec:limitations}
+
+% Single game environment
+% Specific prompt class (symbolic/reflective)
+% n=10 per cell (power analysis in supplementary)
+% Cannot fully ablate decision-time vs memory effects
+% Single model (Claude Opus 4.6)
+
+% ==============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+% Modifying one agent need not improve that agent.
+% It can instead redirect the system.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
