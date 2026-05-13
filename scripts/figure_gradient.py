@@ -60,7 +60,7 @@ def main():
     ax.set_xticks(positions)
     ax.set_xticklabels(["Control", "Yarrow\n(I Ching)", "Tarot", "Scrambled"])
     ax.set_ylabel("Mean reasoning chars per order (non-Han agents)")
-    ax.set_title("Perturbativeness Gradient: Non-Han Reasoning Length")
+    ax.set_title("Non-Han Reasoning Length by Condition\n(Scrambled outlier, KW p=0.048)")
     ax.axhline(y=per_game[per_game.condition == "control"].mean_reasoning_chars.mean(),
                color='gray', linestyle='--', alpha=0.5, label='Control mean')
 

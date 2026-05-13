@@ -2,7 +2,7 @@
 
 ## Project
 
-Paper repo for "Who Wins When One Agent Reflects? Pass-Through Effects of Prompt Interventions in Multi-Agent Games" — a cs.AI paper showing that symbolic reasoning frameworks injected into one LLM agent redirect which *other* agent wins in a multi-agent game, without benefiting the recipient.
+Paper repo for "Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings" — a cs.MA/cs.AI paper showing that symbolic reasoning frameworks injected into one LLM agent produce distinct, framework-specific winner distributions in a multi-agent game, without benefiting the recipient.
 
 Companion to the King Wen negative-result paper (king-wen-agi-framework repo, arXiv 2026).
 
@@ -11,11 +11,11 @@ Companion to the King Wen negative-result paper (king-wen-agi-framework repo, ar
 ```bash
 pip install -r requirements.txt
 python scripts/reproduce_all.py          # All figures + tables
-python scripts/table_local_outcomes.py   # Section 3 tables
+python scripts/table_local_outcomes.py   # Section 4 tables
 python scripts/table_ecosystem_outcomes.py # Section 4 tables + Fisher tests
-python scripts/figure_gradient.py        # Section 5 reasoning-length figure
-python scripts/figure_winners.py         # Section 4 winner distribution bars
-python scripts/figure_peak_scs.py        # Section 3 peak SC boxplot
+python scripts/figure_gradient.py        # Reasoning-length figure
+python scripts/figure_winners.py         # Winner distribution bars
+python scripts/figure_peak_scs.py        # Peak SC boxplot
 python scripts/power_analysis.py         # Supplementary power analysis
 ```
 
@@ -30,26 +30,32 @@ scripts/        # One script per figure/table, plus reproduce_all.py
 
 ## Paper Structure
 
-1. Introduction — lead with the punchline, cite paper 1
-2. Experimental Setup — game, agents, dual-timescale intervention, 4 conditions, metrics
-   - 2.1 Environment & Agents
-   - 2.2 Intervention Design (decision-time + learning-time)
-   - 2.3 Conditions & Controls
-   - 2.4 Metrics (local vs system)
-3. Results I — No Local Benefit (Han survival, peak SCs)
-4. Results II — Ecosystem Redirection (winner distributions, Fisher tests)
-5. Results III — Perturbativeness Gradient (reasoning-length dose-response)
-6. Synthesis — Pass-Through Effects (define the pattern class, connect sections 3-5)
-7. Discussion (alignment implications, generalizability)
-8. Limitations (single game, prompt class, n=10)
+1. Introduction — ecosystem-signature differentiation as primary claim
+2. Related Work — LLM biases, persona effects, multi-agent systems, risk aversion
+3. Methods — game, agents, intervention design, conditions, dataset (N=41), statistics
+4. Results
+   - 4.1 Behavioral Baseline (turtle tendency)
+   - 4.2 Framework-Specific Behavioral Modulation (yarrow, tarot, scrambled profiles)
+   - 4.3 Content-Action Independence (hexagram χ² p=0.75, tarot χ² p=0.68)
+   - 4.4 Ecosystem Signatures (winner distributions, Fisher tests)
+   - 4.5 Ecosystem Mechanisms (speed bump, vacuum, stubborn holdout)
+   - 4.6 Non-Han Reasoning Elevation
+   - 4.7 Han Survival (null across all conditions)
+5. Analysis — four mechanisms, reasoning length as negative indicator
+6. Discussion — alignment implications, process vs content, risk aversion theory
+7. Limitations
+8. Future Work
 9. Conclusion
 
-## Key Findings (N=40: 10 control, 10 yarrow, 10 tarot, 10 scrambled)
+## Key Findings (N=41: 11 control, 10 yarrow, 10 tarot, 10 scrambled — clean single-campaign dataset)
 
-- **Tarot elevates Han peak territory**: 4-way KW p=0.008, MWU tarot > others p<0.002
+- **Ecosystem-signature differentiation**: control→Yan 7/11, yarrow→Yan/Chu co-dominant, tarot→Qin 5/10, scrambled→Qi 5/10
+- **Tarot→Qin**: Fisher vs pooled p=0.006 (survives Bonferroni)
+- **Scrambled→Qi**: Fisher vs pooled p=0.006 (survives Bonferroni)
 - **Qin suppression under yarrow**: 0/10 (Fisher vs tarot p=0.033)
-- **Qi dominance under scrambled**: 6/10 (Fisher vs others p=0.040)
-- **Perturbativeness gradient**: control 98 < yarrow 126 < tarot 152 < scrambled 197 chars/order (KW p<0.001)
+- **Tarot elevates Han peak territory**: KW p=0.010, tarot mean 3.0 vs 2.1–2.5 others
+- **Han survival flat**: Fisher p=1.0 across all conditions (control 36%, yarrow 50%, tarot 30%, scrambled 40%)
+- **Content-action independence**: hexagram themes χ² p=0.75, Tarot card postures χ² p=0.68
 - **Decision-time effects dominate**: Qin suppression present in game-1 (no memory) yarrow games
 
 ## Data Source

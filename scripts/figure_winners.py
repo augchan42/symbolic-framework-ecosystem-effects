@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "game_outcomes.csv"
 OUT = ROOT / "paper" / "figures" / "winner-distributions.pdf"
 
-STATES = ["qin", "han", "wei", "zhao", "qi", "chu", "yan"]
+STATES = ["qin", "han", "wei", "zhao", "qi", "chu", "yan", "draw"]
 COND_ORDER = ["control", "yarrow", "tarot", "scrambled"]
 STATE_COLORS = {
     "qin": "#CC0000",
@@ -20,6 +20,7 @@ STATE_COLORS = {
     "qi": "#9900CC",
     "chu": "#009999",
     "yan": "#666666",
+    "draw": "#BBBBBB",
 }
 
 
@@ -38,7 +39,8 @@ def main():
 
         ax.bar(range(len(STATES)), bars, color=colors, alpha=0.8)
         ax.set_xticks(range(len(STATES)))
-        ax.set_xticklabels([s.capitalize() for s in STATES], rotation=45, ha='right', fontsize=8)
+        labels = [s.capitalize() if s != "draw" else "Draw" for s in STATES]
+        ax.set_xticklabels(labels, rotation=45, ha='right', fontsize=8)
         ax.set_title(f"{cond.capitalize()} (n={n})")
         ax.set_ylim(0, 7)
         ax.axhline(y=n/7, color='gray', linestyle='--', alpha=0.4)

@@ -33,7 +33,7 @@ def main():
     ax.set_xticks(range(len(COND_ORDER)))
     ax.set_xticklabels(["Control", "Yarrow\n(I Ching)", "Tarot", "Scrambled"])
     ax.set_ylabel("Han Peak Supply Centers")
-    ax.set_title("Han Peak Territory: Tarot Elevates, Others Do Not\n(KW p=0.008)")
+    ax.set_title("Han Peak Territory: Tarot Elevates, Others Do Not\n(KW p=0.010)")
     ax.legend(loc='upper right')
 
     plt.tight_layout()
