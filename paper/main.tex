@@ -21,7 +21,7 @@
 \maketitle
 
 \begin{abstract}
-Large language models exhibit innate behavioral tendencies when deployed as strategic agents---notably a risk-averse ``turtle'' bias toward defensive play. We show that symbolic reasoning frameworks, injected as per-round reflective prompts into one agent, differentially modulate this bias and reshape the multi-agent ecosystem to produce framework-specific winner distributions. In a 7-player Warring States Diplomacy variant (41 games, 4 conditions, single-campaign memory accumulation), each framework produces a distinct ecosystem signature: under control, Yan dominates (7/11, 64\%); under I-Ching yarrow divination, Yan and Chu co-dominate while Qin is completely suppressed (0/10); under Tarot, Qin dominates (5/10, Fisher vs.\ pooled $p = 0.006$); under scrambled-text ablation (incoherent oracle text preserving prompt structure), Qi dominates (5/10, Fisher vs.\ pooled $p = 0.006$). The framework-receiving agent (Han) never wins and shows no survival difference across conditions (Fisher $p = 1.0$), but Tarot consistently elevates Han's peak territory (mean 3.0 SCs vs.\ 2.1--2.5 others, Kruskal-Wallis $p = 0.010$). Neither framework's content predicts subsequent actions---hexagram themes ($\chi^2$ $p = 0.75$) and Tarot card postures ($\chi^2$ $p = 0.68$) are both independent of action choice---suggesting the modulation operates through the reflective \emph{process}, not content-following. We present this as an observation paper establishing that alignment-framework choice at the agent level produces deterministic system-level consequences in multi-agent settings.
+Large language models exhibit innate behavioral tendencies when deployed as strategic agents---notably a risk-averse ``turtle'' bias toward defensive play. We show that symbolic reasoning frameworks, injected as per-round reflective prompts into one agent, differentially modulate this bias and reshape the multi-agent ecosystem to produce framework-specific winner distributions. In a 7-player Warring States Diplomacy variant (41 games, 4 conditions, single-campaign memory accumulation), each framework produces a distinct ecosystem signature: under control, Yan dominates (7/11, 64\%); under I-Ching yarrow divination, Yan and Chu co-dominate while Qin is completely suppressed (0/10); under Tarot, Qin dominates (5/10, Fisher vs.\ pooled $p = 0.006$); under scrambled-text ablation (incoherent oracle text preserving prompt structure), Qi dominates (5/10, Fisher vs.\ pooled $p = 0.006$). The framework-receiving agent (Han) never wins and shows no survival difference across conditions (Fisher $p = 1.0$), but Tarot consistently elevates Han's peak territory (mean 3.0 SCs vs.\ 2.1--2.5 others, Kruskal-Wallis $p = 0.010$). Neither framework's content predicts subsequent actions---hexagram themes ($\chi^2$ $p = 0.80$) and Tarot card postures ($\chi^2$ $p = 0.68$) are both independent of action choice---suggesting the modulation operates through the reflective \emph{process}, not content-following. We present this as an observation paper establishing that alignment-framework choice at the agent level produces distinctive system-level consequences in multi-agent settings.
 \end{abstract}
 
 % ==============================================================
@@ -36,9 +36,9 @@ We investigate this using symbolic reasoning frameworks---not trait labels or be
 
 The distinction between frameworks and personas is load-bearing. A persona says ``be cooperative.'' A framework says ``Hexagram 36, Brightness Hiding: the light retreats into the earth; the wise person dims their brilliance among the masses'' and asks the agent to interpret this in context. The interpretation step---not the content---is the mechanism we identify.
 
-Our core finding: each symbolic reasoning framework produces a deterministic, framework-specific winner-ecosystem signature. Under I-Ching yarrow divination, Qin (the strongest expansionist) wins 0 of 10 games while Yan and Chu co-dominate. Under Tarot, Qin wins 5 of 10 (Fisher $p = 0.006$ vs.\ pooled). Under scrambled text, Qi wins 5 of 10 ($p = 0.006$). Under control, Yan dominates with 7 of 11 wins. The framework-receiving agent (Han) never wins under any condition---the frameworks redirect the ecosystem, not Han's fate.
+Our core finding: each symbolic reasoning framework produces a distinctive, framework-specific winner-ecosystem signature. Under I-Ching yarrow divination, Qin (the strongest expansionist) wins 0 of 10 games while Yan and Chu co-dominate. Under Tarot, Qin wins 5 of 10 (Fisher $p = 0.006$ vs.\ pooled). Under scrambled text, Qi wins 5 of 10 ($p = 0.006$). Under control, Yan dominates with 7 of 11 wins. The framework-receiving agent (Han) never wins under any condition---the frameworks redirect the ecosystem, not Han's fate.
 
-The modulation is process-driven, not content-driven: hexagram themes do not predict the agent's subsequent actions ($\chi^2$ $p = 0.75$), even though 70\% of orders reference the hexagram in reasoning text. And the scrambled-text ablation rules out prompt structure alone: destroying semantic coherence while preserving structure produces its own distinct ecosystem, not a reversion to control.
+The modulation is process-driven, not content-driven: hexagram themes do not predict the agent's subsequent actions ($\chi^2$ $p = 0.80$), even though 83\% of orders reference the hexagram in reasoning text. And the scrambled-text ablation rules out prompt structure alone: destroying semantic coherence while preserving structure produces its own distinct ecosystem, not a reversion to control.
 
 This paper is a companion to a negative-result study of the King Wen I-Ching sequence in neural network training \citep{Chan2026kingwen}. There, the sequence's anti-habituation properties failed to improve training. Here, the same sequence (via yarrow-stalk casting) fails to improve strategic decision-making but produces measurable ecosystem effects. The sequence appears to be a reliable perturbator---it changes behavior without improving it.
 
@@ -51,7 +51,7 @@ This paper is a companion to a negative-result study of the King Wen I-Ching seq
 LLMs exhibit systematic behavioral tendencies in game-theoretic settings. LudoBench finds LLMs agree with game-theory baselines only 40--46\% of the time \citep{Jain2026ludobench}. LLMs display strong fairness preferences in dictator games \citep{Einwiller2025dictator}. GPT-3.5 can operationalize cooperative vs.\ competitive personas with conditional reciprocity \citep{Phelps2023psychology}. Llama reproduces population-level human cooperation patterns while Qwen aligns with Nash equilibrium---different models exhibit fundamentally different innate tendencies \citep{CeraPalatsi2025cooperation}. CivBench finds model-specific strategic profiles not visible through outcome-only evaluation \citep{Chen2026civbench}.
 
 \paragraph{Persona and prompt effects on strategic behavior.}
-Direct persona assignment does not reliably transfer to strategy without a mediator \citep{Licato2025persona}. Activation-vector steering shifts both strategy and justification, with rhetoric and strategy sometimes diverging \citep{Sun2026persona}---directly relevant to our Tarot result (longer reasoning, worse outcomes). Assigning human-like identity does not produce human-like behavior \citep{Ma2024behavioral}. Role-playing agents show systematic inconsistencies between stated beliefs and simulated behavior \citep{Mannekote2025roleplaying}.
+Direct persona assignment does not reliably transfer to strategy without a mediator \citep{Licato2025persona}. Activation-vector steering shifts both strategy and justification, with rhetoric and strategy sometimes diverging \citep{Sun2026persona}---directly relevant to our Tarot result (reasoning elevated without outcome improvement). Assigning human-like identity does not produce human-like behavior \citep{Ma2024behavioral}. Role-playing agents show systematic inconsistencies between stated beliefs and simulated behavior \citep{Mannekote2025roleplaying}.
 
 \paragraph{Multi-agent LLM strategic systems.}
 LLMs exhibit high baseline behavioral similarity in strategic settings (strategic algorithmic monoculture; \citealt{Ballestero2026monoculture}). In Diplomacy, self-evolving agents with memory reach competent play \citep{Guan2024richelieu}, while fine-tuned LLMs learn equilibrium policies \citep{Xu2025dipllm}. SAE analysis discovers reward-hacking behaviors in Diplomacy training \citep{Yan2026interpretability}.
@@ -69,7 +69,7 @@ No published work uses a philosophical/symbolic reasoning framework---requiring 
 
 \subsection{Game Environment}
 
-The game is a 7-player variant of Diplomacy played on a 46-territory map based on the Chinese Warring States period (475--221 BCE). The map includes 28 supply centers (19 state home SCs + 9 neutral) and 18 non-SC corridor territories. Each player begins with 2 units and 2 home supply centers. Victory requires 15 supply centers (``domination'') or the most supply centers after 20 rounds. Combat uses standard Diplomacy mechanics: simultaneous hidden orders, deterministic resolution, support orders, retreats, and builds/disbands.
+The game is a 7-player variant of Diplomacy played on a 46-territory map based on the Chinese Warring States period (475--221 BCE). The map includes 27 supply centers (19 state home SCs + 8 neutral) and 19 non-SC corridor territories. Each player begins with 2 units; states hold 2--4 home supply centers depending on historical territory. Victory requires 15 supply centers (``domination'') or the most supply centers after 20 rounds. Combat uses standard Diplomacy mechanics: simultaneous hidden orders, deterministic resolution, support orders, retreats, and builds/disbands.
 
 \subsection{Agents}
 
@@ -126,7 +126,7 @@ Scrambled & Word-scrambled yarrow text; same structure, incoherent content + \te
 \end{tabular}
 \end{table}
 
-The scrambled condition is the critical ablation. It preserves the structural intervention---oracle-formatted prompt, \textsc{MANDATE} to interpret---while removing coherent semantic content through word-level shuffling. If effects derive from oracle \emph{content}, scrambled should resemble control. If from \emph{structure}, scrambled should resemble yarrow. Neither holds: scrambled produces its own distinct ecosystem signature.
+The scrambled condition is the critical ablation. It preserves the structural intervention---oracle-formatted prompt, \textsc{MANDATE} to interpret---while removing coherent semantic content through word-level shuffling. If effects derive from oracle \emph{content}, scrambled should resemble control. If effects derive from \emph{structure}, scrambled should resemble yarrow. Neither holds: scrambled produces its own distinct ecosystem signature.
 
 \subsection{Dataset}
 
@@ -134,7 +134,7 @@ The scrambled condition is the critical ablation. It preserves the structural in
 
 \subsection{Statistical Methodology}
 
-Winner distributions: Fisher's exact tests. Behavioral rates: pooled proportions with Wilson confidence intervals and per-game averages (game as unit of analysis) with Kruskal-Wallis and Mann-Whitney $U$ tests alongside Cliff's delta effect sizes. Pairwise tests follow significant omnibus tests as planned contrasts; we additionally report Holm-Bonferroni adjusted $p$-values. Hexagram-action and Tarot-action association: Pearson's chi-squared and Fisher's exact. We report exact $p$-values throughout.
+Winner distributions: Fisher's exact tests. Behavioral rates: pooled proportions and per-game averages (game as unit of analysis) with Kruskal-Wallis and Mann-Whitney $U$ tests. Pairwise tests follow significant omnibus tests as planned contrasts with Bonferroni correction. Hexagram-action and Tarot-action association: Pearson's chi-squared and Fisher's exact. We report exact $p$-values throughout.
 
 Territorial statistics use final-game-state methodology: each game's last recorded standings.
 
@@ -157,7 +157,7 @@ Each framework produces a qualitatively distinct behavioral profile in Han (Tabl
 \centering
 \caption{Han behavioral profiles by condition. Hold rate = defensive orders; move = territorial repositioning/expansion; self-support = supporting own units; other-support = supporting another state's unit. Reasoning = mean characters per order in Han's strategic text.}
 \label{tab:behavior}
-\begin{tabular}{lccccc}
+\begin{tabular}{lcccc}
 \toprule
 & Control & Yarrow & Tarot & Scrambled \\
 \midrule
@@ -181,7 +181,7 @@ Reasoning (chars) & 309 & 449 & 456 & \textbf{633} \\
 \subsection{Content-Action Independence}
 \label{sec:content}
 
-A central concern is whether the behavioral modulation is simply content-following. We classify all 64 hexagrams by primary theme (advance/retreat/wait/cooperate) and test for association with Han's subsequent action category. The association is null: Pearson's $\chi^2$ $p = 0.7499$. Fisher's exact for advance vs.\ non-advance hexagrams: OR $= 0.94$, $p = 1.0$. However, 70.2\% of Han's orders reference the hexagram in their reasoning text---Han reads and contemplates the hexagram but does not follow it as an instruction.
+A central concern is whether the behavioral modulation is simply content-following. We classify all 64 hexagrams by primary theme (advance/retreat/wait/cooperate) and test for association with Han's subsequent action category. The association is null: Pearson's $\chi^2$ $p = 0.7992$. Fisher's exact for advance vs.\ non-advance hexagrams: OR $= 0.87$, $p = 0.73$. However, 83.3\% of Han's orders reference the hexagram in their reasoning text---Han reads and contemplates the hexagram but does not follow it as an instruction.
 
 We perform an analogous test on the Tarot condition. Each card has a grounded \texttt{decision\_posture} (advance/hold/retreat/ally/transform/observe). The dominant posture of the 3-card spread does not predict Han's subsequent action: $\chi^2$ $p = 0.6750$. Tarot-Han references card names in 81.6\% of reasoning text yet does not follow the cards' posture recommendations.
 
@@ -223,7 +223,7 @@ The four ecosystem signatures are:
 \item \textbf{Scrambled $\to$ Qi dominance} (5/10, 50\%): incoherent oracle text produces its own distinct ecosystem favoring the intelligence/income-advantaged state.
 \end{itemize}
 
-Two ecosystem effects survive Bonferroni correction at the 6-comparison pairwise level:
+Two ecosystem effects survive Bonferroni correction at the 4-comparison level (each condition vs.\ pooled others):
 \begin{itemize}
 \item Tarot $\to$ Qin: Fisher vs.\ pooled others $p = 0.006$
 \item Scrambled $\to$ Qi: Fisher vs.\ pooled others $p = 0.006$
@@ -285,14 +285,14 @@ The Qin gradient across conditions---0/10 yarrow, 1/11 control, 1/10 scrambled, 
 \subsection{Non-Han Reasoning Elevation}
 \label{sec:nonhan}
 
-The framework injected into Han also reshapes how the other six states reason. Per-game pooling across non-Han states: control 146, yarrow 142, tarot 152, \textbf{scrambled 197} mean characters per order. Kruskal-Wallis 4-way $p = 0.048$. The gradient is no longer monotonic across all four conditions---control, yarrow, and tarot cluster together (142--152), with scrambled as the outlier. Pairwise MWU: scrambled vs.\ yarrow $p = 0.009$, scrambled vs.\ tarot $p = 0.014$, scrambled vs.\ control $p = 0.098$. Non-Han order-type distribution is unaffected: support rates 17.5--21.2\% across conditions (KW $p = 0.22$).
+The framework injected into Han also reshapes how the other six states reason. Order-weighted pooling across non-Han states: control 146, yarrow 142, tarot 152, \textbf{scrambled 197} mean characters per order. Kruskal-Wallis 4-way $p = 0.048$. The gradient is not monotonic across all four conditions---control, yarrow, and tarot cluster together (142--152), with scrambled as the outlier. Pairwise MWU: scrambled vs.\ yarrow $p = 0.009$, scrambled vs.\ tarot $p = 0.014$, scrambled vs.\ control $p = 0.098$. Non-Han order-type distribution is unaffected: support rates 17.5--21.2\% across conditions (KW $p = 0.22$).
 
 Non-Han agents never see the oracle text; the perturbation propagates through Han's observable behavior (diplomatic messages and orders) into the reasoning processes of other agents.
 
 \subsection{Han Survival: Null Across All Conditions}
 \label{sec:survival}
 
-Han does not win any game under any condition. Under a loose survival definition (reaches final round not eliminated): control 4/11 (36\%), yarrow 5/10 (50\%), tarot 3/10 (30\%), scrambled 4/10 (40\%). All pairwise Fisher exact tests return $p = 1.0$; all oracle conditions pooled vs.\ control also $p = 1.0$. Han survival is completely flat across conditions.
+Han does not win any game under any condition (Table~\ref{tab:local}). Under a loose survival definition (reaches final round not eliminated): control 4/11 (36\%), yarrow 5/10 (50\%), tarot 3/10 (30\%), scrambled 4/10 (40\%). All pairwise Fisher exact tests are non-significant (all $p \geq 0.65$); all oracle conditions pooled vs.\ control $p = 1.0$. Han survival is flat across conditions.
 
 \begin{table}[t]
 \centering
@@ -371,7 +371,7 @@ Recent theoretical work shows risk aversion functions as an inductive bias for g
 
 \paragraph{Single model.} All agents are Claude Opus 4.6. The turtle tendency and its modulation may be Claude-specific. Replication with GPT-4 or Gemini class models would test generalization.
 
-\paragraph{No prompt-length control.} Tarot reasoning is ${\sim}1.5\times$ longer than control. We cannot fully separate framework-induced deliberation from prompt-induced verbosity, though content-action independence suggests content matters less than process.
+\paragraph{No prompt-length control.} Han's reasoning output under Tarot is ${\sim}1.5\times$ longer than control, and the Tarot prompt itself (3-card spread) may differ in length from the control prompt. We cannot fully separate framework-induced deliberation from prompt-induced verbosity, though content-action independence suggests content matters less than process.
 
 \paragraph{Framework selection.} We compare two philosophical frameworks plus a scrambled ablation. Additional frameworks (Stoic, Mohist, game-theoretic) would strengthen the claim that framework properties map to ecosystem signatures.
 
@@ -396,7 +396,7 @@ Recent theoretical work shows risk aversion functions as an inductive bias for g
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have shown that symbolic reasoning frameworks injected into a single agent in a multi-agent strategic setting produce deterministic, framework-specific ecosystem signatures. Across 41 games and 4 conditions with clean single-campaign memory accumulation: control produces Yan dominance (7/11), I-Ching yarrow produces Yan/Chu co-dominance with complete Qin suppression (0/10), Tarot produces Qin dominance (5/10, $p = 0.006$), and scrambled text produces Qi dominance (5/10, $p = 0.006$). The framework-receiving agent (Han) never wins under any condition and shows no survival difference (Fisher $p = 1.0$).
+We have shown that symbolic reasoning frameworks injected into a single agent in a multi-agent strategic setting produce distinctive, framework-specific ecosystem signatures. Across 41 games and 4 conditions with clean single-campaign memory accumulation: control produces Yan dominance (7/11), I-Ching yarrow produces Yan/Chu co-dominance with complete Qin suppression (0/10), Tarot produces Qin dominance (5/10, $p = 0.006$), and scrambled text produces Qi dominance (5/10, $p = 0.006$). The framework-receiving agent (Han) never wins under any condition and shows no survival difference (Fisher $p = 1.0$).
 
 The scrambled-text ablation is theoretically decisive: incoherent text preserving prompt structure produces its own distinct ecosystem, ruling out both semantic content-following and prompt structure alone as sufficient explanations. Each framework creates a unique perturbation to the agent's reasoning that propagates through the multi-agent ecosystem to reshape winner distributions.
 

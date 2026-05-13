@@ -1,7 +1,7 @@
 # ADR-001: Paper Claim Verification (v0.4 Dataset)
 
 **Date:** 2026-05-13
-**Status:** Active
+**Status:** Resolved (all issues fixed in main.tex)
 **Dataset:** N=41 clean single-campaign (11 control, 10 yarrow, 10 tarot, 10 scrambled)
 
 ## Context
