@@ -13,6 +13,7 @@ from pathlib import Path
 SCRIPTS = [
     "scripts/table_local_outcomes.py",
     "scripts/table_ecosystem_outcomes.py",
+    "scripts/table_pressure_invariance.py",
     "scripts/figure_peak_scs.py",
     "scripts/figure_winners.py",
     "scripts/figure_gradient.py",

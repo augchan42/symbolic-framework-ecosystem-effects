@@ -106,6 +106,7 @@ The intervention operates at two timescales:
 \paragraph{Evidence for decision-time primacy.} First-in-campaign games (empty memory bank) exhibit the same condition-specific ecosystem effects as later games, suggesting the per-round oracle is the primary driver.
 
 \subsection{Conditions}
+\label{sec:conditions}
 
 Four conditions, each modifying only Han's prompt (Table~\ref{tab:conditions}):
 
@@ -173,7 +174,7 @@ Reasoning (chars) & 309 & 449 & 456 & \textbf{633} \\
 
 \paragraph{Tarot: extreme risk aversion.} Tarot-Han holds or supports itself in 78.3\% of orders. Hold rate: control vs.\ Tarot MWU $p = 0.008$. Move rate: 4-way KW $p = 0.005$; control vs.\ Tarot $p = 0.0008$.
 
-\paragraph{Scrambled: reactive self-reinforcement.} Scrambled-Han's late game is dominated by self-support (25.0\%, highest of any condition) and shows the most extreme pressure reactivity ($+12.3$ percentage points defensive shift under territory loss, vs.\ $+1.8$pp yarrow, $+0.0$pp Tarot ceiling effect, $+8.9$pp control).
+\paragraph{Scrambled: reactive self-reinforcement.} Scrambled-Han's late game is dominated by self-support (25.0\%, highest of any condition) and shows the most extreme pressure reactivity ($+12.3$pp defensive shift under territory loss, vs.\ $+1.8$pp yarrow, $+0.0$pp Tarot ceiling effect, $+8.9$pp control; Table~\ref{tab:pressure}).
 
 \paragraph{Reasoning-length gradient.} Han's reasoning length follows a clear gradient: control 309, yarrow 449, tarot 456, scrambled 633 chars (4-way KW $p = 0.007$). Yet strategic outcomes do not improve with reasoning length---the more perturbative the prompt, the more deliberation it induces, but this deliberation does not translate into better outcomes.
 
@@ -248,6 +249,24 @@ How do Han's behavioral profiles propagate to other agents' outcomes? We analyze
 Late self-support & 10.0\% & 7.3\% & 13.6\% & \textbf{25.0\%} \\
 Late other-support & 7.5\% & \textbf{17.1\%} & \textbf{0.0\%} & 3.6\% \\
 Late defensive & 45.0\% & 58.5\% & \textbf{74.6\%} & 66.1\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Pressure response.} When Han's supply centers fall below its starting position of 2, conditions respond differently (Table~\ref{tab:pressure}). Tarot-Han is completely pressure-invariant ($+0.0$pp shift) at a ceiling baseline of 78.3\%. Yarrow-Han shows genuine equanimity ($+1.8$pp) while \emph{adding} cooperation under pressure (2.2\% $\to$ 10.3\%). Scrambled-Han shows the largest defensive shift ($+12.3$pp) and the most reactive profile. Control falls between.
+
+\begin{table}[t]
+\centering
+\caption{Pressure invariance: defensive rate (hold + self-support) when Han SCs $\geq 2$ (stable) vs.\ $< 2$ (losing). Cooperative = other-state support.}
+\label{tab:pressure}
+\begin{tabular}{lccccc}
+\toprule
+& Hold (stable) & Hold (losing) & Shift & Coop (stable) & Coop (losing) \\
+\midrule
+Control & 46.7\% & 55.7\% & $+8.9$pp & 0.8\% & 7.5\% \\
+Yarrow & 61.0\% & 62.8\% & $+1.8$pp & 2.2\% & \textbf{10.3\%} \\
+Tarot & \textbf{78.3\%} & \textbf{78.3\%} & $+0.0$pp & 1.7\% & 2.9\% \\
+Scrambled & 62.0\% & \textbf{74.3\%} & $+12.3$pp & 0.7\% & 5.9\% \\
 \bottomrule
 \end{tabular}
 \end{table}
