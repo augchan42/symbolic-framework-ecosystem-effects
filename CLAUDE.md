@@ -10,22 +10,28 @@ Companion to the King Wen negative-result paper (king-wen-agi-framework repo, ar
 
 ```bash
 pip install -r requirements.txt
-python scripts/reproduce_all.py          # All figures + tables
-python scripts/table_local_outcomes.py   # Section 4 tables
-python scripts/table_ecosystem_outcomes.py # Section 4 tables + Fisher tests
-python scripts/figure_gradient.py        # Reasoning-length figure
-python scripts/figure_winners.py         # Winner distribution bars
-python scripts/figure_peak_scs.py        # Peak SC boxplot
-python scripts/power_analysis.py         # Supplementary power analysis
+python scripts/reproduce_all.py            # All figures + tables
+python scripts/table_local_outcomes.py     # §4.7 Han survival + peak SCs
+python scripts/table_ecosystem_outcomes.py # §4.4 winner distributions + Fisher tests
+python scripts/table_pressure_invariance.py # §4.5 pressure invariance (Table 6)
+python scripts/figure_gradient.py          # §4.6 reasoning-length boxplot
+python scripts/figure_winners.py           # §4.4 winner distribution bars
+python scripts/figure_peak_scs.py          # §4.7 peak SC boxplot
+python scripts/power_analysis.py           # Supplementary power analysis
+python scripts/extract_han_orders.py       # Extract order-level data from warringstates-engine
 ```
 
 ## Architecture
 
 ```
 paper/          # LaTeX source, figures, references
-data/           # Summary CSVs + raw order files (no diplomacy transcripts)
-  orders/       # Per-condition per-game orders with reasoning text
+data/           # Summary CSVs (no diplomacy transcripts)
+  game_outcomes.csv    # Per-game: winner, Han survival, peak SCs
+  reasoning_lengths.csv # Per-game per-state: mean reasoning chars, n_orders
+  han_orders.csv       # Per-order: action, phase, pressure, reasoning length (984 orders)
+  oracle_casts.csv     # Per-round: hexagram/tarot cast data (284 casts)
 scripts/        # One script per figure/table, plus reproduce_all.py
+  extract_han_orders.py  # Reads from warringstates-engine → han_orders.csv + oracle_casts.csv
 ```
 
 ## Paper Structure
@@ -57,6 +63,12 @@ scripts/        # One script per figure/table, plus reproduce_all.py
 - **Han survival flat**: Fisher p=1.0 across all conditions (control 36%, yarrow 50%, tarot 30%, scrambled 40%)
 - **Content-action independence**: hexagram themes χ² p=0.75, Tarot card postures χ² p=0.68
 - **Decision-time effects dominate**: Qin suppression present in game-1 (no memory) yarrow games
+
+## Pressure Invariance Methodology (§4.5 Table 6)
+
+- **Defensive** = hold + self_support (4-category action scheme)
+- **Pressure definition**: absolute SC position — "losing" = SCs < 2 (below Han's starting position), "stable" = SCs >= 2
+- **SC timing**: post-round (orders paired with the same round's resolved outcome, matching the engine's `han_sc_delta` pairing)
 
 ## Data Source
 
