@@ -103,6 +103,8 @@ The intervention operates at two timescales:
 
 \paragraph{Learning-time (between-game).} After each game, Han reflects on the game through the lens of its assigned framework. Reflections are stored in a SQLite memory bank and retrieved in subsequent games within the same campaign.
 
+\paragraph{Hexagram text variation.} Due to a corpus configuration change mid-campaign, the first 6 yarrow games provided only hexagram numbers and line diagrams (name listed as ``Unknown,'' judgment and commentary fields empty), while the last 4 provided the full hexagram name, Chinese source text, and English commentary. In the number-only games, Claude supplied hexagram names and meanings from its training data (e.g., producing ``Hexagram 18 (Gu/Decay)'' from the input ``Hexagram 18, Unknown''). The ecosystem signature---Qin suppression (0/6 and 0/4), Yan/Chu co-dominance---held across both subgroups, providing an unplanned within-condition ablation of oracle \emph{content} that further supports the process-driven interpretation (\S\ref{sec:content}).
+
 \paragraph{Evidence for decision-time primacy.} First-in-campaign games (empty memory bank) exhibit the same condition-specific ecosystem effects as later games, suggesting the per-round oracle is the primary driver.
 
 \subsection{Conditions}
@@ -181,7 +183,7 @@ Reasoning (chars) & 309 & 449 & 456 & \textbf{633} \\
 \subsection{Content-Action Independence}
 \label{sec:content}
 
-A central concern is whether the behavioral modulation is simply content-following. We classify all 64 hexagrams by primary theme (advance/retreat/wait/cooperate) and test for association with Han's subsequent action category. The association is null: Pearson's $\chi^2$ $p = 0.7992$. Fisher's exact for advance vs.\ non-advance hexagrams: OR $= 0.87$, $p = 0.73$. However, 83.3\% of Han's orders reference the hexagram in their reasoning text---Han reads and contemplates the hexagram but does not follow it as an instruction.
+A central concern is whether the behavioral modulation is simply content-following. We classify all 64 hexagrams by primary theme (advance/retreat/wait/cooperate) and test for association with Han's subsequent action category. The association is null: Pearson's $\chi^2$ $p = 0.7992$. Fisher's exact for advance vs.\ non-advance hexagrams: OR $= 0.87$, $p = 0.73$. However, 83.3\% of Han's orders reference the hexagram in their reasoning text---Han reads and contemplates the hexagram but does not follow it as an instruction. This independence is especially striking for the 6 yarrow games where no hexagram text was provided: the agent generated its own interpretation from the hexagram number alone, then did not follow that self-generated interpretation either.
 
 We perform an analogous test on the Tarot condition. Each card has a grounded \texttt{decision\_posture} (advance/hold/retreat/ally/transform/observe). The dominant posture of the 3-card spread does not predict Han's subsequent action: $\chi^2$ $p = 0.6750$. Tarot-Han references card names in 81.6\% of reasoning text yet does not follow the cards' posture recommendations.
 
@@ -376,6 +378,8 @@ Recent theoretical work shows risk aversion functions as an inductive bias for g
 \paragraph{Framework selection.} We compare two philosophical frameworks plus a scrambled ablation. Additional frameworks (Stoic, Mohist, game-theoretic) would strengthen the claim that framework properties map to ecosystem signatures.
 
 \paragraph{Mechanism not experimentally tested.} The hypothesized transmission pathways (\S\ref{sec:mechanisms}) are consistent with game logs and late-game cooperation data but have not been tested via counterfactual intervention (e.g., forcing cooperation independent of framework).
+
+\paragraph{Yarrow hexagram text inconsistency.} A corpus configuration change mid-campaign caused the first 6 yarrow games to present only hexagram numbers (empty name, judgment, commentary fields) while the last 4 received full hexagram text. The agent supplied accurate hexagram content from training data in all number-only games, so the interpretive process was preserved. The core ecosystem signature (Qin suppression, Yan/Chu co-dominance) held across both subgroups, but the relative Yan-Chu balance shifted (Yan 4/6 in number-only, Chu 2/4 in full-text), which could reflect content effects, memory accumulation, or small-sample noise.
 
 \paragraph{Replication history.} The original Tarot-Qin finding ($p = 0.007$ at $n = 6$) weakened to $p = 0.091$ at $n = 10$ with scattered-campaign data before strengthening to $p = 0.006$ with clean single-campaign data. The campaign confound (memory resets between batches suppressing the signal) is itself a caution about treating small-$n$ results as definitive.
 
