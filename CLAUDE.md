@@ -14,6 +14,7 @@ python scripts/reproduce_all.py            # All figures + tables
 python scripts/table_local_outcomes.py     # §4.7 Han survival + peak SCs
 python scripts/table_ecosystem_outcomes.py # §4.4 winner distributions + Fisher tests
 python scripts/table_pressure_invariance.py # §4.5 pressure invariance (Table 6)
+python scripts/table_content_independence.py # §4.3 hexagram/tarot × action chi-squared
 python scripts/figure_gradient.py          # §4.6 reasoning-length boxplot
 python scripts/figure_winners.py           # §4.4 winner distribution bars
 python scripts/figure_peak_scs.py          # §4.7 peak SC boxplot
@@ -42,7 +43,7 @@ scripts/        # One script per figure/table, plus reproduce_all.py
 4. Results
    - 4.1 Behavioral Baseline (turtle tendency)
    - 4.2 Framework-Specific Behavioral Modulation (yarrow, tarot, scrambled profiles)
-   - 4.3 Content-Action Independence (hexagram χ² p=0.75, tarot χ² p=0.68)
+   - 4.3 Content-Action Independence (hexagram χ² p=0.95, tarot χ² p=0.69)
    - 4.4 Ecosystem Signatures (winner distributions, Fisher tests)
    - 4.5 Ecosystem Mechanisms (speed bump, vacuum, stubborn holdout)
    - 4.6 Non-Han Reasoning Elevation
@@ -61,7 +62,7 @@ scripts/        # One script per figure/table, plus reproduce_all.py
 - **Qin suppression under yarrow**: 0/10 (Fisher vs tarot p=0.033)
 - **Tarot elevates Han peak territory**: KW p=0.010, tarot mean 3.0 vs 2.1–2.5 others
 - **Han survival flat**: Fisher p=1.0 across all conditions (control 36%, yarrow 50%, tarot 30%, scrambled 40%)
-- **Content-action independence**: hexagram themes χ² p=0.75, Tarot card postures χ² p=0.68
+- **Content-action independence**: hexagram themes χ² p=0.95, Tarot card postures χ² p=0.69
 - **Decision-time effects dominate**: Qin suppression present in game-1 (no memory) yarrow games
 
 ## Pressure Invariance Methodology (§4.5 Table 6)
