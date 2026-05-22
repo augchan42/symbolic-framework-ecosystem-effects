@@ -435,8 +435,8 @@ The smallest state cannot win by consulting the oracle. But the oracle still cha
 \section{Sample Agent Prompts}
 \label{app:prompts}
 
-This appendix reproduces the complete user-facing prompt delivered to
-Han's agent at Round~1 of one representative game per condition,
+This appendix reproduces representative excerpts from the prompt
+delivered to Han's agent at Round~1 of one game per condition,
 drawn verbatim from the experimental logs.  All four games share the
 same opening board state (Listing~\ref{lst:board}); the conditions
 differ only in the \emph{oracle injection} block that follows it.
@@ -504,9 +504,10 @@ Then issue your orders grounded in this analysis.
 \label{app:yarrow}
 
 The yarrow agent receives a hexagram cast via the yarrow-stalk
-method, including the hexagram name, Chinese judgment text, English
-commentary, and a structured \textsc{MANDATE} to interpret the
-hexagram before issuing orders.  In-campaign memory entries
+method, including the hexagram name, line diagram, judgment and
+commentary text, and a structured \textsc{MANDATE} to interpret the
+hexagram before issuing orders.  Later yarrow games also included
+Chinese source text (see \S\ref{sec:intervention}).  In-campaign memory entries
 (Listing~\ref{lst:memory}) frame previous lessons through hexagram
 symbolism.
 

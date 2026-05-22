@@ -25,8 +25,9 @@ Generates all figures and tables from `data/`.
 ## Data
 
 - `data/game_outcomes.csv` — per-game outcomes (condition, winner, Han survival, peak SCs)
-- `data/reasoning_lengths.csv` — per-order reasoning character counts by state and condition
-- `data/orders/` — raw order files with reasoning text per game
+- `data/reasoning_lengths.csv` — per-game, per-state mean reasoning character counts
+- `data/han_orders.csv` — per-order Han action data (984 orders across 41 games)
+- `data/oracle_casts.csv` — per-round oracle cast data (284 casts)
 
 ## Game Engine
 
