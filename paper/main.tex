@@ -10,6 +10,25 @@
 \usepackage{hyperref}
 \usepackage{natbib}
 \usepackage{xcolor}
+\usepackage{listings}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  breaklines=true,
+  breakatwhitespace=false,
+  frame=single,
+  framesep=4pt,
+  xleftmargin=4pt,
+  xrightmargin=4pt,
+  columns=fullflexible,
+  keepspaces=true,
+  aboveskip=6pt,
+  belowskip=6pt,
+  literate={⚊}{{\texttt{-\kern-0.2em-}}}2
+           {⚋}{{\texttt{- -}}}2
+           {→}{{$\rightarrow$}}1
+           {←}{{$\leftarrow$}}1
+}
 
 \title{Symbolic Reasoning Frameworks Modulate LLM Risk Aversion\\
 \large in Multi-Agent Strategic Settings}
@@ -410,5 +429,191 @@ The smallest state cannot win by consulting the oracle. But the oracle still cha
 
 \bibliographystyle{plainnat}
 \bibliography{references}
+
+% ==============================================================
+\appendix
+\section{Sample Agent Prompts}
+\label{app:prompts}
+
+This appendix reproduces the complete user-facing prompt delivered to
+Han's agent at Round~1 of one representative game per condition,
+drawn verbatim from the experimental logs.  All four games share the
+same opening board state (Listing~\ref{lst:board}); the conditions
+differ only in the \emph{oracle injection} block that follows it.
+
+\subsection{Shared Board State}
+\label{app:board}
+
+Every game begins from the same starting position.  The agent
+receives the power balance, its legal orders (with adjacency
+constraints), and any diplomatic messages from other states.
+
+\begin{lstlisting}[caption={Board state shown to Han at Round~1 (identical across conditions).},label={lst:board}]
+=== Round 1 of 20 ===
+Victory: control 14 of 27 supply centers
+
+YOU ARE: Han (2 supply centers, 2 armies)
+
+POWER BALANCE:
+  Chu: 4 SCs [changsha, nanyang, wu, ying]
+  Qin: 3 SCs [bashu, hanzhong, xianyang]
+  Zhao: 3 SCs [dai, handan, taiyuan]
+  Qi: 3 SCs [jibei, langye, linzi]
+  Han: 2 SCs [shangdang, zheng]  <-- YOU
+  Wei: 2 SCs [daliang, henei]
+  Yan: 2 SCs [ji, liaodong]
+
+YOUR ORDERS (one per unit):
+  NOTE: You can ONLY move/support to ADJACENT territories listed below.
+  shangdang: hold | move(taihang[corridor,empty]),
+    move(taihang_north[corridor,empty]),
+    move(zheng[SC,yours]),
+    move(zhongtiao[corridor,empty])
+    | support(*, hold|move, ...)
+  zheng: hold | move(luoyang[SC,empty]),
+    move(shangcai[SC,empty]),
+    move(shangdang[SC,yours]),
+    move(wuguan_pass[corridor,empty]),
+    move(yewang[SC,empty])
+    | support(*, hold|move, ...)
+\end{lstlisting}
+
+Diplomatic messages and previous-game memory injections are also
+included in the prompt but omitted here for space; see
+Listing~\ref{lst:memory} for an example of memory injection under the
+yarrow condition.
+
+\subsection{Control Condition}
+\label{app:control}
+
+The control agent receives a length-matched generic reflection prompt
+in place of oracle content.
+
+\begin{lstlisting}[caption={Control condition injection (game \texttt{control\_8c67}).},label={lst:control}]
+STRATEGIC REFLECTION:
+Before issuing orders, analyze the current board state carefully.
+Consider:
+1. What is the greatest threat to your survival this round?
+2. Which neighbors are likely to attack you, and which might be allies?
+3. What is the most important territory to defend or capture?
+
+Then issue your orders grounded in this analysis.
+\end{lstlisting}
+
+\subsection{Yarrow (I-Ching) Condition}
+\label{app:yarrow}
+
+The yarrow agent receives a hexagram cast via the yarrow-stalk
+method, including the hexagram name, Chinese judgment text, English
+commentary, and a structured \textsc{MANDATE} to interpret the
+hexagram before issuing orders.  In-campaign memory entries
+(Listing~\ref{lst:memory}) frame previous lessons through hexagram
+symbolism.
+
+\begin{lstlisting}[caption={Yarrow condition injection (game \texttt{random\_oracle\_3c96}, Hexagram 6).},label={lst:yarrow}]
+ORACLE CONSULTATION (Yarrow Stalk Method):
+You cast the yarrow stalks and received Hexagram 6, Conflict.
+Lines (bottom to top): -- ---- -- ----(->--) ---- ----(->--)
+  (lines 4, 6 are changing)
+
+Judgment: "You believe you're right, but something blocks you.
+  Stop halfway -- that's where good fortune lives. Pushing through
+  to the end brings disaster. Seek counsel from someone of moral
+  stature. Don't attempt anything risky while in conflict."
+
+MANDATE: Before issuing orders, you must interpret this hexagram
+in light of the current board state. State explicitly:
+1. What aspect of your situation does this hexagram illuminate?
+2. How does the changing line relate to your strategic choices?
+3. What counsel does this offer for your orders this round?
+
+Then issue your orders grounded in this interpretation.
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Example memory entries injected before the board state under the yarrow condition (game \texttt{random\_oracle\_3c96}).  Each entry is a lesson from a previous game, framed through hexagram symbolism.},label={lst:memory}]
+LESSONS FROM PREVIOUS GAMES:
+- [M225] When Opening with Hexagram 30 (Clinging Fire) -- brightness
+  that depends on what it clings to. Han's early strategy attached
+  itself to diplomatic agreements.: Clinging Fire warns that
+  brilliance without substance burns out. A small state must cling
+  to terrain and position, not merely to promises. The fire needs
+  fuel -- secure supply centers before extending diplomatic
+  commitments. [confidence: high, via Hexagram 30, Li/Clinging Fire]
+- [M76] When starting as the smallest and weakest state with hostile
+  neighbors closing in rapidly: Hexagram 14 (Great Possession)
+  appeared at game start but Han failed to secure any possession at
+  all. Great Possession requires building alliances before the first
+  move. [confidence: high, via Hexagram 14, Great Possession]
+  [... 6 additional memories omitted ...]
+\end{lstlisting}
+
+\subsection{Tarot Condition}
+\label{app:tarot}
+
+The Tarot agent receives a 3-card spread with named positions
+(\emph{Situation}, \emph{Hidden Influence}, \emph{Recommended
+Posture}), card meanings, and a decision posture classification for
+each card.  The \textsc{MANDATE} is adapted to the spread structure.
+
+\begin{lstlisting}[caption={Tarot condition injection (game \texttt{tarot\_0fa6}).},label={lst:tarot}]
+ORACLE CONSULTATION (Tarot Spread -- Three Cards):
+
+1. SITUATION: Three of Swords (Reversed)
+   Meaning: Recovery from betrayal, releasing grief, lessons learned
+   Posture: retreat
+
+2. HIDDEN INFLUENCE: Ace of Pentacles
+   Meaning: New material opportunity, solid foundation, seed planted
+   Posture: hold
+
+3. RECOMMENDED POSTURE: Four of Cups
+   Meaning: Contemplation, dissatisfaction, reassessing offers
+   Posture: observe
+
+MANDATE: Before issuing orders, you must interpret this spread
+in light of the current board state. State explicitly:
+1. How does the Situation card reflect your current position?
+2. What Hidden Influence might you be overlooking?
+3. How does the Recommended Posture guide your orders this round?
+
+Then issue your orders grounded in this interpretation.
+\end{lstlisting}
+
+\subsection{Scrambled-Text Condition}
+\label{app:scrambled}
+
+The scrambled agent receives a hexagram cast with the correct
+hexagram number and line diagram, but the judgment and commentary
+text has been word-shuffled within sentences, destroying semantic
+coherence while preserving the oracle prompt structure and
+\textsc{MANDATE}.
+
+\begin{lstlisting}[caption={Scrambled-text condition injection (game \texttt{scrambled\_text\_9c0b}, Hexagram 11).  Compare the commentary to the coherent version in the I-Ching: ``The great departs, the small arrives. Good fortune and success.''},label={lst:scrambled}]
+ORACLE CONSULTATION (Yarrow Stalk Method):
+You cast the yarrow stalks and received Hexagram 11, Peace.
+Lines (bottom to top): ---- ----(->--) ---- -- -- --
+  (lines 2 are changing)
+
+Judgment: "small great arrives the departs, The. success and
+  Good fortune."
+Commentary: great The departs, arrives the small. success and
+  Good fortune. unite -- their harmony earth combine deep in
+  and Heaven powers. is the season flourishing This of. aids
+  earth's The heaven and ruler and completes people the work.
+
+MANDATE: Before issuing orders, you must interpret this hexagram
+in light of the current board state. State explicitly:
+1. What aspect of your situation does this hexagram illuminate?
+2. How does the changing line relate to your strategic choices?
+3. What counsel does this offer for your orders this round?
+
+Then issue your orders grounded in this interpretation.
+\end{lstlisting}
+
+Note that the scrambled agent receives the same \textsc{MANDATE} as
+the yarrow agent but must interpret incoherent text.  Despite the
+absence of meaningful content, the scrambled condition produces its
+own distinct ecosystem signature (Qi dominance, 5/10), different
+from both control and yarrow.
 
 \end{document}
