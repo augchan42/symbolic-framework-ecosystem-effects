@@ -37,6 +37,11 @@ Preparing the paper "Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in
 - [ ] Spellcheck: authors' names, proper nouns, abstract, section headings
 - [ ] No journal-specific boilerplate (we use plain `article` class, so N/A)
 
+### Stats / Data Integrity
+
+- [ ] **§4.5 content-independence numbers match the reproducer** — Re-run the card/hexagram action-independence reproducer (`tarot_action_correlation.py`, currently in `warringstates-engine/scripts/`; port a copy into this repo's `scripts/` so v2 is self-contained) against the N=41 dataset and confirm every stat in §4.5 matches its output exactly: the hexagram advance-vs-non-advance Fisher (currently `OR = 1.40, p = 0.34`, `paper/main.tex:205`), the hexagram theme χ² (`p = 0.9454`, line 205), and the Tarot posture χ² (`p = 0.6860`, line 207).
+  - *Why this is on the list:* the superseded n=28 draft (`warringstates-engine/docs/paper/framework-ecosystem-effects.tex`, the version currently on arXiv) reported `OR = 1.29, p = 0.47` for this same test, which matched **no** script output — the reproducer gave `OR ≈ 1.38, p ≈ 0.27`. That was a stale hand-edited statistic that survived into a submission. Don't let an unverified §4.5 number survive into v2. (Audit, 2026-05-31.)
+
 ## Bundle Preparation
 
 ### Step-by-step
