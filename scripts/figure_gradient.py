@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Section 5: Perturbativeness Gradient — reasoning length dose-response."""
+"""EXPLORATORY (not used in the paper). Non-Han reasoning-length boxplot for the
+§4.7 elevation finding (KW p=0.048, non-monotonic — scrambled is the lone outlier).
+Kept as an analysis aid only; the result is borderline and is reported in prose, so
+no figure ships. The output PDF is intentionally not committed."""
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import kruskal, mannwhitneyu
