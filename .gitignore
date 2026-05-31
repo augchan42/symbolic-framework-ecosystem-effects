@@ -10,3 +10,7 @@ __pycache__/
 *.fls
 *.synctex.gz
 .claude/
+
+# LaTeX build artifact (rebuilt during arXiv bundling)
+arxiv-submission/main.pdf
+main.pdf
