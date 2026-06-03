@@ -57,7 +57,7 @@ The distinction between frameworks and personas is load-bearing. A persona says 
 
 Our core finding: each symbolic reasoning framework produces a distinctive, framework-specific winner-ecosystem signature. Under I-Ching yarrow divination, Qin (the strongest expansionist) wins 0 of 10 games while Yan and Chu co-dominate. Under Tarot, Qin wins 5 of 10 (Fisher $p = 0.006$ vs.\ pooled). Under scrambled text, Qi wins 5 of 10 ($p = 0.006$). Under control, Yan dominates with 7 of 11 wins. The framework-receiving agent (Han) never wins under any condition---the frameworks redirect the ecosystem, not Han's fate.
 
-The modulation is process-driven, not content-driven: hexagram themes do not predict the agent's subsequent actions ($\chi^2$ $p = 0.95$), even though 83\% of orders reference the hexagram in reasoning text. And the scrambled-text ablation rules out prompt structure alone: destroying semantic coherence while preserving structure produces its own distinct ecosystem, not a reversion to control.
+The modulation is process-driven, not content-driven: hexagram themes do not predict the agent's subsequent actions ($\chi^2$ $p = 0.95$), even though 77\% of orders reference the hexagram in reasoning text. And the scrambled-text ablation rules out prompt structure alone: destroying semantic coherence while preserving structure produces its own distinct ecosystem, not a reversion to control.
 
 This paper is a companion to a negative-result study of the King Wen I-Ching sequence in neural network training \citep{Chan2026kingwen}. There, the sequence's anti-habituation properties failed to improve training. Here, the same sequence (via yarrow-stalk casting) fails to improve strategic decision-making but produces measurable ecosystem effects. The sequence appears to be a reliable perturbator---it changes behavior without improving it.
 
@@ -223,7 +223,7 @@ Reasoning (chars) & 309 & 449 & 456 & \textbf{633} \\
 \subsection{Content-Action Independence}
 \label{sec:content}
 
-A central concern is whether the behavioral modulation is simply content-following. We classify all 64 hexagrams by primary theme (advance/retreat/wait/cooperate) and test for association with Han's subsequent action category. The association is null: Pearson's $\chi^2$ $p = 0.9454$ ($n = 214$ orders, 4 themes $\times$ 4 actions, dof $= 9$). Fisher's exact for advance vs.\ non-advance hexagrams: OR $= 1.40$, $p = 0.34$. However, 83.3\% of Han's orders reference the hexagram in their reasoning text---Han reads and contemplates the hexagram but does not follow it as an instruction. This independence is especially striking for the 6 yarrow games where no hexagram text was provided: the agent generated its own interpretation from the hexagram number alone, then did not follow that self-generated interpretation either.
+A central concern is whether the behavioral modulation is simply content-following. We classify all 64 hexagrams by primary theme (advance/retreat/wait/cooperate) and test for association with Han's subsequent action category. The association is null: Pearson's $\chi^2$ $p = 0.9454$ ($n = 214$ orders, 4 themes $\times$ 4 actions, dof $= 9$). Fisher's exact for advance vs.\ non-advance hexagrams: OR $= 1.40$, $p = 0.34$. However, 77.1\% of Han's orders reference the hexagram in their reasoning text (131/170 yarrow orders with hexagram data)---Han reads and contemplates the hexagram but does not follow it as an instruction. This independence is especially striking for the 6 yarrow games where no hexagram text was provided: the agent generated its own interpretation from the hexagram number alone, then did not follow that self-generated interpretation either.
 
 We perform an analogous test on the Tarot condition. Each card has a grounded \texttt{decision\_posture} (advance/hold/retreat/ally/transform/observe). The dominant posture of the 3-card spread does not predict Han's subsequent action: $\chi^2$ $p = 0.6860$ ($n = 299$ orders, 6 postures $\times$ 4 actions, dof $= 15$). Tarot-Han references card names in 81.6\% of reasoning text yet does not follow the cards' posture recommendations.
 
@@ -387,6 +387,13 @@ Draw & 0 & \textbf{6} & 3 & 1 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/factorial-winners.pdf}
+\caption{Winner distributions across the 2$\times$2 factorial. Each yarrow component in isolation (decision-only, learning-only) inflates draws and fails to reproduce the full signature; only the combined yarrow intervention yields Chu/Yan co-dominance with Qin shut out. Dashed line marks the uniform-chance rate ($n/7$).}
+\label{fig:factorial}
+\end{figure}
 
 Three findings emerge:
 
