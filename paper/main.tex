@@ -40,7 +40,7 @@
 \maketitle
 
 \begin{abstract}
-Large language models exhibit innate behavioral tendencies when deployed as strategic agents---notably a risk-averse ``turtle'' bias toward defensive play. We show that symbolic reasoning frameworks, injected as per-round reflective prompts into one agent, differentially modulate this bias and reshape the multi-agent ecosystem to produce framework-specific winner distributions. In a 7-player Warring States Diplomacy variant (41 games, 4 conditions, single-campaign memory accumulation), each framework produces a distinct ecosystem signature: under control, Yan dominates (7/11, 64\%); under I-Ching yarrow divination, Yan and Chu co-dominate while Qin is completely suppressed (0/10); under Tarot, Qin dominates (5/10, Fisher vs.\ pooled $p = 0.006$); under scrambled-text ablation (incoherent oracle text preserving prompt structure), Qi dominates (5/10, Fisher vs.\ pooled $p = 0.006$). The framework-receiving agent (Han) never wins and shows no survival difference across conditions (Fisher $p = 1.0$), but Tarot consistently elevates Han's peak territory (mean 3.0 SCs vs.\ 2.1--2.5 others, Kruskal-Wallis $p = 0.010$). Neither framework's content predicts subsequent actions---hexagram themes ($\chi^2$ $p = 0.95$) and Tarot card postures ($\chi^2$ $p = 0.69$) are both independent of action choice---suggesting the modulation operates through the reflective \emph{process}, not content-following. We present this as an observation paper establishing that alignment-framework choice at the agent level produces distinctive system-level consequences in multi-agent settings.
+Large language models exhibit innate behavioral tendencies when deployed as strategic agents---notably a risk-averse ``turtle'' bias toward defensive play. We show that symbolic reasoning frameworks, injected as per-round reflective prompts into one agent, differentially modulate this bias and reshape the multi-agent ecosystem to produce framework-specific winner distributions. In a 7-player Warring States Diplomacy variant (61 games, 6 conditions, single-campaign memory accumulation), framework choice reshapes the winner distribution (Monte-Carlo permutation omnibus $p \approx 0.001$ over the four primary conditions), producing condition-associated ecosystem signatures: under control, Yan dominates (7/11, 64\%); under I-Ching yarrow divination, Yan and Chu co-dominate while Qin is completely suppressed (0/10); under Tarot, Qin dominates (5/10); under scrambled-text ablation (incoherent oracle text preserving prompt structure), Qi dominates (5/10). The scrambled$\to$Qi attractor is the most robust (significant against both a pooled denominator and control alone, $p = 0.006$ and $0.012$); the tarot$\to$Qin attractor is significant only against the pooled denominator ($p = 0.006$, vs.\ control alone $p = 0.064$). The framework-receiving agent (Han) never wins and shows no survival difference across conditions (Fisher $p = 1.0$), but Tarot consistently elevates Han's peak territory (mean 3.0 SCs vs.\ 2.1--2.5 others, Kruskal-Wallis $p = 0.010$). Neither framework's content predicts subsequent actions---hexagram themes ($\chi^2$ $p = 0.95$) and Tarot card postures ($\chi^2$ $p = 0.69$) are both independent of action choice---suggesting the modulation operates through the reflective \emph{process}, not content-following. A 2$\times$2 factorial decomposition separating yarrow's decision-time (per-round oracle) and learning-time (between-game I-Ching reflection) components reveals a non-additive interaction: each component individually freezes the board (50--60\% stalemate rate, Fisher $p = 0.012$ and $0.004$ vs.\ control), but combined they produce zero stalemates (interaction $p = 0.004$). Direct testing of the central mechanism relocates yarrow's Qin suppression from the framework-receiving agent's own cooperation to rival (Chu) expansion---the agent transmits the effect rather than causing it. We present this as an observation paper establishing that alignment-framework choice at the agent level produces distinctive, non-additive system-level consequences in multi-agent settings.
 \end{abstract}
 
 % ==============================================================
@@ -129,33 +129,54 @@ The intervention operates at two timescales:
 \subsection{Conditions}
 \label{sec:conditions}
 
-Four conditions, each modifying only Han's prompt (Table~\ref{tab:conditions}):
+Six conditions, each modifying only Han's prompt (Table~\ref{tab:conditions}): four primary conditions plus two factorial-decomposition conditions (\S\ref{sec:factorial-design}) that separate the yarrow intervention's decision-time and learning-time components.
 
 \begin{table}[h]
 \centering
-\caption{Experimental conditions. All conditions modify only Han's prompt; the other six agents are identical across conditions.}
+\caption{Experimental conditions. All conditions modify only Han's prompt; the other six agents are identical across conditions. Decision-only and learning-only isolate the per-round and between-game components of the yarrow intervention.}
 \label{tab:conditions}
-\begin{tabular}{lp{7.5cm}l}
+\begin{tabular}{lp{7.0cm}l}
 \toprule
-Condition & Han's Per-Round Prompt & $n$ \\
+Condition & Han's Per-Round / Between-Game Prompt & $n$ \\
 \midrule
 Control & Length-matched generic reflection prompt & 11 \\
 Yarrow & Yarrow-stalk I-Ching cast; hexagram text + \textsc{MANDATE} to interpret & 10 \\
 Tarot & 3-card Tarot spread (situation / hidden influence / posture) + \textsc{MANDATE} & 10 \\
 Scrambled & Word-scrambled yarrow text; same structure, incoherent content + \textsc{MANDATE} & 10 \\
+Decision-only & Yarrow \textsc{MANDATE} per round; \emph{generic} reflection between games & 10 \\
+Learning-only & \emph{Generic} prompt per round; I-Ching framework reflection between games & 10 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The scrambled condition is the critical ablation. It preserves the structural intervention---oracle-formatted prompt, \textsc{MANDATE} to interpret---while removing coherent semantic content through word-level shuffling. If effects derive from oracle \emph{content}, scrambled should resemble control. If effects derive from \emph{structure}, scrambled should resemble yarrow. Neither holds: scrambled produces its own distinct ecosystem signature.
 
+\subsection{Factorial Decomposition Conditions}
+\label{sec:factorial-design}
+
+The yarrow intervention operates at two timescales (\S\ref{sec:intervention}): a per-round oracle (decision-time) and I-Ching-framed reflection between games (learning-time). To isolate them we add two conditions, yielding a 2$\times$2 factorial with control and full yarrow as the remaining cells (Table~\ref{tab:factorial-design}). \textbf{Decision-only} gives Han the yarrow \textsc{MANDATE} prompt per round but \emph{generic} between-game reflection; \textbf{learning-only} gives Han a \emph{generic} per-round prompt (identical to control) but I-Ching-framework reflection between games. This tests whether the full yarrow ecosystem signature is carried by the per-round oracle, the learning framework, or their interaction.
+
+\begin{table}[h]
+\centering
+\caption{2$\times$2 factorial decomposition of the yarrow intervention.}
+\label{tab:factorial-design}
+\begin{tabular}{lcc}
+\toprule
+ & No oracle per-round & Oracle per-round \\
+\midrule
+No framework reflection & Control & Decision-only \\
+Framework reflection & Learning-only & Yarrow (full) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Dataset}
 
-41 games across 4 conditions: 11 control, 10 yarrow, 10 Tarot, 10 scrambled text. All agents use Claude Opus 4.6. Each condition runs as a single campaign with continuous memory accumulation across games (SQLite memory bank carries learning forward).
+61 games across 6 conditions: 11 control, 10 each yarrow, Tarot, scrambled text, decision-only, and learning-only. The four primary conditions (control, yarrow, Tarot, scrambled; $n=41$) carry the ecosystem-signature analysis; the two factorial conditions extend it to the decomposition in \S\ref{sec:factorial}. All agents use Claude Opus 4.6. Each condition runs as a single campaign with continuous memory accumulation across games (SQLite memory bank carries learning forward).
 
 \subsection{Statistical Methodology}
 
-Winner distributions: Fisher's exact tests. Behavioral rates: pooled proportions and per-game averages (game as unit of analysis) with Kruskal-Wallis and Mann-Whitney $U$ tests. Pairwise tests follow significant omnibus tests as planned contrasts with Bonferroni correction. Hexagram-action and Tarot-action association: Pearson's chi-squared and Fisher's exact. We report exact $p$-values throughout.
+Winner distributions: we first establish global heterogeneity with a Monte-Carlo permutation omnibus (100{,}000 reshuffles of the condition labels across all 41 games, evaluated under both a Pearson chi-squared and a summed pairwise total-variation statistic), since the condition$\times$winner table has numerous zero and small cells that invalidate the asymptotic chi-squared test. Pairwise winner comparisons then use Fisher's exact tests, reported against both a pooled ``vs.\ all other conditions'' denominator and the conservative direct ``vs.\ control'' denominator; pairwise condition separability is assessed by total-variation distance against the same permutation null. Behavioral rates: pooled proportions and per-game averages (game as unit of analysis) with Kruskal-Wallis and Mann-Whitney $U$ tests. Pairwise tests follow significant omnibus tests as planned contrasts with Bonferroni correction. Hexagram-action and Tarot-action association: Pearson's chi-squared and Fisher's exact. We report exact $p$-values throughout.
 
 Territorial statistics use final-game-state methodology: each game's last recorded standings.
 
@@ -211,7 +232,7 @@ The scrambled-text ablation (\S\ref{sec:conditions}) provides the critical test:
 \subsection{Ecosystem Signatures: Winner Distributions}
 \label{sec:ecosystem}
 
-The behavioral differences propagate to other agents' outcomes. Each condition produces a distinct winner-ecosystem signature (Table~\ref{tab:winners}, Figure~\ref{fig:winners}).
+The behavioral differences propagate to other agents' outcomes, producing condition-associated winner-ecosystem signatures (Table~\ref{tab:winners}, Figure~\ref{fig:winners}). A Monte-Carlo permutation omnibus (100{,}000 reshuffles of the condition labels over the 41 games) rejects a common winner distribution at $p \approx 0.0013$ under both a chi-squared and a total-variation statistic, establishing global heterogeneity before any pairwise claim.
 
 \begin{table}[t]
 \centering
@@ -236,7 +257,7 @@ Scrambled ($n\!=\!10$) & 1 & 1 & \textbf{5} & 0 & 1 & 1 & 1 & 0 \\
 \label{fig:winners}
 \end{figure}
 
-The four ecosystem signatures are:
+The four condition-associated modal signatures are:
 \begin{itemize}
 \item \textbf{Control $\to$ Yan dominance} (7/11, 64\%): under no-framework conditions with full memory accumulation, Yan's defensive posture wins overwhelmingly.
 \item \textbf{Yarrow $\to$ Yan/Chu co-dominance, Qin suppressed} (Yan 4, Chu 4, Qin 0): the I-Ching framework produces a cooperative/defensive ecosystem that shuts out the strongest expansionist.
@@ -244,11 +265,9 @@ The four ecosystem signatures are:
 \item \textbf{Scrambled $\to$ Qi dominance} (5/10, 50\%): incoherent oracle text produces its own distinct ecosystem favoring the intelligence/income-advantaged state.
 \end{itemize}
 
-Two ecosystem effects survive Bonferroni correction at the 4-comparison level (each condition vs.\ pooled others):
-\begin{itemize}
-\item Tarot $\to$ Qin: Fisher vs.\ pooled others $p = 0.006$
-\item Scrambled $\to$ Qi: Fisher vs.\ pooled others $p = 0.006$
-\end{itemize}
+\paragraph{Pairwise separability is weaker than the global heterogeneity.} Decomposing the omnibus by total-variation distance against the same permutation null, only the scrambled condition separates from its neighbours at the uncorrected 5\% level (vs.\ control TV $= 0.71$, $p = 0.016$; vs.\ yarrow TV $= 0.70$, $p = 0.029$). The control--yarrow--tarot cluster is \emph{not} pairwise-distinguishable on winner identity alone at this sample size (every pair $p > 0.11$). We therefore frame the result as a single strongly heterogeneous landscape in which scrambled is the most distinct individual signature, rather than four mutually separable signatures.
+
+\paragraph{The two attractor claims.} The tarot$\to$Qin and scrambled$\to$Qi effects were tested as pre-registered attractor hypotheses against a pooled ``all-other-conditions'' denominator, each $p = 0.006$ (5/10 vs.\ 2/31), surviving Bonferroni correction for the $m = 2$ family. Pooling, however, presumes the comparator conditions are exchangeable on the target state's win rate---an assumption the omnibus shows is only approximate---so we also report the conservative direct comparison against control. Under that test the two effects diverge: \textbf{scrambled$\to$Qi is robust} (significant against both the pooled denominator and control alone: 5/10 vs.\ 0/11, $p = 0.012$), whereas \textbf{tarot$\to$Qin is denominator-dependent} (5/10 vs.\ control 1/11, $p = 0.064$, not reaching $\alpha = 0.05$). A leave-one-out analysis shows the pooled tarot$\to$Qin result is insensitive to any single game ($p \in [0.003, 0.016]$, significant in all ten deletions); its fragility lies in the choice of denominator, not sample composition. Given the finding's replication history (\S\ref{sec:limitations}), we present tarot$\to$Qin as suggestive and in need of out-of-sample replication, and treat scrambled$\to$Qi as the stronger attractor.
 
 Additional pairwise tests: yarrow Qin suppression (0/10) vs.\ Tarot (5/10): Fisher $p = 0.033$; yarrow Qin suppression vs.\ all others (7/31): Fisher $p = 0.161$.
 
@@ -292,16 +311,18 @@ Scrambled & 62.0\% & \textbf{74.3\%} & $+12.3$pp & 0.7\% & 5.9\% \\
 \end{tabular}
 \end{table}
 
-\paragraph{Hypothesized transmission pathways.} We propose four mechanistic accounts, consistent with the data but not experimentally confirmed via counterfactual intervention:
+\paragraph{Transmission pathways: rival expansion, not Han-mediated friction.} We propose mechanistic accounts of how each condition propagates to ecosystem outcomes. We tested the central one---yarrow's Qin suppression---directly against the game logs, and the test forced a revision: the \emph{outcome} is real and reproducible, but the originally proposed \emph{agent} (Han's cooperative friction) is not the cause.
 
 \begin{enumerate}
-\item \textbf{Yarrow $\to$ friction $\to$ Qin suppression}: yarrow-Han's multi-directional support creates local territorial stability that prevents any single expansionist from sweeping the center. Qin, positioned behind Hangu Pass on the western edge, cannot exploit a vacuum that yarrow-Han's cooperative play prevents from forming.
-\item \textbf{Tarot $\to$ vacuum $\to$ Qin dominance}: Tarot-Han's extreme defensiveness (78.3\% hold + self-support, 0\% cooperation) makes it a non-participant. Without friction, the strongest expansionist faces no resistance and snowballs territory.
-\item \textbf{Scrambled $\to$ stubborn holdout $\to$ Qi dominance}: scrambled-Han actively supports its own positions ($+12.3$pp defensive shift under pressure), absorbing disproportionate military pressure in the central corridor. Qi, positioned on the eastern coast away from this friction, expands into less contested territory.
-\item \textbf{Control $\to$ moderate friction $\to$ Yan dominance}: moderate turtling creates some friction but not enough to block any single state. The balanced ecosystem favors Yan, whose defensive geographic position makes it hardest to eliminate.
+\item \textbf{Yarrow $\to$ rival (Chu) expansion $\to$ Qin suppression} (revised). The trajectory prediction holds: under yarrow Qin's supply-center count is flat (growth slope $+0.004$ SC/round over rounds 1--15; final mean 2.8) whereas under tarot Qin snowballs (slope $+0.253$; final 7.8), significant on per-game final SC (Mann-Whitney yarrow vs.\ tarot $U = 18$, $p = 0.018$). But the original ``speed bump'' is not the cause: yarrow-Han issues only 0.70 cooperative-support orders per game in the final third (5/10 games have any), and of the 7 such orders across the whole condition, 2 support Qin \emph{itself} and 4 support Wei---not an anti-Qin coalition. Mediation is weak (Han late-cooperation vs.\ Qin final SC, $r = -0.31$, $p = 0.05$; vs.\ Qin-won binary $r = -0.08$, n.s.). The actual blocker is \textbf{Chu, a stronger rival}: within yarrow games Qin final SC is strongly inversely correlated with Chu final SC ($r = -0.73$, $p = 0.016$) and uncorrelated with Yan's ($r = +0.30$, n.s.); the two yarrow games where Qin escaped (6, 10 SC) are exactly the two where Chu collapsed. Decisively, Qin is \emph{also} suppressed under the learning-only condition (\S\ref{sec:factorial}), where Han's late cooperation is \emph{exactly zero}---so Qin suppression occurs with no Han friction at all. The honest reading is ecosystem redirection: yarrow framing reshapes the board into a Chu/Yan-favorable basin that crowds Qin out, and Han's occasional late supports are a \emph{symptom} of that basin, not its cause.
+\item \textbf{Tarot $\to$ vacuum $\to$ Qin dominance} (untested conjecture): Tarot-Han's extreme defensiveness (78.3\% hold + self-support, 0\% cooperation) makes it a non-participant. Without resistance, the strongest expansionist faces no friction and snowballs (Qin slope $+0.253$).
+\item \textbf{Scrambled $\to$ stubborn holdout $\to$ Qi dominance} (untested conjecture): scrambled-Han actively supports its own positions ($+12.3$pp defensive shift under pressure), absorbing military pressure in the central corridor while Qi, on the eastern coast, expands into less contested territory.
+\item \textbf{Control $\to$ moderate friction $\to$ Yan dominance} (untested conjecture): moderate turtling does not systematically block any state; the balanced ecosystem favors Yan, whose defensive geography makes it hardest to eliminate.
 \end{enumerate}
 
-The Qin gradient across conditions---0/10 yarrow, 1/11 control, 1/10 scrambled, 5/10 tarot---tracks the late-game cooperation gradient in the opposite direction (17.1\%, 7.5\%, 3.6\%, 0\%).
+The Qin gradient across conditions---0/10 yarrow, 1/11 control, 1/10 scrambled, 5/10 tarot---is descriptively real, but we caution against reading it as \emph{tracking} Han's late-game cooperation gradient (17.1\%, 7.5\%, 3.6\%, 0\%). Direct testing shows Han's cooperation is too small in volume to be causal and that Qin is suppressed even where Han cooperation is zero (learning-only). The common thread is better stated as redirection than as a single mechanical lever: a perturbation at Han's reasoning shifts which \emph{other} state captures the cooperative or expansionist basin, and Han---which never wins---is a transmitter, not the engine. The tarot, scrambled, and control pathways above remain hypothesized and, unlike the yarrow case, have not been individually stress-tested.
+
+\paragraph{The friction is in commitments, not rhetoric.} The yarrow account rests on Han's cooperative-support \emph{orders}. A natural alternative is that yarrow-Han simply \emph{talks} more cooperatively. Mining the diplomatic-message logs of all 61 games (game as unit of analysis) does not support this: diplomatic cooperativeness is saturated and condition-invariant---across every condition $\sim$76--91\% of Han's messages propose peace or alliance, Han keeps peace promises 96--100\% of the time, and $\sim$70\% of state pairs form mutual cooperative ties per game. Yarrow-Han is statistically indistinguishable from control, tarot, and scrambled on diplomatic cooperative rate (Kruskal-Wallis $p = 0.079$), peace-promise break rate ($p = 0.98$), and alliance-network density ($p = 0.85$); on two of three measures the point estimates run mildly \emph{against} the hypothesis. Whatever yarrow does, it does in the action channel, not the rhetoric channel---consistent with content-action independence (\S\ref{sec:content})---which rules out a ``yarrow-Han negotiates better'' explanation.
 
 \subsection{Non-Han Reasoning Elevation}
 \label{sec:nonhan}
@@ -342,6 +363,41 @@ Peak SCs by condition: Kruskal-Wallis $p = 0.010$ (significant). Pairwise: tarot
 
 These results discipline the framing: whatever framework Han adopts, it does not help Han survive or win. The frameworks' effects are felt elsewhere---they redirect which non-Han state dominates.
 
+\subsection{Factorial Decomposition: Decision-Time vs.\ Learning-Time}
+\label{sec:factorial}
+
+The yarrow intervention has two temporal components: a per-round oracle (decision-time) and I-Ching-framed reflection between games (learning-time). We isolate them with the decision-only and learning-only conditions (\S\ref{sec:factorial-design}), producing a 2$\times$2 factorial with control and full yarrow as the existing cells (Table~\ref{tab:factorial}).
+
+\begin{table}[t]
+\centering
+\caption{Winner distributions across the 2$\times$2 factorial. Bold marks each condition's dominant outcome.}
+\label{tab:factorial}
+\begin{tabular}{lcccc}
+\toprule
+Winner & Control & Decision-only & Learning-only & Yarrow full \\
+& $(n\!=\!11)$ & $(n\!=\!10)$ & $(n\!=\!10)$ & $(n\!=\!10)$ \\
+\midrule
+Chu & 1 & \textbf{3} & 1 & \textbf{4} \\
+Yan & \textbf{7} & 1 & 2 & \textbf{4} \\
+Qi & 0 & 0 & \textbf{3} & 1 \\
+Wei & 0 & 0 & 1 & 0 \\
+Qin & 1 & 0 & 0 & \textbf{0} \\
+Zhao & 2 & 0 & 0 & 0 \\
+Draw & 0 & \textbf{6} & 3 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three findings emerge:
+
+\paragraph{1. Stalemate explosion (the strongest result in the dataset).} Decision-only produces 5/10 stalemates (Fisher $p = 0.012$ vs.\ control 0/11); learning-only produces 6/10 ($p = 0.004$). Average game length drops from 19.6 (control) and 20.0 (yarrow) to 15.6 (decision-only) and 15.3 (learning-only). Combined factorial (11/20 stalemates) vs.\ full yarrow (0/10): Fisher $p = 0.004$. Each component individually freezes the board; together they produce the longest, most dynamic games---a statistically significant negative interaction.
+
+\paragraph{2. Decision-only reproduces Chu elevation but not the full signature.} Decision-only Chu wins 3/10 (vs.\ 4/10 yarrow, 1/11 control)---the per-round oracle drives Chu elevation. But it also produces 6/10 draws and Yan suppression (1/10, Fisher $p = 0.024$ vs.\ control 7/11): the oracle disrupts the default ecosystem without directing a clear alternative winner.
+
+\paragraph{3. Learning-only produces a novel ecosystem.} Learning-only's top winners are Qi (3/10) and Wei (1/10)---Wei wins in no other condition at this rate, and the Qi elevation resembles the scrambled condition more than yarrow. I-Ching reflection without the per-round oracle creates its own distinct perturbation, not a component of the full yarrow signature.
+
+The factorial rules out additive decomposition: yarrow $\neq$ decision-only $+$ learning-only. The full yarrow ecosystem (Chu/Yan co-dominance, zero stalemates, dynamic boards) requires both components operating simultaneously.
+
 
 % ==============================================================
 \section{Analysis}
@@ -357,11 +413,18 @@ The four conditions produce four qualitatively distinct behavioral modes. The na
 
 \paragraph{Parsing failure as perturbation (scrambled).} Incoherent oracle text forces the longest deliberation (633 chars, 2.05$\times$ control) but produces neither yarrow's cooperation nor tarot's passivity. Instead, scrambled-Han develops distinctive self-reinforcement: 25.0\% late-game self-support, the largest pressure-induced defensive shift ($+12.3$pp). When oracle text is unparseable, the agent falls back on self-referential reasoning.
 
-These three mechanisms map to the ecosystem signatures: yarrow's cooperation creates friction that blocks expansionists ($\to$ Qin suppression), tarot's passivity creates a vacuum the strongest expansionist exploits ($\to$ Qin dominance), scrambled's self-reinforcement creates a localized holdout while a distant state benefits ($\to$ Qi dominance), and control's moderate behavior produces a balanced ecosystem where the most defensively advantaged state prevails ($\to$ Yan dominance).
+These three behavioral modes are associated with the ecosystem signatures, though the transmission pathway is rival-mediated rather than Han-mediated (\S\ref{sec:mechanisms}): the yarrow basin coincides with rival (Chu) expansion that crowds out the strongest expansionist ($\to$ Qin suppression), tarot's passivity creates a vacuum the strongest expansionist exploits ($\to$ Qin dominance), scrambled's self-reinforcement creates a localized holdout while a distant state benefits ($\to$ Qi dominance), and control's moderate behavior produces a balanced ecosystem where the most defensively advantaged state prevails ($\to$ Yan dominance).
 
 \subsection{Reasoning Length as a Negative Indicator}
 
 The reasoning-length gradient (control 309 $<$ yarrow 449 $\approx$ tarot 456 $<$ scrambled 633, KW $p = 0.007$) is informative about mechanism but \emph{not} about capability: more reasoning does not mean better strategy. This parallels the ``rhetoric-strategy divergence'' finding in activation-steering work \citep{Sun2026persona}. The gradient tracks perturbativeness---the more disruptive the prompt, the more deliberation it induces---not strategic quality.
+
+\subsection{Factorial Decomposition: A Non-Additive Interaction}
+\label{sec:factorial-analysis}
+
+The 2$\times$2 factorial (\S\ref{sec:factorial}) shows the yarrow intervention is not decomposable into independent components. The stalemate interaction is the clearest signal: each component individually freezes the board (decision-only 5/10, learning-only 6/10 stalemates), but combined they produce zero stalemates---a significant negative interaction (Fisher $p = 0.004$).
+
+We propose a complementary-function account. The per-round oracle (decision-time) disrupts Han's default behavioral mode within each game, introducing variability into its orders; without learning-time reflection to channel that variability into coherent strategy, the disruption produces erratic play that drives neighbours to defensive postures and freezes the board. Conversely, learning-time reflection alone accumulates I-Ching-framed memories that sit inert without the per-round oracle to activate them, so Han plays like a slightly modified control agent and the board again tends to stalemate. Only when both operate together does the system produce dynamic boards: the oracle generates real-time disruption and the reflection channels it into strategic patterns (the late-game cooperation and pressure invariance of \S\ref{sec:mechanisms}) that create the rival-mediated friction preventing any single state from dominating. The yarrow framework functions as an integrated cognitive system, not a sum of separable prompt effects. Consistently, decision-only partially reproduces the full-yarrow Chu elevation (3/10 vs.\ 4/10) but its 6/10 draw rate and Yan suppression show the oracle creating disruption without direction---a perturbation that prevents any winner from emerging rather than redirecting which one prevails.
 
 
 % ==============================================================
@@ -388,7 +451,9 @@ Recent theoretical work shows risk aversion functions as an inductive bias for g
 \section{Limitations}
 \label{sec:limitations}
 
-\paragraph{Sample size.} 41 games across 4 conditions (11/10/10/10). Two ecosystem effects survive Bonferroni correction (tarot$\to$Qin and scrambled$\to$Qi, both $p = 0.006$), but other pairwise winner comparisons remain underpowered.
+\paragraph{Sample size and separability.} 61 games across 6 conditions (control 11; 10 each for the other five). The ecosystem-signature analysis rests on the four primary conditions ($n = 41$); the factorial conditions add 20 games. The conditions are globally heterogeneous (permutation omnibus $p \approx 0.0013$), but only the scrambled condition is individually separable at the pairwise level (\S\ref{sec:ecosystem}); the control--yarrow--tarot cluster is not, and other pairwise winner comparisons remain underpowered.
+
+\paragraph{Pooled-denominator dependence.} The tarot$\to$Qin attractor is significant only against a pooled denominator ($p = 0.006$), not against control alone ($p = 0.064$), so it rests on a comparator-exchangeability assumption the omnibus shows is imperfect. Scrambled$\to$Qi is the more robust attractor (significant against both pooled and control-alone comparisons).
 
 \paragraph{Single model.} All agents are Claude Opus 4.6. The turtle tendency and its modulation may be Claude-specific. Replication with GPT-4 or Gemini class models would test generalization.
 
@@ -396,7 +461,7 @@ Recent theoretical work shows risk aversion functions as an inductive bias for g
 
 \paragraph{Framework selection.} We compare two philosophical frameworks plus a scrambled ablation. Additional frameworks (Stoic, Mohist, game-theoretic) would strengthen the claim that framework properties map to ecosystem signatures.
 
-\paragraph{Mechanism not experimentally tested.} The hypothesized transmission pathways (\S\ref{sec:mechanisms}) are consistent with game logs and late-game cooperation data but have not been tested via counterfactual intervention (e.g., forcing cooperation independent of framework).
+\paragraph{Mechanism revised, not all variants tested.} The originally proposed Han-mediated ``speed bump'' was tested against the game logs (\S\ref{sec:mechanisms}) and rejected as the causal account: Han's cooperation is too sparse, and Qin is suppressed even where Han cooperation is zero (learning-only). The revised account attributes Qin suppression to rival (Chu) expansion. This revision is observational; it has not been confirmed by counterfactual intervention (e.g., handicapping Chu), and the tarot/scrambled/control pathways remain untested conjectures.
 
 \paragraph{Yarrow hexagram text inconsistency.} A corpus configuration change mid-campaign caused the first 6 yarrow games to present only hexagram numbers (empty name, judgment, commentary fields) while the last 4 received full hexagram text. The agent supplied accurate hexagram content from training data in all number-only games, so the interpretive process was preserved. The core ecosystem signature (Qin suppression, Yan/Chu co-dominance) held across both subgroups, but the relative Yan-Chu balance shifted (Yan 4/6 in number-only, Chu 2/4 in full-text), which could reflect content effects, memory accumulation, or small-sample noise.
 
@@ -411,7 +476,8 @@ Recent theoretical work shows risk aversion functions as an inductive bias for g
 \item \textbf{Third philosophical framework} (6--8 games with Stoic or Mohist reflection). Turns the two-framework comparison into a systematic study of how framework properties map to behavioral modulation.
 \item \textbf{Cross-model replication} (10 games each on GPT-4 and Gemini). Tests whether the turtle tendency and its modulation are Claude-specific or general LLM properties.
 \item \textbf{Prompt-length control.} Run a condition with verbose generic reflection (matching Tarot's length) to isolate framework content from prompt length.
-\item \textbf{Counterfactual mechanism test.} Directly manipulate Han's late-game cooperation rate (forced support vs.\ forced hold) independent of framework, and observe whether Qin suppression follows.
+\item \textbf{Counterfactual mechanism test (Chu-blockade).} The mechanism analysis (\S\ref{sec:mechanisms}) relocated the cause of yarrow's Qin suppression from Han to rival (Chu) expansion. The decisive counterfactual is to handicap or constrain Chu under the yarrow condition: if Qin recovers when Chu cannot expand, the rival-blockade account is confirmed. A secondary control manipulates Han's late-game cooperation directly (forced support vs.\ forced hold) to confirm it is \emph{not} pivotal.
+\item \textbf{Factorial interaction mechanism.} The stalemate interaction ($p = 0.004$, \S\ref{sec:factorial}) is the strongest result in the dataset but its mechanism is hypothesized. Targeted interventions (e.g., forced stalemate-breaking in decision-only games) could test whether the learning-time component specifically prevents the board freezing the decision-time component induces.
 \end{enumerate}
 
 
@@ -419,11 +485,13 @@ Recent theoretical work shows risk aversion functions as an inductive bias for g
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have shown that symbolic reasoning frameworks injected into a single agent in a multi-agent strategic setting produce distinctive, framework-specific ecosystem signatures. Across 41 games and 4 conditions with clean single-campaign memory accumulation: control produces Yan dominance (7/11), I-Ching yarrow produces Yan/Chu co-dominance with complete Qin suppression (0/10), Tarot produces Qin dominance (5/10, $p = 0.006$), and scrambled text produces Qi dominance (5/10, $p = 0.006$). The framework-receiving agent (Han) never wins under any condition and shows no survival difference (Fisher $p = 1.0$).
+We have shown that symbolic reasoning frameworks injected into a single agent in a multi-agent strategic setting systematically reshape the winner distribution (permutation omnibus $p \approx 0.001$), producing condition-associated ecosystem signatures. Across 61 games and 6 conditions with clean single-campaign memory accumulation: control produces Yan dominance (7/11), I-Ching yarrow produces Yan/Chu co-dominance with complete Qin suppression (0/10), Tarot produces Qin dominance (5/10), and scrambled text produces Qi dominance (5/10). The framework-receiving agent (Han) never wins under any condition and shows no survival difference (Fisher $p = 1.0$).
 
 The scrambled-text ablation is theoretically decisive: incoherent text preserving prompt structure produces its own distinct ecosystem, ruling out both semantic content-following and prompt structure alone as sufficient explanations. Each framework creates a unique perturbation to the agent's reasoning that propagates through the multi-agent ecosystem to reshape winner distributions.
 
-The finding is an observation, not a definitive causal claim. Our model is one, our game is one, and the behavioral transmission mechanism requires further investigation. But two ecosystem effects survive Bonferroni correction, and the four-way signature differentiation is qualitatively clean.
+The 2$\times$2 factorial adds a second decisive result: the yarrow intervention's decision-time and learning-time components each individually freeze the board (50--60\% stalemate rate), but combined produce zero stalemates ($p = 0.004$)---a non-additive interaction ruling out simple prompt-effect decomposition and suggesting the framework operates as an integrated cognitive system.
+
+The finding is an observation, not a definitive causal claim. Our model is one, our game is one, and the transmission mechanism still requires intervention to confirm: direct testing revised it from the framework-receiving agent's own play to rival (Chu) expansion, so the agent transmits the effect rather than causing it. But the winner landscape is globally heterogeneous (omnibus $p \approx 0.001$), the scrambled$\to$Qi attractor is robust to both pooled and conservative comparisons, and the factorial stalemate interaction is the strongest statistical result in the dataset.
 
 The smallest state cannot win by consulting the oracle. But the oracle still changes the world---each oracle changes it differently, and even a broken oracle changes it in its own way.
 
