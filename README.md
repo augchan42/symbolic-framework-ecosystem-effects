@@ -1,13 +1,15 @@
-# Who Wins When One Agent Reflects?
+# Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings
 
-**Pass-Through Effects of Prompt Interventions in Multi-Agent Games**
+[![arXiv](https://img.shields.io/badge/arXiv-2606.07552-b31b1b.svg)](https://arxiv.org/abs/2606.07552)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20338937-blue.svg)](https://doi.org/10.5281/zenodo.20338937)
 
 ## Abstract
 
-We inject symbolic reasoning frameworks (I Ching, Tarot, scrambled-text control) into one agent in a 7-player Warring States diplomacy game and measure ecosystem-level outcomes. The intervention does not benefit its recipient (Han survival drops from 64% to 30-40%) but systematically redirects which *other* state wins: yarrow suppresses Qin (0/10, Fisher p=0.033 vs tarot), tarot elevates Qin (5/10), scrambled boosts Qi (6/10, Fisher p=0.040). A perturbativeness gradient in non-Han reasoning length (control 98 < yarrow 126 < tarot 152 < scrambled 197 chars/order, KW p<0.001) provides the mechanism. We name this pattern class **pass-through effects**: interventions that bypass their recipient and land on third parties.
+Large language models exhibit innate behavioral tendencies when deployed as strategic agents — notably a risk-averse "turtle" bias toward defensive play. We show that symbolic reasoning frameworks, injected as per-round reflective prompts into one agent, differentially modulate this bias and reshape the multi-agent ecosystem to produce framework-specific winner distributions. In a 7-player Warring States Diplomacy variant (41 games, 4 conditions, single-campaign memory accumulation), each framework produces a distinct ecosystem signature: under control, Yan dominates (7/11, 64%); under I-Ching yarrow divination, Yan and Chu co-dominate while Qin is completely suppressed (0/10); under Tarot, Qin dominates (5/10, Fisher vs. pooled p = 0.006); under scrambled-text ablation (incoherent oracle text preserving prompt structure), Qi dominates (5/10, Fisher vs. pooled p = 0.006). The framework-receiving agent (Han) never wins and shows no survival difference across conditions (Fisher p = 1.0), but Tarot consistently elevates Han's peak territory (mean 3.0 SCs vs. 2.1–2.5 others, Kruskal-Wallis p = 0.010). Neither framework's content predicts subsequent actions — hexagram themes (chi-squared p = 0.95) and Tarot card postures (chi-squared p = 0.69) are both independent of action choice — suggesting the modulation operates through the reflective process, not content-following. We present this as an observation paper establishing that alignment-framework choice at the agent level produces distinctive system-level consequences in multi-agent settings.
 
 ## Paper
 
+- [arXiv:2606.07552](https://arxiv.org/abs/2606.07552)
 - [LaTeX source](paper/main.tex)
 - [References](paper/references.bib)
 
@@ -36,10 +38,14 @@ The Warring States game engine is at [warringstates-engine](https://github.com/d
 ## Citation
 
 ```bibtex
-@article{Chan2026passthrough,
-  title={Who Wins When One Agent Reflects? Pass-Through Effects of Prompt Interventions in Multi-Agent Games},
+@article{Chan2026symbolic,
+  title={Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings},
   author={Augustin Chan},
-  year={2026}
+  year={2026},
+  eprint={2606.07552},
+  archivePrefix={arXiv},
+  primaryClass={cs.MA},
+  doi={10.48550/arXiv.2606.07552}
 }
 ```
 
