@@ -1,15 +1,19 @@
 # ADR-003: arXiv Submission Metadata
 
-**Status:** Submitted
+**Status:** Published
 **Date:** 2026-05-22
 **Author:** Augustin Chan
 
 ## Submission Details
 
-- **Primary category:** cs.LG (endorsed)
-- **Cross-list:** cs.MA, cs.AI (not endorsed for these as primary)
+- **arXiv ID:** 2606.07552 ([abs](https://arxiv.org/abs/2606.07552))
+- **arXiv DOI:** 10.48550/arXiv.2606.07552
+- **Primary category (as published):** cs.MA — Multiagent Systems
+- **Cross-list (as published):** cs.AI, cs.LG
 - **License:** CC BY 4.0
 - **Zenodo DOI:** 10.5281/zenodo.20338937
+
+> Note: submitted endorsed for cs.LG (from the king-wen paper); arXiv classified the published version with cs.MA as primary and cs.LG/cs.AI as cross-lists.
 
 ## Metadata Fields
 
