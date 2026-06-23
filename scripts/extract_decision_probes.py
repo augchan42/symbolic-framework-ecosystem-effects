@@ -83,6 +83,10 @@ def main():
             order_set=serialize_order_set(orders),
         ))
         arm_counts[r["arm"]] += 1
+    if not rows:
+        raise SystemExit(
+            f"No valid probe records in {SRC} (all rows were error/None-orders). "
+            "Nothing written.")
     rows.sort(key=lambda x: (x["scenario_id"], x["arm"], x["replicate"]))
     OUT.parent.mkdir(exist_ok=True)
     with open(OUT, "w", newline="") as f:

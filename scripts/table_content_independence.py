@@ -8,12 +8,15 @@ Methodology:
   - Tarot postures: dominant decision_posture from 3-card spread
 """
 
+from pathlib import Path
+
 import pandas as pd
 from scipy import stats
 from collections import Counter
 
-orders = pd.read_csv("data/han_orders.csv")
-casts = pd.read_csv("data/oracle_casts.csv")
+ROOT = Path(__file__).resolve().parent.parent
+orders = pd.read_csv(ROOT / "data" / "han_orders.csv")
+casts = pd.read_csv(ROOT / "data" / "oracle_casts.csv")
 
 # Standard I Ching thematic groupings (advance/retreat/wait/cooperate)
 HEX_THEMES = {

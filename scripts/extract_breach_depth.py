@@ -127,6 +127,10 @@ def main():
                 winner=str(m.get("winner", "")).strip().lower(),
                 started_at=m.get("started_at", ""),
             ))
+    if not rows:
+        raise SystemExit(
+            f"No completed campaign games found under {ENGINE} "
+            f"(matched {len(metas)} game(s), all incomplete). Nothing written.")
     OUT.parent.mkdir(exist_ok=True)
     with open(OUT, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
