@@ -18,6 +18,7 @@ SCRIPTS = [
     "scripts/figure_peak_scs.py",
     "scripts/figure_winners.py",
     "scripts/figure_gradient.py",
+    "scripts/figure_factorial.py",
     "scripts/power_analysis.py",
 ]
 
