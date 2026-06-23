@@ -1,9 +1,33 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Anonymous(2025{\natexlab{a}})]{DemocratizingDiplomacy2025}
+Anonymous.
+\newblock Democratizing diplomacy: A harness for evaluating any large language
+  model.
+\newblock \emph{arXiv preprint arXiv:2508.07485}, 2025{\natexlab{a}}.
+
+\bibitem[Anonymous(2025{\natexlab{b}})]{NetworkHistory2025}
+Anonymous.
+\newblock When machines meet each other: Network effects and the strategic role
+  of history in multi-agent ai.
+\newblock \emph{arXiv preprint arXiv:2510.06903}, 2025{\natexlab{b}}.
+
+\bibitem[Anonymous(2026{\natexlab{a}})]{MemoryCurse2026}
+Anonymous.
+\newblock The memory curse: How expanded recall erodes cooperative intent in
+  llm agents.
+\newblock \emph{arXiv preprint arXiv:2605.08060}, 2026{\natexlab{a}}.
+
+\bibitem[Anonymous(2026{\natexlab{b}})]{MemorySurvey2026}
+Anonymous.
+\newblock Memory for autonomous llm agents: Mechanisms, evaluation, and
+  emerging frontiers.
+\newblock \emph{arXiv preprint arXiv:2603.07670}, 2026{\natexlab{b}}.
 
 \bibitem[Bakhtin et~al.(2022)Bakhtin, Brown, Dinan,
   et~al.]{Bakhtin2022diplomacy}
@@ -27,8 +51,8 @@ Albert Cera~Palatsi, Samuel Martin-Gutierrez, Ana~S. Cardenal, and Max Pellert.
 
 \bibitem[Chan(2026)]{Chan2026kingwen}
 Augustin Chan.
-\newblock King wen sequence-based optimization does not improve neural network
-  training.
+\newblock Statistical properties of the king wen sequence: An anti-habituation
+  structure that does not improve neural network training.
 \newblock \emph{arXiv preprint arXiv:2604.09234}, 2026.
 
 \bibitem[Chen et~al.(2026)]{Chen2026civbench}
