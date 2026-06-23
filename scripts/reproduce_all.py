@@ -15,6 +15,8 @@ SCRIPTS = [
     "scripts/table_ecosystem_outcomes.py",
     "scripts/table_pressure_invariance.py",
     "scripts/table_content_independence.py",
+    "scripts/table_decision_isolation.py",
+    "scripts/table_breach_depth.py",
     "scripts/figure_peak_scs.py",
     "scripts/figure_winners.py",
     "scripts/figure_gradient.py",
