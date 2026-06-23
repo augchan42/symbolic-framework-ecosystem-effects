@@ -5,30 +5,6 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Anonymous(2025{\natexlab{a}})]{DemocratizingDiplomacy2025}
-Anonymous.
-\newblock Democratizing diplomacy: A harness for evaluating any large language
-  model.
-\newblock \emph{arXiv preprint arXiv:2508.07485}, 2025{\natexlab{a}}.
-
-\bibitem[Anonymous(2025{\natexlab{b}})]{NetworkHistory2025}
-Anonymous.
-\newblock When machines meet each other: Network effects and the strategic role
-  of history in multi-agent ai.
-\newblock \emph{arXiv preprint arXiv:2510.06903}, 2025{\natexlab{b}}.
-
-\bibitem[Anonymous(2026{\natexlab{a}})]{MemoryCurse2026}
-Anonymous.
-\newblock The memory curse: How expanded recall erodes cooperative intent in
-  llm agents.
-\newblock \emph{arXiv preprint arXiv:2605.08060}, 2026{\natexlab{a}}.
-
-\bibitem[Anonymous(2026{\natexlab{b}})]{MemorySurvey2026}
-Anonymous.
-\newblock Memory for autonomous llm agents: Mechanisms, evaluation, and
-  emerging frontiers.
-\newblock \emph{arXiv preprint arXiv:2603.07670}, 2026{\natexlab{b}}.
-
 \bibitem[Bakhtin et~al.(2022)Bakhtin, Brown, Dinan,
   et~al.]{Bakhtin2022diplomacy}
 Anton Bakhtin, Noam Brown, Emily Dinan, et~al.
@@ -60,6 +36,20 @@ Siyuan Chen et~al.
 \newblock {CivBench}: Progress-based evaluation for {LLMs'} strategic
   decision-making in {Civilization V}.
 \newblock \emph{arXiv preprint arXiv:2604.07733}, 2026.
+
+\bibitem[Du(2026)]{MemorySurvey2026}
+Pengfei Du.
+\newblock Memory for autonomous llm agents: Mechanisms, evaluation, and
+  emerging frontiers.
+\newblock \emph{arXiv preprint arXiv:2603.07670}, 2026.
+
+\bibitem[Duffy et~al.(2025)Duffy, Paech, Shastri, Karpinski, Alloui-Cros,
+  Marques, and Olson]{DemocratizingDiplomacy2025}
+Alexander Duffy, Samuel~J. Paech, Ishana Shastri, Elizabeth Karpinski, Baptiste
+  Alloui-Cros, Tyler Marques, and Matthew~Lyle Olson.
+\newblock Democratizing diplomacy: A harness for evaluating any large language
+  model on full-press diplomacy.
+\newblock \emph{arXiv preprint arXiv:2508.07485}, 2025.
 
 \bibitem[Einwiller et~al.(2025)]{Einwiller2025dictator}
 Stephan Einwiller et~al.
@@ -101,6 +91,20 @@ John Licato, Stefan Steinle, and Brandon Hollis.
 \newblock Do persona-infused {LLMs} affect performance in a strategic reasoning
   game?
 \newblock \emph{arXiv preprint arXiv:2512.06867}, 2025.
+
+\bibitem[Liu et~al.(2026)Liu, Li, Du, Luo, Zeng, Tewolde, Lee, Wang, Kingsford,
+  and Conitzer]{MemoryCurse2026}
+Jiayuan Liu, Tianqin Li, Shiyi Du, Xin Luo, Haoxuan Zeng, Emanuel Tewolde,
+  Tai~Sing Lee, Tonghan Wang, Carl Kingsford, and Vincent Conitzer.
+\newblock The memory curse: How expanded recall erodes cooperative intent in
+  llm agents.
+\newblock \emph{arXiv preprint arXiv:2605.08060}, 2026.
+
+\bibitem[Liu et~al.(2025)Liu, Li, Dou, and Ye]{NetworkHistory2025}
+Yu~Liu, Wenwen Li, Yifan Dou, and Guangnan Ye.
+\newblock When machines meet each other: Network effects and the strategic role
+  of history in multi-agent ai.
+\newblock \emph{arXiv preprint arXiv:2510.06903}, 2025.
 
 \bibitem[Ma(2024)]{Ma2024behavioral}
 Jun Ma.
