@@ -91,7 +91,7 @@ No published work uses a philosophical/symbolic reasoning framework---requiring 
 
 \subsection{Game Environment}
 
-The game is a 7-player variant of Diplomacy played on a 46-territory map based on the Chinese Warring States period (475--221 BCE). The map includes 27 supply centers (19 state home SCs + 8 neutral) and 19 non-SC corridor territories. Each player begins with 2 units; states hold 2--4 home supply centers depending on historical territory. Victory requires 15 supply centers (``domination'') or the most supply centers after 20 rounds; in the event of a tie, the engine attempts one tiebreaker round before declaring a draw (one scrambled-condition game reached 21 rounds this way). Combat uses standard Diplomacy mechanics: simultaneous hidden orders, deterministic resolution, support orders, retreats, and builds/disbands.
+The game is a 7-player variant of Diplomacy played on a 46-territory map based on the Chinese Warring States period (475--221 BCE). The map includes 27 supply centers (19 state home SCs + 8 neutral) and 19 non-SC corridor territories. Each state begins with one unit per home supply center (2--4 units, depending on historical territory). Victory requires 14 of the 27 supply centers (``domination'') or the most supply centers after 20 rounds; ties are broken by army count, and an exact tie is recorded as a draw (one scrambled-condition game ran a single round past the limit, terminating at round 21). Combat uses Diplomacy-style mechanics---simultaneous hidden orders, support orders, and deterministic resolution---with two simplifications relative to standard Diplomacy: dislodged units retreat to the first available province, and each state makes at most one build or disband per round.
 
 \subsection{Agents}
 
@@ -126,8 +126,6 @@ The intervention operates at two timescales:
 \paragraph{Learning-time (between-game).} After each game, Han reflects on the game through the lens of its assigned framework. Reflections are stored in a SQLite memory bank and retrieved in subsequent games within the same campaign.
 
 \paragraph{Hexagram text variation.} Due to a corpus configuration change mid-campaign, the first 6 yarrow games provided only hexagram numbers and line diagrams (name listed as ``Unknown,'' judgment and commentary fields empty), while the last 4 provided the full hexagram name, Chinese source text, and English commentary. In the number-only games, Claude supplied hexagram names and meanings from its training data (e.g., producing ``Hexagram 18 (Gu/Decay)'' from the input ``Hexagram 18, Unknown''). The ecosystem signature---Qin suppression (0/6 and 0/4), Yan/Chu co-dominance---held across both subgroups, providing an unplanned within-condition ablation of oracle \emph{content} that further supports the content-independence finding (\S\ref{sec:content}).
-
-\paragraph{Evidence for decision-time primacy.} First-in-campaign games (empty memory bank) exhibit the same condition-specific ecosystem effects as later games, suggesting the per-round oracle is the primary driver.
 
 \subsection{Conditions}
 \label{sec:conditions}
@@ -407,7 +405,7 @@ Three findings emerge:
 
 \paragraph{1. Stalemate explosion (the strongest result in the dataset).} A \emph{stalemate} here is a game terminated by the engine's board-freeze rule (three consecutive rounds with no supply-center change), recorded in each game's \texttt{terminal\_reason}; this is distinct from a drawn \emph{winner} (a stalemate may end with a single state ahead, and a game reaching round 20 may terminate either by the round limit or by the freeze rule). Decision-only produces 5/10 stalemates (Fisher $p = 0.012$ vs.\ control 0/11); learning-only produces 6/10 ($p = 0.004$). Average game length drops from 19.6 (control) and 20.0 (yarrow) to 15.6 (decision-only) and 15.3 (learning-only). Combined factorial (11/20 stalemates) vs.\ full yarrow (0/10): Fisher $p = 0.004$. Each component individually freezes the board; together they produce the longest, most dynamic games---a statistically significant negative interaction.
 
-\paragraph{2. Decision-only reproduces Chu elevation but not the full signature.} Decision-only Chu wins 3/10 (vs.\ 4/10 yarrow, 1/11 control)---the per-round oracle drives Chu elevation. But it also produces 6/10 draws and Yan suppression (1/10, Fisher $p = 0.024$ vs.\ control 7/11): the oracle disrupts the default ecosystem without directing a clear alternative winner.
+\paragraph{2. Decision-only reproduces Chu elevation but not the full signature.} Decision-only Chu wins 3/10 (vs.\ 4/10 yarrow, 1/11 control)---the per-round oracle is associated with Chu elevation, though decision-only Chu elevation may itself partly reflect campaign-depth dynamics (\S\ref{sec:mechanisms}) rather than the oracle alone. But it also produces 6/10 draws and Yan suppression (1/10, Fisher $p = 0.024$ vs.\ control 7/11): the oracle disrupts the default ecosystem without directing a clear alternative winner.
 
 \paragraph{3. Learning-only produces a novel ecosystem.} Learning-only's top winners are Qi (3/10) and Wei (1/10)---Wei wins in no other condition at this rate, and the Qi elevation resembles the scrambled condition more than yarrow. I-Ching reflection without the per-round oracle creates its own distinct perturbation, not a component of the full yarrow signature.
 
