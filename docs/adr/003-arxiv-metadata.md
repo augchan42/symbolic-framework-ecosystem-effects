@@ -13,7 +13,7 @@
 - **Primary category:** cs.MA — Multiagent Systems (live; moderators reclassified from the cs.LG submission ~weeks after v1 posted; a replacement cannot change it)
 - **Cross-list:** cs.AI, cs.LG (verified live on arxiv.org/abs/2606.07552, 2026-06-25; cs.LG became a cross-list after the primary moved to cs.MA)
 - **License:** CC BY 4.0
-- **Zenodo DOI:** 10.5281/zenodo.20338937 (v1 release) — **cut a v2 version release and update this DOI before upload if you want v2 data attached**
+- **Zenodo DOI:** 10.5281/zenodo.20338937 — **concept (all-versions) DOI**: always resolves to the latest version, so no DOI string ever needs updating here, in the README, the arXiv Comments, or `paper/main.tex`. Optionally cut a v2 Zenodo version release so the *latest* resolved version carries the N=61 data, but the DOI above stays the same.
 
 > Note: submitted endorsed for cs.LG (from the king-wen paper); arXiv classified the published version with cs.MA as primary and cs.LG/cs.AI as cross-lists.
 
