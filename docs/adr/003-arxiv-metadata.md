@@ -1,6 +1,6 @@
 # ADR-003: arXiv Submission Metadata
 
-**Status:** v1 published (arXiv:2606.07552, 2026-05); v2 replacement metadata prepared below — not yet uploaded
+**Status:** v1 published (arXiv:2606.07552, 2026-05); v2 replacement **submitted 2026-06-25** (submit/7751412), pending arXiv announcement. Repo at release v2.0.3.
 **Date:** 2026-05-22 (v1); updated 2026-06-25 (v2)
 **Author:** Augustin Chan
 
