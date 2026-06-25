@@ -144,7 +144,7 @@ No `arxiv.sty` needed — we use plain `article` class (king-wen used `arxiv.sty
 - [ ] **Primary category:** cs.MA
 - [ ] **Cross-list:** cs.AI
 - [ ] **License:** CC BY 4.0
-- [ ] **Comments field:** e.g., `17 pages, 3 figures, 6 tables, 6 listings`
+- [ ] **Comments field:** e.g., `24 pages, 3 figures, 9 tables, 6 listings`. **This is a replacement of arXiv:2606.07552 (v2), not a new submission** — upload via "replace," keep the same identifier; the v2 author corrections and N=61 reframe ride along.
 
 ## Post-Submission
 
