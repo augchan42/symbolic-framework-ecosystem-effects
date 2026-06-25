@@ -10,6 +10,8 @@
 \usepackage{hyperref}
 \usepackage{natbib}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,backgrounds}
 \usepackage{listings}
 
 \lstset{
@@ -331,11 +333,43 @@ Scrambled & 62.0\% & \textbf{74.3\%} & $+12.3$pp & 0.7\% & 5.9\% \\
 \paragraph{Transmission pathways: rival expansion, not Han-mediated friction.} We propose mechanistic accounts of how each condition propagates to ecosystem outcomes. We tested the central one---yarrow's Qin suppression---directly against the game logs, and the test forced a revision: the \emph{outcome} is real and reproducible, but the originally proposed \emph{agent} (Han's cooperative friction) is not the cause.
 
 \begin{enumerate}
-\item \textbf{Yarrow $\to$ early Chu corridor-invasion of Qin $\to$ Qin suppression} (revised). The trajectory prediction holds: under yarrow Qin is flat (growth slope $+0.004$ SC/round; final mean 2.8) whereas under tarot Qin snowballs (slope $+0.253$; final 7.8), significant on per-game final SC (Mann-Whitney $U = 18$, $p = 0.018$). But the original ``speed bump'' is not the cause: yarrow-Han issues only 0.70 cooperative orders/game late (mediation $r = -0.31$), and Qin is suppressed even under learning-only (\S\ref{sec:factorial}) where Han's late cooperation is \emph{exactly zero}. Forensic log-tracing locates the proximate pathway in one map corridor: Chu's capital (\emph{ying}) is one move from \emph{three\_gorges}, the sole link to two of Qin's three home centers (\emph{hanzhong}, \emph{bashu}). In the deep-dive campaign that first motivated this account, Chu breaches Qin's home through it in \textbf{10/10 games at median round 4.5} (vs.\ control 8/11 at R9.5, tarot 7/10 but three breaches too late at R14--18), capturing 7.7 SCs/game directly from Qin (vs.\ control 4.4, tarot 3.7)---85\% the same SCs Qin grabs when it wins under tarot. We flag immediately that this 10/10 is a \emph{single deep-memory campaign}, not the canonical breach rate, which is campaign-variable (40--100\%) and memory-depth-driven rather than yarrow-specific; the controlled test is below. Chu decapitates Qin's economy before it can break east; Han is not the agent (Han$\to$Chu transfers flat: yarrow 8, control 9, tarot 8; Han is \emph{more} hostile to Chu under yarrow, 8.5\% vs.\ 5.3\% control). We do not over-read the Qin--Chu anticorrelation: it is \emph{generic} ($r = -0.73$ yarrow, $-0.75$ tarot, $-0.77$ decision-only), zero-sum geometry present in every condition. What is yarrow-specific is the position on that fixed line (yarrow Chu 7.0/Qin 2.8 vs.\ tarot Chu 4.0/Qin 7.8, combined pool $\approx$ 10 throughout): yarrow does not invent a blockade, it moves Chu through the pre-existing route earlier. A genuine puzzle remains---Chu's prompt is \emph{identical} across conditions, so the distal trigger from Han's framework to Chu's early push (necessarily indirect, via board state and diplomacy) is unexplained, and is the key open question for the counterfactual in \S\ref{sec:future}.
+\item \textbf{Yarrow $\to$ early Chu corridor-invasion of Qin $\to$ Qin suppression} (revised). The trajectory prediction holds: under yarrow Qin is flat (growth slope $+0.004$ SC/round; final mean 2.8) whereas under tarot Qin snowballs (slope $+0.253$; final 7.8), significant on per-game final SC (Mann-Whitney $U = 18$, $p = 0.018$). But the original ``speed bump'' is not the cause: yarrow-Han issues only 0.70 cooperative orders/game late (mediation $r = -0.31$), and Qin is suppressed even under learning-only (\S\ref{sec:factorial}) where Han's late cooperation is \emph{exactly zero}. Forensic log-tracing locates the proximate pathway in one map corridor: Chu's capital (\emph{ying}) is one move from \emph{three\_gorges}, the sole link to two of Qin's three home centers (\emph{hanzhong}, \emph{bashu})---see Figure~\ref{fig:corridor}. In the deep-dive campaign that first motivated this account, Chu breaches Qin's home through it in \textbf{10/10 games at median round 4.5} (vs.\ control 8/11 at R9.5, tarot 7/10 but three breaches too late at R14--18), capturing 7.7 SCs/game directly from Qin (vs.\ control 4.4, tarot 3.7)---85\% the same SCs Qin grabs when it wins under tarot. We flag immediately that this 10/10 is a \emph{single deep-memory campaign}, not the canonical breach rate, which is campaign-variable (40--100\%) and memory-depth-driven rather than yarrow-specific; the controlled test is below. Chu decapitates Qin's economy before it can break east; Han is not the agent (Han$\to$Chu transfers flat: yarrow 8, control 9, tarot 8; Han is \emph{more} hostile to Chu under yarrow, 8.5\% vs.\ 5.3\% control). We do not over-read the Qin--Chu anticorrelation: it is \emph{generic} ($r = -0.73$ yarrow, $-0.75$ tarot, $-0.77$ decision-only), zero-sum geometry present in every condition. What is yarrow-specific is the position on that fixed line (yarrow Chu 7.0/Qin 2.8 vs.\ tarot Chu 4.0/Qin 7.8, combined pool $\approx$ 10 throughout): yarrow does not invent a blockade, it moves Chu through the pre-existing route earlier. A genuine puzzle remains---Chu's prompt is \emph{identical} across conditions, so the distal trigger from Han's framework to Chu's early push (necessarily indirect, via board state and diplomacy) is unexplained, and is the key open question for the counterfactual in \S\ref{sec:future}.
 \item \textbf{Tarot $\to$ vacuum $\to$ Qin dominance} (untested conjecture): Tarot-Han's extreme defensiveness (78.3\% hold + self-support, 0\% cooperation) makes it a non-participant. Without resistance, the strongest expansionist faces no friction and snowballs (Qin slope $+0.253$).
 \item \textbf{Scrambled $\to$ stubborn holdout $\to$ Qi dominance} (untested conjecture): scrambled-Han actively supports its own positions ($+12.3$pp defensive shift under pressure), absorbing military pressure in the central corridor while Qi, on the eastern coast, expands into less contested territory.
 \item \textbf{Control $\to$ moderate friction $\to$ Yan dominance} (untested conjecture): moderate turtling does not systematically block any state; the balanced ecosystem favors Yan, whose defensive geography makes it hardest to eliminate.
 \end{enumerate}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  sc/.style={circle,draw,minimum size=7mm,inner sep=1pt,line width=0.4pt},
+  qin/.style={sc,fill=gray!30},
+  chu/.style={sc,fill=blue!22},
+  neu/.style={sc,fill=white},
+  choke/.style={sc,fill=red!12,line width=1pt,draw=red!70!black},
+  edge/.style={gray!55,line width=0.6pt},
+  strike/.style={red!75!black,line width=1.1pt,->},
+  corridor/.style={red!75!black,line width=1.9pt},
+  lbl/.style={font=\scriptsize}
+]
+\node[qin]   (xian) at (0,4)    {}; \node[lbl,above=1pt of xian]  {Xianyang};
+\node[neu]   (guan) at (1.4,2.9) {}; \node[lbl,left=1pt of guan]  {Guanzhong};
+\node[qin]   (hanz) at (2.8,3.3) {}; \node[lbl,above=1pt of hanz] {Hanzhong};
+\node[neu]   (wugu) at (4.5,2.9) {}; \node[lbl,right=1pt of wugu] {Wuguan Pass};
+\node[qin]   (bash) at (0.8,1.6) {}; \node[lbl,left=1pt of bash]  {Bashu};
+\node[neu]   (nanz) at (0.8,0.2) {}; \node[lbl,below=1pt of nanz] {Nanzhong};
+\node[choke] (tg)   at (3.0,1.5) {}; \node[lbl,right=2pt of tg]   {Three Gorges};
+\node[chu]   (ying) at (4.9,0.7) {}; \node[lbl,below=1pt of ying] {Ying (Chu)};
+\node[chu]   (chan) at (3.3,-0.5){}; \node[lbl,below=1pt of chan] {Changsha};
+\draw[edge] (xian)--(guan); \draw[edge] (guan)--(hanz); \draw[edge] (guan)--(bash);
+\draw[edge] (hanz)--(wugu); \draw[edge] (bash)--(nanz); \draw[edge] (nanz)--(chan);
+\draw[strike] (tg)--(hanz); \draw[strike] (tg)--(bash);
+\draw[corridor] (ying)--(tg) node[midway,fill=white,inner sep=1.5pt,lbl,text=red!70!black]{corridor};
+\end{tikzpicture}
+\caption{The \emph{ying}$\to$\emph{three\_gorges} corridor (\S\ref{sec:mechanisms}). Circles are territories, lines are adjacencies in the engine topology. Grey~$=$~Qin home centers (Xianyang, Hanzhong, Bashu); blue~$=$~Chu (capital \emph{Ying}); white~$=$~neutral. The single bold edge \emph{Ying}--\emph{Three Gorges} is the only one-move link from Chu's capital to the neutral chokepoint bordering two of Qin's three home centers (red arrows), the route by which Chu breaches Qin's economy early. The \S\ref{sec:future} counterfactual severs exactly this edge, forcing any Chu strike on Qin's home to detour the long way via \emph{Wuguan Pass}. The topology is load-bearing, but the \emph{rate} at which the corridor is used is driven by campaign memory depth, not the oracle (this section).}
+\label{fig:corridor}
+\end{figure}
 
 The Qin gradient across conditions---0/10 yarrow, 1/11 control, 1/10 scrambled, 5/10 tarot---is descriptively real, but we caution against reading it as \emph{tracking} Han's late-game cooperation gradient (17.1\%, 7.5\%, 3.6\%, 0\%). Direct testing shows Han's cooperation is too small in volume to be causal and that Qin is suppressed even where Han cooperation is zero (learning-only). The common thread is better stated as redirection than as a single mechanical lever: a perturbation at Han's reasoning shifts which \emph{other} state captures the cooperative or expansionist basin, and Han---which never wins---is a transmitter, not the engine. The tarot, scrambled, and control pathways above remain hypothesized and, unlike the yarrow case, have not been individually stress-tested.
 
