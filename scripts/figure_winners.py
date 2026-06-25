@@ -46,7 +46,7 @@ def main():
         ax.axhline(y=n/7, color='gray', linestyle='--', alpha=0.4)
 
     axes[0].set_ylabel("Games won")
-    fig.suptitle("Winner Distributions: Each Framework Produces a Distinct Ecosystem", fontsize=11)
+    fig.suptitle("Winner Distributions Across the Four Realized Condition-Campaigns", fontsize=11)
     plt.tight_layout()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(OUT, dpi=150, bbox_inches='tight')
