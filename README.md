@@ -1,45 +1,75 @@
-# Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings
+# Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems
 
 [![arXiv](https://img.shields.io/badge/arXiv-2606.07552-b31b1b.svg)](https://arxiv.org/abs/2606.07552)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20338937-blue.svg)](https://doi.org/10.5281/zenodo.20338937)
 
-## Abstract
+Augustin Chan · `aug@iterative.day` · June 2026 (v2)
 
-Large language models exhibit innate behavioral tendencies when deployed as strategic agents — notably a risk-averse "turtle" bias toward defensive play. We show that symbolic reasoning frameworks, injected as per-round reflective prompts into one agent, differentially modulate this bias and reshape the multi-agent ecosystem to produce framework-specific winner distributions. In a 7-player Warring States Diplomacy variant (41 games, 4 conditions, single-campaign memory accumulation), each framework produces a distinct ecosystem signature: under control, Yan dominates (7/11, 64%); under I-Ching yarrow divination, Yan and Chu co-dominate while Qin is completely suppressed (0/10); under Tarot, Qin dominates (5/10, Fisher vs. pooled p = 0.006); under scrambled-text ablation (incoherent oracle text preserving prompt structure), Qi dominates (5/10, Fisher vs. pooled p = 0.006). The framework-receiving agent (Han) never wins and shows no survival difference across conditions (Fisher p = 1.0), but Tarot consistently elevates Han's peak territory (mean 3.0 SCs vs. 2.1–2.5 others, Kruskal-Wallis p = 0.010). Neither framework's content predicts subsequent actions — hexagram themes (chi-squared p = 0.95) and Tarot card postures (chi-squared p = 0.69) are both independent of action choice — suggesting the modulation operates through the reflective process, not content-following. We present this as an observation paper establishing that alignment-framework choice at the agent level produces distinctive system-level consequences in multi-agent settings.
+## Summary
+
+Large language models exhibit a risk-averse "turtle" bias when deployed as strategic
+agents. We inject symbolic reasoning frameworks (I-Ching yarrow divination, Tarot, and
+a scrambled-text control) as per-round reflective prompts into **one** agent in a
+7-player Warring States Diplomacy variant and measure ecosystem-level outcomes across
+**61 games / 6 conditions** with single-campaign memory accumulation.
+
+Framework choice reshapes the winner distribution (permutation omnibus *p* ≈ 0.001 over
+the four primary conditions), producing condition-associated signatures: control → Yan
+(7/11), I-Ching yarrow → Yan/Chu co-dominance with Qin fully suppressed (0/10), Tarot →
+Qin (5/10), scrambled → Qi (5/10). The framework-receiving agent (Han) never wins and
+shows no survival difference (Fisher *p* = 1.0).
+
+**v2 core result — the modulation is emergent, not per-decision.** A memory-free
+decision-isolation probe (960 calls) shows the reflective process does not change the
+receiving agent's risk posture in isolation (hold-rate Friedman *p* = 0.45; the I-Ching
+changes no decisions, *p* = 0.60; Tarot perturbs move content but not risk, *p* = 0.021).
+A depth-matched follow-up shows the rival-expansion pathway behind Qin suppression is
+governed by campaign memory depth, not the oracle (logistic condition *p* = 0.55). The
+effects require memory accumulation and the multi-agent interaction — situating the
+result in the 2026 memory-dominance literature. A 2×2 factorial separating yarrow's
+decision-time and learning-time components reveals a non-additive stalemate interaction
+(each component alone freezes the board 50–60% of games; combined, 0%; *p* = 0.004).
+
+Companion (Paper 1) to: [Statistical Properties of the King Wen Sequence](https://doi.org/10.5281/zenodo.14679537) (Chan, 2026).
 
 ## Paper
 
 - [arXiv:2606.07552](https://arxiv.org/abs/2606.07552)
-- [LaTeX source](paper/main.tex)
-- [References](paper/references.bib)
+- [LaTeX source](paper/main.tex) · [References](paper/references.bib)
 
-Companion to: [Statistical Properties of the King Wen Sequence](https://doi.org/10.5281/zenodo.14679537) (Chan, 2026)
-
-## Reproducing Results
+## Reproducing results
 
 ```bash
 pip install -r requirements.txt
-python scripts/reproduce_all.py
+python scripts/reproduce_all.py        # all figures + tables from data/
 ```
 
-Generates all figures and tables from `data/`.
+Every figure and statistical test reads from the committed summary CSVs in `data/`; no
+engine checkout is needed to reproduce them. The `scripts/extract_*.py` scripts
+(re)generate those CSVs from a local `warringstates-engine` checkout (set
+`WARRINGSTATES_ENGINE` if it is not a sibling directory).
 
 ## Data
 
-- `data/game_outcomes.csv` — per-game outcomes (condition, winner, Han survival, peak SCs)
+- `data/game_outcomes.csv` — per-game outcomes for the 41 core games (condition, winner, Han survival, peak SCs)
+- `data/factorial_outcomes.csv` — the 20 factorial games (winner, terminal reason, stalemate flag)
 - `data/reasoning_lengths.csv` — per-game, per-state mean reasoning character counts
-- `data/han_orders.csv` — per-order Han action data (984 orders across 41 games)
-- `data/oracle_casts.csv` — per-round oracle cast data (284 casts)
+- `data/han_orders.csv` — per-order Han action data
+- `data/oracle_casts.csv` — per-round oracle cast data
+- `data/decision_probes_summary.csv` — §4.3 memory-free decision-isolation probe (960 rows)
+- `data/breach_depth.csv` — §4.5 per-game Chu→Qin home-breach vs campaign position
 
-## Game Engine
+## Game engine
 
-The Warring States game engine is at [warringstates-engine](https://github.com/digital-rain-tech/warringstates-engine). This repo contains only the data and analysis needed to reproduce the paper.
+The Warring States game engine and full game archives are at
+[warringstates-engine](https://github.com/augchan42/warringstates-engine). This repo
+contains only the summarized data and analysis needed to reproduce the paper.
 
 ## Citation
 
 ```bibtex
 @article{Chan2026symbolic,
-  title={Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings},
+  title={Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems},
   author={Augustin Chan},
   year={2026},
   eprint={2606.07552},

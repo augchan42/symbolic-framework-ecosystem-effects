@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -12,121 +12,154 @@ Anton Bakhtin, Noam Brown, Emily Dinan, et~al.
   models with strategic reasoning.
 \newblock \emph{Science}, 378\penalty0 (6624), 2022.
 
-\bibitem[Ballestero et~al.(2026)]{Ballestero2026monoculture}
-Miguel Ballestero et~al.
+\bibitem[Ballestero et~al.(2026)Ballestero, Hosseini, Khanna, and
+  Shorrer]{Ballestero2026monoculture}
+Gonzalo Ballestero, Hadi Hosseini, Samarth Khanna, and Ran~I. Shorrer.
 \newblock Strategic algorithmic monoculture: Experimental evidence from
   coordination games.
 \newblock \emph{arXiv preprint arXiv:2604.09502}, 2026.
 
 \bibitem[Cera~Palatsi et~al.(2025)Cera~Palatsi, Martin-Gutierrez, Cardenal, and
   Pellert]{CeraPalatsi2025cooperation}
-Albert Cera~Palatsi, Samuel Martin-Gutierrez, Ana~S. Cardenal, and Max Pellert.
-\newblock Large language models replicate human cooperation across experiments
-  in game theory.
+Andrea Cera~Palatsi, Samuel Martin-Gutierrez, Ana~S. Cardenal, and Max Pellert.
+\newblock Large language models replicate and predict human cooperation across
+  experiments in game theory.
 \newblock \emph{arXiv preprint arXiv:2511.04500}, 2025.
 
 \bibitem[Chan(2026)]{Chan2026kingwen}
 Augustin Chan.
-\newblock King wen sequence-based optimization does not improve neural network
-  training.
+\newblock Statistical properties of the king wen sequence: An anti-habituation
+  structure that does not improve neural network training.
 \newblock \emph{arXiv preprint arXiv:2604.09234}, 2026.
 
-\bibitem[Chen et~al.(2026)]{Chen2026civbench}
-Siyuan Chen et~al.
+\bibitem[Chen et~al.(2026)Chen, Cheng, Gurkan, and Lin]{Chen2026civbench}
+John Chen, Sihan Cheng, Can Gurkan, and Mingyi Lin.
 \newblock {CivBench}: Progress-based evaluation for {LLMs'} strategic
   decision-making in {Civilization V}.
 \newblock \emph{arXiv preprint arXiv:2604.07733}, 2026.
 
-\bibitem[Einwiller et~al.(2025)]{Einwiller2025dictator}
-Stephan Einwiller et~al.
+\bibitem[Du(2026)]{MemorySurvey2026}
+Pengfei Du.
+\newblock Memory for autonomous llm agents: Mechanisms, evaluation, and
+  emerging frontiers.
+\newblock \emph{arXiv preprint arXiv:2603.07670}, 2026.
+
+\bibitem[Duffy et~al.(2025)Duffy, Paech, Shastri, Karpinski, Alloui-Cros,
+  Marques, and Olson]{DemocratizingDiplomacy2025}
+Alexander Duffy, Samuel~J. Paech, Ishana Shastri, Elizabeth Karpinski, Baptiste
+  Alloui-Cros, Tyler Marques, and Matthew~Lyle Olson.
+\newblock Democratizing diplomacy: A harness for evaluating any large language
+  model on full-press diplomacy.
+\newblock \emph{arXiv preprint arXiv:2508.07485}, 2025.
+
+\bibitem[Einwiller et~al.(2025)Einwiller, Ghosh~Dastidar, Romazanov,
+  Hautli-Janisz, Granitzer, and Lemmerich]{Einwiller2025dictator}
+Andreas Einwiller, Kanishka Ghosh~Dastidar, Artur Romazanov, Annette
+  Hautli-Janisz, Michael Granitzer, and Florian Lemmerich.
 \newblock Benevolent dictators? {On} {LLM} agent behavior in dictator games.
 \newblock \emph{arXiv preprint arXiv:2511.08721}, 2025.
 
-\bibitem[Guan et~al.(2024)]{Guan2024richelieu}
-Yichao Guan et~al.
+\bibitem[Guan et~al.(2024)Guan, Kong, Zhong, and Wang]{Guan2024richelieu}
+Zhenyu Guan, Xiangyu Kong, Fangwei Zhong, and Yizhou Wang.
 \newblock Richelieu: Self-evolving {LLM}-based agents for {AI} diplomacy.
 \newblock \emph{NeurIPS 2024}, 2024.
 \newblock arXiv:2407.06813.
 
-\bibitem[Guo et~al.(2026)]{Guo2026coalition}
-Xiang Guo et~al.
+\bibitem[Guo et~al.(2026)Guo, Wu, and Yiu]{Guo2026coalition}
+Dongxin Guo, Jikun Wu, and Siu-Ming Yiu.
 \newblock Coalition formation in {LLM} agent networks: Stability analysis and
   convergence guarantees.
 \newblock \emph{arXiv preprint arXiv:2604.14386}, 2026.
 
 \bibitem[Jain and Kumar(2026)]{Jain2026ludobench}
-Soumil Jain and Vaibhav Kumar.
+Ojas Jain and Dhruv Kumar.
 \newblock {LUDOBENCH}: Evaluating {LLM} behavioural decision-making through
-  spot-based board game scenarios.
+  spot-based board game scenarios in {Ludo}.
 \newblock \emph{arXiv preprint arXiv:2604.05681}, 2026.
 
 \bibitem[Kitadai et~al.(2025)Kitadai, Fukasawa, and Nishino]{Kitadai2025bias}
-Atsushi Kitadai, Yoshinobu Fukasawa, and Nariaki Nishino.
+Ayato Kitadai, Yusuke Fukasawa, and Nariaki Nishino.
 \newblock Bias-adjusted {LLM} agents for human-like decision-making via
   behavioral economics.
 \newblock \emph{arXiv preprint arXiv:2508.18600}, 2025.
 
-\bibitem[Li et~al.(2025)]{Li2025negotiation}
-Zheyuan Li et~al.
+\bibitem[Li et~al.(2025)Li, Ng, Liu, and Fried]{Li2025negotiation}
+Wenkai Li, Lynnette Hui~Xian Ng, Andy Liu, and Daniel Fried.
 \newblock Measuring fine-grained negotiation tactics of humans and {LLMs} in
   {Diplomacy}.
 \newblock \emph{arXiv preprint arXiv:2512.18292}, 2025.
 
 \bibitem[Licato et~al.(2025)Licato, Steinle, and Hollis]{Licato2025persona}
-John Licato, Stefan Steinle, and Brandon Hollis.
+John Licato, Stephen Steinle, and Brayden Hollis.
 \newblock Do persona-infused {LLMs} affect performance in a strategic reasoning
   game?
 \newblock \emph{arXiv preprint arXiv:2512.06867}, 2025.
 
+\bibitem[Liu et~al.(2026)Liu, Li, Du, Luo, Zeng, Tewolde, Lee, Wang, Kingsford,
+  and Conitzer]{MemoryCurse2026}
+Jiayuan Liu, Tianqin Li, Shiyi Du, Xin Luo, Haoxuan Zeng, Emanuel Tewolde,
+  Tai~Sing Lee, Tonghan Wang, Carl Kingsford, and Vincent Conitzer.
+\newblock The memory curse: How expanded recall erodes cooperative intent in
+  llm agents.
+\newblock \emph{arXiv preprint arXiv:2605.08060}, 2026.
+
+\bibitem[Liu et~al.(2025)Liu, Li, Dou, and Ye]{NetworkHistory2025}
+Yu~Liu, Wenwen Li, Yifan Dou, and Guangnan Ye.
+\newblock When machines meet each other: Network effects and the strategic role
+  of history in multi-agent ai.
+\newblock \emph{arXiv preprint arXiv:2510.06903}, 2025.
+
 \bibitem[Ma(2024)]{Ma2024behavioral}
-Jun Ma.
+Ji~Ma.
 \newblock Can machines think like humans? {A} behavioral evaluation of {LLM}
   agents in dictator games.
 \newblock \emph{arXiv preprint arXiv:2410.21359}, 2024.
 
 \bibitem[Mannekote et~al.(2025)Mannekote, Davies, Li, Boyer, Zhai, Dorr, and
   Pinto]{Mannekote2025roleplaying}
-Adarsh Mannekote, Alan Davies, Gengyu Li, Kristy~Elizabeth Boyer, ChengXiang
+Amogh Mannekote, Adam Davies, Guohao Li, Kristy~Elizabeth Boyer, ChengXiang
   Zhai, Bonnie~J. Dorr, and Francesco Pinto.
 \newblock Do role-playing agents practice what they preach? {Belief-Behavior}
   consistency in {LLM}-based simulations of human trust.
 \newblock \emph{arXiv preprint arXiv:2507.02197}, 2025.
 
-\bibitem[Mukobi et~al.(2023)Mukobi, Jaffe, Anil, Besiroglu, Zilka, and
-  Torr]{Mukobi2023welfare}
-Gabriel Mukobi, Hannah Jaffe, Cem Anil, Tamay Besiroglu, Misha Zilka, and
-  Robert Torr.
+\bibitem[Mukobi et~al.(2023)Mukobi, Erlebach, Lauffer, Hammond, Chan, and
+  Clifton]{Mukobi2023welfare}
+Gabriel Mukobi, Hannah Erlebach, Niklas Lauffer, Lewis Hammond, Alan Chan, and
+  Jesse Clifton.
 \newblock Welfare diplomacy: Benchmarking language model cooperation.
-\newblock \emph{arXiv preprint}, 2023.
+\newblock \emph{arXiv preprint arXiv:2310.08901}, 2023.
 
 \bibitem[Phelps and Russell(2023)]{Phelps2023psychology}
-Steve Phelps and Yvan Russell.
+Steve Phelps and Yvan~I. Russell.
 \newblock The machine psychology of cooperation: Can {GPT} models
   operationalise prompts for altruism, cooperation, competitiveness and
   selfishness in economic games?
 \newblock \emph{arXiv preprint arXiv:2305.07970}, 2023.
 
 \bibitem[Qu et~al.(2026)Qu, Zhang, Lanzetti, and Mazumdar]{Qu2026riskaversion}
-Chengbo Qu, Yuxiao Zhang, Nicolas Lanzetti, and Eric Mazumdar.
+Chengrui Qu, Yizhou Zhang, Nicolas Lanzetti, and Eric Mazumdar.
 \newblock Training generalizable collaborative agents via strategic risk
   aversion.
 \newblock \emph{arXiv preprint arXiv:2602.21515}, 2026.
 
 \bibitem[Sun and Zhang(2026)]{Sun2026persona}
-Jiayu Sun and Amy Zhang.
+Johnathan Sun and Andrew Zhang.
 \newblock Persona vectors in games: Measuring and steering strategies via
   activation vectors.
 \newblock \emph{arXiv preprint arXiv:2603.21398}, 2026.
 
-\bibitem[Xu et~al.(2025)]{Xu2025dipllm}
-Jiawei Xu et~al.
+\bibitem[Xu et~al.(2025)Xu, Chai, Li, Fu, Zhu, and Zhao]{Xu2025dipllm}
+Kaixuan Xu, Jiajun Chai, Sicheng Li, Yuqian Fu, Yuanheng Zhu, and Dongbin Zhao.
 \newblock {DipLLM}: Fine-tuning {LLM} for strategic decision-making in
   {Diplomacy}.
 \newblock \emph{ICML 2025}, 2025.
 \newblock arXiv:2506.09655.
 
-\bibitem[Yan et~al.(2026)]{Yan2026interpretability}
-Di~Yan et~al.
+\bibitem[Yan et~al.(2026)Yan, Yu, Sun, Duffy, Marques, and
+  Olson]{Yan2026interpretability}
+John Yan, Michael Yu, Yuqi Sun, Alexander Duffy, Tyler Marques, and
+  Matthew~Lyle Olson.
 \newblock Data-centric interpretability for {LLM}-based multi-agent
   reinforcement learning.
 \newblock \emph{arXiv preprint arXiv:2602.05183}, 2026.

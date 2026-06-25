@@ -6,14 +6,14 @@
 
 ## Context
 
-Preparing the paper "Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings" for arXiv submission. This checklist is derived from the king-wen-agi-framework submission (arXiv 2026-04-10, cs.LG) and standard arXiv preparation guidance.
+Preparing the paper "Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems" for arXiv submission. This checklist is derived from the king-wen-agi-framework submission (arXiv 2026-04-10, cs.LG) and standard arXiv preparation guidance.
 
 ## Submission Metadata
 
-- **Primary category:** cs.MA (Multi-Agent Systems)
-- **Cross-list:** cs.AI
+- **Primary category:** cs.MA (Multi-Agent Systems) — live classification; see ADR-003
+- **Cross-list:** cs.AI, cs.LG
 - **License:** CC BY 4.0
-- **Title:** Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings
+- **Title:** Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems
 - **Author:** Augustin Chan
 - **Companion paper:** king-wen-agi-framework (already on arXiv)
 - **Zenodo DOI:** *(create before arXiv submission, as with king-wen)*
@@ -37,6 +37,11 @@ Preparing the paper "Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in
 - [ ] Spellcheck: authors' names, proper nouns, abstract, section headings
 - [ ] No journal-specific boilerplate (we use plain `article` class, so N/A)
 
+### Citation Integrity
+
+- [ ] **Every `references.bib` entry verified against the real paper.** For each entry, open the arXiv abstract page (`https://arxiv.org/abs/<ID>`) or the publisher page and confirm, field by field: (1) the arXiv ID resolves to a paper with the **same title** (watch for truncated titles — a dropped trailing clause still "looks right"); (2) the **full author list matches**, with special attention to **every author's first name**, not just surnames; (3) the year and venue are correct. Do not let `and others` / `et al.` hide an unverified author — expand and check the real first author at minimum. Every `journal={arXiv preprint}` must carry the real `arXiv:<ID>`.
+  - *Why this is on the list:* on 2026-06-25, a co-author of a cited paper (Andreas Einwiller, "Benevolent Dictators?") emailed to point out that the v1 submission (arXiv 2606.07552) had hallucinated his first name as "Stephan." A full audit of all 21 v1 references then found that **17 had fabricated author first names** — the LLM that drafted the `.bib` kept the correct surnames and arXiv IDs but invented plausible given names (e.g., Yichao→Zhenyu Guan, Jun→Ji Ma, Soumil→Ojas Jain, Miguel→Gonzalo Ballestero), and in one case fabricated an entire co-author list (Mukobi "Welfare Diplomacy"). Surname-correct, ID-correct, first-name-wrong citations read as correct on a skim and pass the `no [?] in output` check — the only reliable catch is opening each source page. Note the failure was silent for an entire published version; corrected on the `paper-v2` branch. Re-verify the **whole** bibliography on every submission (preprint metadata also changes when a paper is later published). The four v2-only entries (Memory Curse, Network/History, Memory survey, Democratizing Diplomacy) were checked clean.
+
 ### Stats / Data Integrity
 
 - [ ] **§4.5 content-independence numbers match the reproducer** — Re-run the card/hexagram action-independence reproducer (`tarot_action_correlation.py`, currently in `warringstates-engine/scripts/`; port a copy into this repo's `scripts/` so v2 is self-contained) against the N=41 dataset and confirm every stat in §4.5 matches its output exactly: the hexagram advance-vs-non-advance Fisher (currently `OR = 1.40, p = 0.34`, `paper/main.tex:205`), the hexagram theme χ² (`p = 0.9454`, line 205), and the Tarot posture χ² (`p = 0.6860`, line 207).
@@ -57,10 +62,16 @@ Preparing the paper "Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in
    mv figures/*.pdf .
    rmdir figures/
    ```
-   Then edit `main.tex`:
+   Then strip the `figures/` prefix from all four `\includegraphics` calls:
    - `figures/winner-distributions.pdf` → `winner-distributions.pdf`
    - `figures/peak-scs-by-condition.pdf` → `peak-scs-by-condition.pdf`
-   *(Only two \includegraphics calls, both in figures/ subdir)*
+   - `figures/factorial-winners.pdf` → `factorial-winners.pdf`
+   - `figures/corridor.pdf` → `corridor.pdf`
+   *(Four \includegraphics calls. The `reproduce_all.py` regenerates the three
+   data plots; `corridor.pdf` is a standalone TikZ figure — rebuild it with
+   `pdflatex figures/corridor.tex`. Do NOT ship `figures/corridor.tex` in the
+   bundle; arXiv only needs the precompiled `corridor.pdf`, and `main.tex` no
+   longer loads `tikz`.)*
 
 3. **Remove comments from .tex files**
    - Remove the 3 header comment lines (lines 1-3: `% Symbolic Reasoning...`)
@@ -112,7 +123,9 @@ arxiv-submission.tar
 ├── main.tex                        # LaTeX source (no comments, flat paths)
 ├── main.bbl                        # Pre-compiled bibliography
 ├── winner-distributions.pdf        # Figure 1
-├── peak-scs-by-condition.pdf       # Figure 2
+├── peak-scs-by-condition.pdf       # Figure 2 (Han peak SCs)
+├── factorial-winners.pdf           # Figure 3 (factorial decomposition)
+├── corridor.pdf                    # Figure 4 (ying->three_gorges, from corridor.tex)
 └── (no other files)
 ```
 
@@ -127,7 +140,7 @@ No `arxiv.sty` needed — we use plain `article` class (king-wen used `arxiv.sty
 
 ### Metadata fields (plain text, no LaTeX)
 
-- [ ] **Title:** `Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings`
+- [ ] **Title:** `Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems`
 - [ ] **Author:** `Augustin Chan`
 - [ ] **Abstract:** Copy from paper, but:
   - Replace `\citep{...}` citations with inline text or remove
@@ -136,10 +149,10 @@ No `arxiv.sty` needed — we use plain `article` class (king-wen used `arxiv.sty
   - Replace `\emph{...}` with plain text
   - Remove all newline breaks and extra whitespace
   - Remove `\\` line breaks
-- [ ] **Primary category:** cs.MA
-- [ ] **Cross-list:** cs.AI
+- [ ] **Primary category:** cs.MA (locked from live; a replacement cannot change it)
+- [ ] **Cross-list:** cs.AI, cs.LG
 - [ ] **License:** CC BY 4.0
-- [ ] **Comments field:** e.g., `17 pages, 3 figures, 6 tables, 6 listings`
+- [ ] **Comments field:** e.g., `28 pages, 4 figures, 9 tables, 6 listings`. **This is a replacement of arXiv:2606.07552 (v2), not a new submission** — upload via "replace," keep the same identifier; the v2 author corrections and N=61 reframe ride along.
 
 ## Post-Submission
 
