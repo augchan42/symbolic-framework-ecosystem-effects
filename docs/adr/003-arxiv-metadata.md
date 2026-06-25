@@ -16,7 +16,7 @@
 ## Metadata Fields
 
 **Title:**
-One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem
+Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems
 
 **Author(s):**
 Augustin Chan
@@ -28,7 +28,7 @@ Large language models exhibit innate behavioral tendencies when deployed as stra
 24 pages, 3 figures, 9 tables, 6 listings. Code and data: https://doi.org/10.5281/zenodo.20338937
 *(update the DOI here if a v2 Zenodo version is cut)*
 
-> **v2 retitle note:** the title changed from "Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings" (v1) to "One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem" (v2). Rationale: v2's decision-isolation controls show the effect is emergent, not a per-decision modulation of the receiving agent's risk posture, so the v1 title overclaimed. The new title foregrounds the robust, novel result — the asymmetry (one agent's scaffold reshapes the whole system, without benefiting that agent) — and deliberately names no specific measured quantity ("winner distributions"/"signatures"), so it stays resistant to the planned Paper-3 campaign-variance correction (40-100% breach-rate spread across nominally identical campaigns) and the cross-cultural-following result. Consider noting the retitle briefly in the replacement's Comments so readers/citers see why it moved (the arXiv ID is unchanged).
+> **v2 retitle note:** the title changed from "Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings" (v1) to "Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems" (v2). Rationale: v2's decision-isolation controls show the effect is emergent, not a per-decision modulation of the receiving agent's risk posture, so the v1 title overclaimed. The new title names the paper's actual mechanism — the symbolic framework is a small perturbation, **campaign memory is the amplifier, the ecosystem reorganization is the phenomenon** — in intervention → mechanism → phenomenon order. Design choices for durability: "Trigger" (not "Produce") connotes a small initiator rather than the framework doing the heavy lifting; "Dynamics" (not "Signatures") avoids implying a stable reproducible per-condition pattern, keeping it resistant to the planned Paper-3 campaign-variance correction (40-100% breach-rate spread across nominally identical campaigns); and "memory-mediated" is *reinforced* by the planned work (Paper-3's breach result is itself memory-depth-driven), so it is the most future-proof element rather than a liability. The cross-cultural-following result (ADR-020) is likewise untouched, since the title makes no oracle/direction/content-following claim. Consider noting the retitle briefly in the replacement's Comments so readers/citers see why it moved (the arXiv ID is unchanged).
 
 **Report number:** *(blank)*
 

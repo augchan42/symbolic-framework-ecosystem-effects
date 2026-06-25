@@ -6,14 +6,14 @@
 
 ## Context
 
-Preparing the paper "One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem" for arXiv submission. This checklist is derived from the king-wen-agi-framework submission (arXiv 2026-04-10, cs.LG) and standard arXiv preparation guidance.
+Preparing the paper "Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems" for arXiv submission. This checklist is derived from the king-wen-agi-framework submission (arXiv 2026-04-10, cs.LG) and standard arXiv preparation guidance.
 
 ## Submission Metadata
 
 - **Primary category:** cs.MA (Multi-Agent Systems) — live classification; see ADR-003
 - **Cross-list:** cs.AI, cs.LG
 - **License:** CC BY 4.0
-- **Title:** One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem
+- **Title:** Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems
 - **Author:** Augustin Chan
 - **Companion paper:** king-wen-agi-framework (already on arXiv)
 - **Zenodo DOI:** *(create before arXiv submission, as with king-wen)*
@@ -132,7 +132,7 @@ No `arxiv.sty` needed — we use plain `article` class (king-wen used `arxiv.sty
 
 ### Metadata fields (plain text, no LaTeX)
 
-- [ ] **Title:** `One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem`
+- [ ] **Title:** `Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems`
 - [ ] **Author:** `Augustin Chan`
 - [ ] **Abstract:** Copy from paper, but:
   - Replace `\citep{...}` citations with inline text or remove

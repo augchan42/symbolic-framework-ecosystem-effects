@@ -1,4 +1,4 @@
-# One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem
+# Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems
 
 Augustin Chan · `aug@iterative.day` · June 2026 (v2)
 
@@ -65,7 +65,7 @@ contains only the summarized data and analysis needed to reproduce the paper.
 
 ```bibtex
 @article{Chan2026symbolic,
-  title={One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem},
+  title={Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems},
   author={Augustin Chan},
   year={2026},
   note={arXiv:2606.07552}
