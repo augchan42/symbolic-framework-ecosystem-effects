@@ -62,10 +62,16 @@ Preparing the paper "Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosy
    mv figures/*.pdf .
    rmdir figures/
    ```
-   Then edit `main.tex`:
+   Then strip the `figures/` prefix from all four `\includegraphics` calls:
    - `figures/winner-distributions.pdf` → `winner-distributions.pdf`
    - `figures/peak-scs-by-condition.pdf` → `peak-scs-by-condition.pdf`
-   *(Only two \includegraphics calls, both in figures/ subdir)*
+   - `figures/factorial-winners.pdf` → `factorial-winners.pdf`
+   - `figures/corridor.pdf` → `corridor.pdf`
+   *(Four \includegraphics calls. The `reproduce_all.py` regenerates the three
+   data plots; `corridor.pdf` is a standalone TikZ figure — rebuild it with
+   `pdflatex figures/corridor.tex`. Do NOT ship `figures/corridor.tex` in the
+   bundle; arXiv only needs the precompiled `corridor.pdf`, and `main.tex` no
+   longer loads `tikz`.)*
 
 3. **Remove comments from .tex files**
    - Remove the 3 header comment lines (lines 1-3: `% Symbolic Reasoning...`)
@@ -117,7 +123,9 @@ arxiv-submission.tar
 ├── main.tex                        # LaTeX source (no comments, flat paths)
 ├── main.bbl                        # Pre-compiled bibliography
 ├── winner-distributions.pdf        # Figure 1
-├── peak-scs-by-condition.pdf       # Figure 2
+├── peak-scs-by-condition.pdf       # Figure 2 (Han peak SCs)
+├── factorial-winners.pdf           # Figure 3 (factorial decomposition)
+├── corridor.pdf                    # Figure 4 (ying->three_gorges, from corridor.tex)
 └── (no other files)
 ```
 
