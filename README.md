@@ -61,9 +61,11 @@ engine checkout is needed to reproduce them. The `scripts/extract_*.py` scripts
 
 ## Game engine
 
-The Warring States game engine and full game archives are at
-[warringstates-engine](https://github.com/augchan42/warringstates-engine). This repo
-contains only the summarized data and analysis needed to reproduce the paper.
+This repo contains only the summarized data and analysis needed to reproduce the paper.
+The game engine, agent orchestration code, and full game archives (diplomatic transcripts
+and agent prompts) are withheld pending planned creative works and are available from the
+author on reasonable request. Individual game replays can be viewed online at
+[warringstates.day/map](https://warringstates.day/map).
 
 ## Citation
 
