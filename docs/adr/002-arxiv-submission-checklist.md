@@ -6,14 +6,14 @@
 
 ## Context
 
-Preparing the paper "Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings" for arXiv submission. This checklist is derived from the king-wen-agi-framework submission (arXiv 2026-04-10, cs.LG) and standard arXiv preparation guidance.
+Preparing the paper "One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem" for arXiv submission. This checklist is derived from the king-wen-agi-framework submission (arXiv 2026-04-10, cs.LG) and standard arXiv preparation guidance.
 
 ## Submission Metadata
 
-- **Primary category:** cs.MA (Multi-Agent Systems)
-- **Cross-list:** cs.AI
+- **Primary category:** cs.MA (Multi-Agent Systems) — live classification; see ADR-003
+- **Cross-list:** cs.AI, cs.LG
 - **License:** CC BY 4.0
-- **Title:** Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings
+- **Title:** One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem
 - **Author:** Augustin Chan
 - **Companion paper:** king-wen-agi-framework (already on arXiv)
 - **Zenodo DOI:** *(create before arXiv submission, as with king-wen)*
@@ -132,7 +132,7 @@ No `arxiv.sty` needed — we use plain `article` class (king-wen used `arxiv.sty
 
 ### Metadata fields (plain text, no LaTeX)
 
-- [ ] **Title:** `Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings`
+- [ ] **Title:** `One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem`
 - [ ] **Author:** `Augustin Chan`
 - [ ] **Abstract:** Copy from paper, but:
   - Replace `\citep{...}` citations with inline text or remove
@@ -141,8 +141,8 @@ No `arxiv.sty` needed — we use plain `article` class (king-wen used `arxiv.sty
   - Replace `\emph{...}` with plain text
   - Remove all newline breaks and extra whitespace
   - Remove `\\` line breaks
-- [ ] **Primary category:** cs.MA
-- [ ] **Cross-list:** cs.AI
+- [ ] **Primary category:** cs.MA (locked from live; a replacement cannot change it)
+- [ ] **Cross-list:** cs.AI, cs.LG
 - [ ] **License:** CC BY 4.0
 - [ ] **Comments field:** e.g., `24 pages, 3 figures, 9 tables, 6 listings`. **This is a replacement of arXiv:2606.07552 (v2), not a new submission** — upload via "replace," keep the same identifier; the v2 author corrections and N=61 reframe ride along.
 

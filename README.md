@@ -1,4 +1,4 @@
-# Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings
+# One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem
 
 Augustin Chan · `aug@iterative.day` · June 2026 (v2)
 
@@ -65,7 +65,7 @@ contains only the summarized data and analysis needed to reproduce the paper.
 
 ```bibtex
 @article{Chan2026symbolic,
-  title={Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings},
+  title={One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem},
   author={Augustin Chan},
   year={2026},
   note={arXiv:2606.07552}

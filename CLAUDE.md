@@ -2,7 +2,7 @@
 
 ## Project
 
-Paper repo for "Symbolic Reasoning Frameworks Modulate LLM Risk Aversion in Multi-Agent Strategic Settings" — a cs.MA/cs.AI paper showing that symbolic reasoning frameworks injected into one LLM agent produce distinct, framework-specific winner distributions in a multi-agent game, without benefiting the recipient.
+Paper repo for "One Agent's Reasoning Framework Reshapes the Multi-Agent LLM Ecosystem" — a cs.MA/cs.AI paper showing that symbolic reasoning frameworks injected into one LLM agent produce distinct, framework-specific winner distributions in a multi-agent game, without benefiting the recipient.
 
 Companion to the King Wen negative-result paper (king-wen-agi-framework repo, arXiv 2026).
 
