@@ -1,6 +1,6 @@
 # ADR-002: arXiv Submission Checklist
 
-**Status:** In Progress
+**Status:** Complete — v2 live ([arXiv:2606.07552v2](https://arxiv.org/abs/2606.07552v2), 2026-06-26)
 **Date:** 2026-05-22
 **Author:** Augustin Chan
 

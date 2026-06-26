@@ -1,5 +1,7 @@
 # arXiv v2 Replace — Metadata (copy-paste)
 
+> **Applied — v2 is live ([arXiv:2606.07552v2](https://arxiv.org/abs/2606.07552v2), 2026-06-26).** Kept for history.
+
 Replacement of **arXiv:2606.07552**. Three fields change from v1: **Title**, **Abstract**, **Comments**.
 Categories are locked for a replace (primary cs.MA; cross-list cs.AI, cs.LG) — not editable on the metadata screen.
 
