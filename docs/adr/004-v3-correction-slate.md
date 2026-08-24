@@ -114,10 +114,22 @@ so plainly: **the published artifact is not sufficient to reproduce §4.3.**
 3. **Port the citation-rate reproducer into this repo's `scripts/`,** as ADR-SFEE-002
    already requires for the independence reproducer, so §4.3 becomes checkable
    without the sibling repo. Currently it is not.
-4. **Reconcile the upstream branches first.** `warringstates-engine` has ADR-WSE-023
-   and ADR-WSE-025 on `adr-023-citation-detector` and ADR-WSE-024 plus the Fleiss fix on
-   `main`; neither branch sees the other's findings. A v3 drawing on both would be
-   assembled from two sources that disagree about what is known.
+4. **Reconcile the upstream branches first.** — ✅ **DONE 2026-08-24.**
+   `warringstates-engine` had ADR-WSE-023 and ADR-WSE-025 on `adr-023-citation-detector`
+   and ADR-WSE-024 plus the Fleiss fix on `main`, with neither branch seeing the other's
+   findings. Merged at `78922e695`. The reconciliation surfaced one thing this slate did
+   not know: **ADR-023 had been written twice**, independently, on both branches. The two
+   authorings agreed on every number but disagreed on tarot — `main`'s declared the tarot
+   figure "out of scope, no defect reported," while the branch had actually audited it and
+   found it clean (81.6%, identical under substring and word-boundary matching). The merged
+   ADR carries the audit. Nothing in this slate changes as a result.
+
+   The same duplication had happened here: this repo corrected §4.3 twice, on `main`
+   (`bf7a7df`, a bare number swap) and on `paper-v2` (`5a8963c`, the swap plus the
+   detector-stating footnote). Merged at `a12f167`, keeping the footnote — item 1's own
+   gate requires it. Had the merge gone the other way, v3 would have shipped the corrected
+   number with the method still unstated, which is the exact condition that let the
+   original 77.1% survive review.
 
 ## Consequences
 
