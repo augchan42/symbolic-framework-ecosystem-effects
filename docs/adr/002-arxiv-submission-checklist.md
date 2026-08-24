@@ -1,4 +1,4 @@
-# ADR-002: arXiv Submission Checklist
+# ADR-SFEE-002: arXiv Submission Checklist
 
 **Status:** Complete — v2 live ([arXiv:2606.07552v2](https://arxiv.org/abs/2606.07552v2), 2026-06-26)
 **Date:** 2026-05-22
@@ -10,7 +10,7 @@ Preparing the paper "Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosy
 
 ## Submission Metadata
 
-- **Primary category:** cs.MA (Multi-Agent Systems) — live classification; see ADR-003
+- **Primary category:** cs.MA (Multi-Agent Systems) — live classification; see ADR-SFEE-003
 - **Cross-list:** cs.AI, cs.LG
 - **License:** CC BY 4.0
 - **Title:** Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosystem Dynamics in Multi-Agent LLM Systems
@@ -48,7 +48,7 @@ Preparing the paper "Symbolic Reasoning Frameworks Trigger Memory-Mediated Ecosy
   - *Why this is on the list:* the superseded n=28 draft (`warringstates-engine/docs/paper/framework-ecosystem-effects.tex`, the version currently on arXiv) reported `OR = 1.29, p = 0.47` for this same test, which matched **no** script output — the reproducer gave `OR ≈ 1.38, p ≈ 0.27`. That was a stale hand-edited statistic that survived into a submission. Don't let an unverified §4.5 number survive into v2. (Audit, 2026-05-31.)
 
 - [ ] **§4.3 citation rate is reproduced, and its detector is named in the text** — Re-run `citation_detector.py` (upstream `warringstates-engine/scripts/`; port a copy here, as above) against `CLEAN_DATASET["yarrow"]` and confirm §4.3 matches: **70.6% (151/214)** word-boundary, **68.2% (146/214)** strict oracle vocabulary. Confirm the denominator equals the χ²'s `n = 214` in the same sentence.
-  - *Why this is on the list:* the published **77.1% (131/170)** was a substring detector counting the supply centre *Luoyang* as an oracle citation via `yang`, computed over a game set sharing only 8 of 10 games with the χ² it was printed beside. Two defects running opposite directions partly cancelled, so the value looked unremarkable and passed review. It was also **unfalsifiable externally** — the artifact ships no citation-rate code and no reasoning text. A rate whose detector is not stated in the paper cannot be checked by a reader and must not ship. See ADR-004 and upstream ADR-023. (Audit, 2026-08-24.)
+  - *Why this is on the list:* the published **77.1% (131/170)** was a substring detector counting the supply centre *Luoyang* as an oracle citation via `yang`, computed over a game set sharing only 8 of 10 games with the χ² it was printed beside. Two defects running opposite directions partly cancelled, so the value looked unremarkable and passed review. It was also **unfalsifiable externally** — the artifact ships no citation-rate code and no reasoning text. A rate whose detector is not stated in the paper cannot be checked by a reader and must not ship. See ADR-SFEE-004 and upstream ADR-WSE-023. (Audit, 2026-08-24.)
 
 ## Bundle Preparation
 

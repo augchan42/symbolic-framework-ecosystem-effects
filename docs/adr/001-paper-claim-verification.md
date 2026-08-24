@@ -1,4 +1,4 @@
-# ADR-001: Paper Claim Verification (v0.4 Dataset)
+# ADR-SFEE-001: Paper Claim Verification (v0.4 Dataset)
 
 **Date:** 2026-05-13
 **Status:** Resolved (all issues fixed in main.tex)

@@ -1,8 +1,8 @@
-# ADR-004: v3 Correction Slate
+# ADR-SFEE-004: v3 Correction Slate
 
 **Date:** 2026-08-24
 **Status:** OPEN — one item applied, the rest outstanding. This is the gating list for the arXiv v3 replacement.
-**Depends on:** ADR-001 (paper claim verification), ADR-002 (arXiv submission checklist), ADR-003 (arXiv metadata)
+**Depends on:** ADR-SFEE-001 (paper claim verification), ADR-SFEE-002 (arXiv submission checklist), ADR-SFEE-003 (arXiv metadata)
 **Upstream provenance:** `warringstates-engine/docs/adr/023-citation-rate-detector-defect.md`, `.../024-content-before-counts.md`, `.../025-launch-artifacts-are-not-games.md`
 
 ## Context
@@ -31,7 +31,7 @@ sentence were computed over different game sets sharing only 8 of 10 games.
 
 The detector is now **stated in the text** (word-boundary match on the paper's own
 nine keywords; 68.2% under a stricter oracle-only vocabulary). This satisfies
-ADR-023 decision item 4 and is the substantive fix: the public artifact ships no
+ADR-WSE-023 decision item 4 and is the substantive fix: the public artifact ships no
 citation-rate code and `data/han_orders.csv` carries `reasoning_chars` but not the
 reasoning text, so the published figure was **unfalsifiable by any external
 reader**. A stated detector is auditable even without the data.
@@ -62,7 +62,7 @@ itself is confirmed.
 
 The `three_gorges` severing test named in §Future Work item 4 has run to 72
 completed games. Two findings in `warringstates-engine/docs/experiments/chu-blockade-experiment.md`
-§10 are **superseded** (see ADR-025 upstream, and §11 of that doc):
+§10 are **superseded** (see ADR-WSE-025 upstream, and §11 of that doc):
 
 - **§10.2's condition × map interaction does not replicate.** It was described
   there as "the strongest thing in the dataset." At full N both arms move the same
@@ -83,7 +83,7 @@ confirmed." The interaction that would license the stronger claim is at p ≈ 0.
 
 ### 4. Methodology: content before counts — ⚠️ CONSIDER FOR §Limitations
 
-ADR-024 (upstream) records that the Han divergence scan concluded "no divergence"
+ADR-WSE-024 (upstream) records that the Han divergence scan concluded "no divergence"
 from order counts, message lengths and keyword hits **without reading a single
 message**. The content layer and a blind coding run were added on review, and the
 null held. Worth a sentence in §Limitations on how the outward-channel nulls were
@@ -94,8 +94,8 @@ established, since "we read the transcripts" is materially different evidence fr
 
 Four defects, one shape: **an analysis trusting whatever the filesystem or a
 substring happened to return, with nothing asserting what it should have
-returned.** ADR-001 (this repo, 2026-05-13) flagged the class; it recurred in
-ADR-023, again in ADR-024, and a fourth time in ADR-025 — each time because the
+returned.** ADR-SFEE-001 (this repo, 2026-05-13) flagged the class; it recurred in
+ADR-WSE-023, again in ADR-WSE-024, and a fourth time in ADR-WSE-025 — each time because the
 prior fix was applied by hand with no regression test. Every one is now
 test-guarded upstream.
 
@@ -108,14 +108,14 @@ so plainly: **the published artifact is not sufficient to reproduce §4.3.**
 1. **Do not upload a v3 replacement until items 2–4 are dispositioned.** Item 1 is
    done; the others are either not in the manuscript or actively contradict text
    that is.
-2. **Add a `Stats / Data Integrity` gate to ADR-002** requiring §4.3's citation
+2. **Add a `Stats / Data Integrity` gate to ADR-SFEE-002** requiring §4.3's citation
    figure to be reproduced from `citation_detector.py` against `CLEAN_DATASET`,
    with the detector variant named. (Added with this ADR.)
-3. **Port the citation-rate reproducer into this repo's `scripts/`,** as ADR-002
+3. **Port the citation-rate reproducer into this repo's `scripts/`,** as ADR-SFEE-002
    already requires for the independence reproducer, so §4.3 becomes checkable
    without the sibling repo. Currently it is not.
-4. **Reconcile the upstream branches first.** `warringstates-engine` has ADR-023
-   and ADR-025 on `adr-023-citation-detector` and ADR-024 plus the Fleiss fix on
+4. **Reconcile the upstream branches first.** `warringstates-engine` has ADR-WSE-023
+   and ADR-WSE-025 on `adr-023-citation-detector` and ADR-WSE-024 plus the Fleiss fix on
    `main`; neither branch sees the other's findings. A v3 drawing on both would be
    assembled from two sources that disagree about what is known.
 
@@ -127,6 +127,6 @@ so plainly: **the published artifact is not sufficient to reproduce §4.3.**
 - The §4.3 sentence is now longer and carries a footnote. That is deliberate: the
   original was short *because* it left the detector unstated, which is what made it
   unauditable.
-- ADR-002's citation-integrity precedent applies here too — that audit found 17 of
+- ADR-SFEE-002's citation-integrity precedent applies here too — that audit found 17 of
   21 v1 references with fabricated author first names, silent for an entire
   published version. Numbers deserve the same per-item verification as citations.
