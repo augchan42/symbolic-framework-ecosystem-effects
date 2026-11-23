@@ -90,6 +90,28 @@ null held. Worth a sentence in §Limitations on how the outward-channel nulls we
 established, since "we read the transcripts" is materially different evidence from
 "we counted keywords."
 
+### 5. Model attribution and the §1 citation figure — ✅ APPLIED (2026-11-23)
+
+Found while fact-checking a public comment to the HKMA
+(augustinchan.dev `private/hkma-agentic-ai-comment/review-1.md`).
+
+- **§1 still said "77\% of orders reference the hexagram"** after item 1 fixed
+  §4.3. Changed to 70.6\% in `paper/main.tex` and `arxiv-submission/main.tex`.
+- **The paper said "All agents use Claude Opus 4.6" in four places** (§3 agents,
+  §3 dataset, §Limitations, AI-use statement). The engine writes diplomacy messages
+  with Claude Sonnet 4.6 and orders and reflection with Opus 4.6
+  (`warringstates-engine/scripts/run_full_campaign.py:52-54`,
+  `docs/OPERATIONAL_NOTES.md:121`). All four now name both models. The
+  peace-promise sentence in §4.5 now says that messages and orders come from
+  different models, so the 96–100\% figure measures agreement between two calls,
+  not one model's words against its own actions.
+- **Open:** before commit `232c52e65` (2026-06-10) the engine called the floating
+  `opus` and `sonnet` CLI aliases. That commit says the aliases resolved to the 4.6
+  snapshots for the games run before it, and that `game_meta` records the model
+  string the code writes, not one read back from the API. The 4.6 attribution for
+  the paper's April–May games therefore rests on release dates. Confirm from call
+  logs if any survive.
+
 ## The pattern worth stating in the paper
 
 Four defects, one shape: **an analysis trusting whatever the filesystem or a
